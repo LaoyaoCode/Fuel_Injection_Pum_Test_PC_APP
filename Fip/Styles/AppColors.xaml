@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Fip.Styles">
+    <SolidColorBrush x:Key="AppBackBrush" Color="White"/>
+    <SolidColorBrush x:Key="MenuMouseDown" Color="#7F4F4F4F"/>
+    <SolidColorBrush x:Key="MenuMouseOver" Color="#7FA0A0A0"/>
+    <SolidColorBrush x:Key="NormalTextColor" Color="#7F434343"/>
+    <SolidColorBrush x:Key="SpecialColor" Color="#FF5722" />
+    <SolidColorBrush x:Key="SpecialColor2" Color="#50434343"/>
+</ResourceDictionary>
