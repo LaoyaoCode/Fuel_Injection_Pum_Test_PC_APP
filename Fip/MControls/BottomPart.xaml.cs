@@ -24,5 +24,11 @@ namespace Fip.MControls
         {
             InitializeComponent();
         }
+
+        private void ConnectedIcon_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            DeviceToolTip.IsOpen = false;
+            DeviceToolTip.IsOpen = true;
+        }
     }
 }

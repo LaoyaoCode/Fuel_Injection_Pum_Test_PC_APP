@@ -134,5 +134,20 @@
   <ItemGroup>
     <Resource Include="Images\roll.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\connected_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\triangular.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\device_name.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\device_time.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\device_vender.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
