@@ -6,5 +6,6 @@
     <SolidColorBrush x:Key="MenuMouseOver" Color="#7FA0A0A0"/>
     <SolidColorBrush x:Key="NormalTextColor" Color="#7F434343"/>
     <SolidColorBrush x:Key="SpecialColor" Color="#FF5722" />
-    <SolidColorBrush x:Key="SpecialColor2" Color="#50434343"/>
+    <SolidColorBrush x:Key="SpecialColor2" Color="#1296db"/>
+    <SolidColorBrush x:Key="ButtonColor" Color="#FF707070"/>
 </ResourceDictionary>
