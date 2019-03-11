@@ -10,6 +10,7 @@
 
                 <ResourceDictionary Source="/Styles/AppColors.xaml"/>
                 <ResourceDictionary Source="/Styles/SomeUIChange.xaml"/>
+                <ResourceDictionary Source="/Styles/MScroll.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <System:Double x:Key="NormalTextSize">18</System:Double>
             <System:Double x:Key="BigTextSize">21</System:Double>

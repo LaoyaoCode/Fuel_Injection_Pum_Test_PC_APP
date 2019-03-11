@@ -99,5 +99,40 @@
                 </Grid>
             </Popup>
         </Grid>
+
+        <Grid Width="40" HorizontalAlignment="Right">
+            <!--日志信息处理-->
+            <Image x:Name="LogIcon" Source="/Fip;component/Images/message_normal.png" Margin="0,5,10,5" ToolTip="日志" MouseLeftButtonUp="LogIcon_MouseLeftButtonUp"></Image>
+
+            <!--日志信息-->
+            <Popup x:Name="LogToolTip" StaysOpen="False" Placement="Top" AllowsTransparency="True" HorizontalOffset="99" PlacementTarget="{Binding ElementName=LogIcon}" PopupAnimation="Fade" VerticalOffset="-3">
+                <Grid Height="300">
+                    <Image Source="/Fip;component/Images/triangular.png" VerticalAlignment="Bottom" Width="30" Height="30" Margin="0,0,0,-6">
+                        <Image.Effect>
+                            <DropShadowEffect Color="#FFBBBBBB" ShadowDepth="0" BlurRadius="10"/>
+                        </Image.Effect>
+                    </Image>
+
+                    <Border Background="White" Width="220" Height="300" CornerRadius="10" BorderThickness="10">
+                        <Border.Effect>
+                            <DropShadowEffect Color="#FFBBBBBB" ShadowDepth="0" BlurRadius="10"/>
+                        </Border.Effect>
+                        <Grid>
+                            <ScrollViewer Style="{StaticResource MScrollView}" Margin="0,0,0,20">
+                                <StackPanel x:Name="LogMessageContainer" Margin="5,0">
+
+                                </StackPanel>
+                            </ScrollViewer>
+                            <!--所有日志已读按钮-->
+                            <local:IconButton x:Name="AllLogChecked" ButtonIcon="CheckAll" IconColor="{StaticResource SpecialColor2}" NormalBackColor="{StaticResource AppBackBrush}" VerticalAlignment="Bottom" Width="20" Height="20" Margin="0,0,5,0" HorizontalAlignment="Right" ToolTip="所有日志已读"></local:IconButton>
+                        </Grid>
+                    </Border>
+
+                    <Image Source="/Fip;component/Images/triangular.png" VerticalAlignment="Bottom" Width="30" Height="30" Margin="0,0,0,-6"></Image>
+
+                </Grid>
+            </Popup>
+        </Grid>
+        
     </Grid>
 </UserControl>

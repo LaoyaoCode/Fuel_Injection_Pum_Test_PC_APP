@@ -16,25 +16,13 @@ using System.Windows.Shapes;
 namespace Fip.MControls
 {
     /// <summary>
-    /// BottomPart.xaml 的交互逻辑
+    /// LogMessage.xaml 的交互逻辑
     /// </summary>
-    public partial class BottomPart : UserControl
+    public partial class LogMessage : UserControl
     {
-        public BottomPart()
+        public LogMessage()
         {
             InitializeComponent();
-        }
-
-        private void ConnectedIcon_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            DeviceToolTip.IsOpen = false;
-            DeviceToolTip.IsOpen = true;
-        }
-
-        private void LogIcon_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            LogToolTip.IsOpen = false;
-            LogToolTip.IsOpen = true;
         }
     }
 }
