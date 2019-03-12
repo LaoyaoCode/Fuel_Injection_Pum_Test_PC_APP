@@ -53,17 +53,8 @@
         <Grid HorizontalAlignment="Left" Width="40">
             <!--检索设备按钮-->
             <local:IconButton x:Name="SearchDeviceButton" Visibility="Hidden"  ButtonIcon="SourceBranch" IconColor="{StaticResource ButtonColor}"  NormalBackColor="{StaticResource AppBackBrush}" HorizontalAlignment="Left" Margin="10,5,0,5" ToolTip="自动检索设备" Width="20"/>
-            <Image x:Name="ConnectedIcon" ToolTip="查看试验台信息" Source="/Fip;component/Images/connected_icon.png" HorizontalAlignment="Left" Margin="10,5,0,5" RenderTransformOrigin="0.5,0.5" MouseLeftButtonUp="ConnectedIcon_MouseLeftButtonUp">
-                <Image.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Image.RenderTransform>
-            </Image> 
-            
+            <local:ImageButton x:Name="ConnectedIcon" ToolTip="查看试验台信息" ImageSource="/Fip;component/Images/connected_icon.png" HorizontalAlignment="Left" Margin="10,5,0,5" ClickEvent="ConnectedIcon_MouseLeftButtonUp" NormalOp="0.5"></local:ImageButton>
+
             <!--试验台设备信息-->
             <Popup x:Name="DeviceToolTip" StaysOpen="False" Placement="Top" AllowsTransparency="True" HorizontalOffset="100" PlacementTarget="{Binding ElementName=ConnectedIcon}" PopupAnimation="Fade" VerticalOffset="-3">
                 <Grid Height="95">
@@ -72,7 +63,7 @@
                             <DropShadowEffect Color="#FFBBBBBB" ShadowDepth="0" BlurRadius="10"/>
                         </Image.Effect>
                     </Image>
-                    
+
                     <Border Background="White" Width="220" Height="95" CornerRadius="10" BorderThickness="10">
                         <Border.Effect>
                             <DropShadowEffect Color="#FFBBBBBB" ShadowDepth="0" BlurRadius="10"/>
@@ -94,19 +85,19 @@
                             </StackPanel>
                         </Grid>
                     </Border>
-                    
                     <Image Source="/Fip;component/Images/triangular.png" VerticalAlignment="Bottom" Width="30" Height="30" Margin="0,0,0,-6"></Image>
                 </Grid>
             </Popup>
         </Grid>
 
+        <!--日志信息部分-->
         <Grid Width="40" HorizontalAlignment="Right">
-            <!--日志信息处理-->
-            <Image x:Name="LogIcon" Source="/Fip;component/Images/message_normal.png" Margin="0,5,10,5" ToolTip="日志" MouseLeftButtonUp="LogIcon_MouseLeftButtonUp"></Image>
-
+            <!--日志信息显示按钮-->
+            <local:ImageButton x:Name="LogIcon" ImageSource="/Fip;component/Images/message_normal.png" Margin="0,5,10,5" ToolTip="查看日志" ClickEvent="LogIcon_MouseLeftButtonUp" NormalOp="0.5" Width="20"></local:ImageButton>
             <!--日志信息-->
             <Popup x:Name="LogToolTip" StaysOpen="False" Placement="Top" AllowsTransparency="True" HorizontalOffset="99" PlacementTarget="{Binding ElementName=LogIcon}" PopupAnimation="Fade" VerticalOffset="-3">
                 <Grid Height="300">
+                    
                     <Image Source="/Fip;component/Images/triangular.png" VerticalAlignment="Bottom" Width="30" Height="30" Margin="0,0,0,-6">
                         <Image.Effect>
                             <DropShadowEffect Color="#FFBBBBBB" ShadowDepth="0" BlurRadius="10"/>
@@ -120,7 +111,7 @@
                         <Grid>
                             <ScrollViewer Style="{StaticResource MScrollView}" Margin="0,0,0,20">
                                 <StackPanel x:Name="LogMessageContainer" Margin="5,0">
-
+                                    
                                 </StackPanel>
                             </ScrollViewer>
                             <!--所有日志已读按钮-->
@@ -133,6 +124,5 @@
                 </Grid>
             </Popup>
         </Grid>
-        
     </Grid>
 </UserControl>

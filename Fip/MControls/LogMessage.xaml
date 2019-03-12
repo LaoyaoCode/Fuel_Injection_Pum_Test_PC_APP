@@ -6,9 +6,17 @@
              xmlns:local="clr-namespace:Fip.MControls"
              mc:Ignorable="d" 
              xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
-             d:DesignHeight="40" d:DesignWidth="187">
-    <Grid>
-        <TextBlock x:Name="LogMessageTB" Text="XXXXXX" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Margin="5,0,30,0" Foreground="{DynamicResource NormalTextColor}"/>
-        
+             d:DesignHeight="40" d:DesignWidth="187" Loaded="UserControl_Loaded" Height="40">
+    <Grid MouseEnter="Grid_MouseEnter" MouseLeave="Grid_MouseLeave" Background="{StaticResource AppBackBrush}">
+        <TextBlock x:Name="LogMessageTB" Text="XXXXXX" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Margin="5,0,30,0" Foreground="{DynamicResource NormalLevelColor}"/>
+        <local:IconButton x:Name="CheckButton" ButtonIcon="Check" IconColor="{DynamicResource NormalLevelColor}" HorizontalAlignment="Right" Height="12" Width="12" Margin="0,0,5,0" NormalBackColor="{StaticResource AppBackBrush}" IconClick="CheckButton_Click" ToolTip="已读"></local:IconButton>
+        <Rectangle Height="1" VerticalAlignment="Bottom">
+            <Rectangle.Fill>
+                <RadialGradientBrush>
+                    <GradientStop x:Name="CLineColor"  Color="Black" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </RadialGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
     </Grid>
 </UserControl>
