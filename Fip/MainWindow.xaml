@@ -66,8 +66,26 @@
             <MControls:IconButton x:Name="MinWindowsButton" IconClick="MinButton_Click" ButtonIcon="Minus" NormalBackColor="{DynamicResource AppBackBrush}" HorizontalAlignment="Right" Width="15" Foreground="{x:Null}" IconColor="Black" Margin="0,0,60,0" ToolTip="最小化" Height="15"/>
         </Grid>
 
-        <MControls:BottomPart x:Name="BPart" VerticalAlignment="Bottom" Height="30" Margin="0">
+        <Grid Margin="0,30">
+            <Grid x:Name="LeftMenuGrid" Width="200" HorizontalAlignment="Left">
+                <Rectangle HorizontalAlignment="Right" Width="1" Margin="0,0,0.5,0">
+                    <Rectangle.Fill>
+                        <RadialGradientBrush>
+                            <GradientStop Color="#7F646464"/>
+                            <GradientStop Color="White" Offset="1"/>
+                        </RadialGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Grid>
+            <Grid x:Name="RightFuntionContainer" Margin="200,0,0,0">
+
+                <ScrollViewer Style="{StaticResource MScrollView}">
+                    <StackPanel></StackPanel>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+        <MControls:BottomPart x:Name="BPart" VerticalAlignment="Bottom" Height="30" Margin="0"></MControls:BottomPart>
             
-        </MControls:BottomPart>
+        
     </Grid>
 </Window>

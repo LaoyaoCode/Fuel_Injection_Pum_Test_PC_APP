@@ -4,7 +4,7 @@
     <SolidColorBrush x:Key="AppBackBrush" Color="White"/>
     <SolidColorBrush x:Key="MenuMouseDown" Color="#7F4F4F4F"/>
     <SolidColorBrush x:Key="MenuMouseOver" Color="#7FA0A0A0"/>
-    <SolidColorBrush x:Key="NormalTextColor" Color="#7F434343"/>
+    <SolidColorBrush x:Key="NormalTextColor" Color="#FF646464"/>
     <SolidColorBrush x:Key="SpecialColor" Color="#FF5722" />
     <SolidColorBrush x:Key="SpecialColor2" Color="#1296db"/>
     <SolidColorBrush x:Key="ButtonColor" Color="#FF707070"/>
@@ -12,4 +12,5 @@
     <SolidColorBrush x:Key="NormalLevelColor" Color="#FF686868"/>
     <SolidColorBrush x:Key="ImportantLevelColor" Color="#FF1296DB"/>
     <SolidColorBrush x:Key="ErrorLevelColor" Color="#E91E63"/>
+    <SolidColorBrush x:Key="SelectedColor" Color="#CCE6E6E6"/>
 </ResourceDictionary>

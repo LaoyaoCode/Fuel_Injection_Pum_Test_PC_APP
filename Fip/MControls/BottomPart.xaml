@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Fip.MControls"
              mc:Ignorable="d" 
-             d:DesignHeight="30" d:DesignWidth="780">
+             d:DesignHeight="30" d:DesignWidth="780" Loaded="UserControl_Loaded">
     <UserControl.Resources>
         <Storyboard x:Key="RollingIconSB" RepeatBehavior="Forever" AutoReverse="False">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(RotateTransform.Angle)" Storyboard.TargetName="RollingIcon">
@@ -37,13 +37,15 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </UserControl.Resources>
+    
     <UserControl.Triggers>
         <EventTrigger RoutedEvent="FrameworkElement.Loaded">
             <BeginStoryboard Storyboard="{StaticResource RollingIconSB}"/>
         </EventTrigger>
     </UserControl.Triggers>
+    
     <Grid>
-        <Image x:Name="RollingIcon" Source="/Fip;component/Images/roll.png" HorizontalAlignment="Left" Margin="50,5,0,5" RenderTransformOrigin="0.5,0.5" >
+        <Image x:Name="RollingIcon" Visibility="Collapsed" Source="/Fip;component/Images/roll.png" HorizontalAlignment="Left" Margin="50,5,0,5" RenderTransformOrigin="0.5,0.5" >
             <Image.RenderTransform>
                 <TransformGroup>
                     <RotateTransform/>
@@ -52,12 +54,14 @@
         </Image>
         <Grid HorizontalAlignment="Left" Width="40">
             <!--检索设备按钮-->
-            <local:IconButton x:Name="SearchDeviceButton" Visibility="Hidden"  ButtonIcon="SourceBranch" IconColor="{StaticResource ButtonColor}"  NormalBackColor="{StaticResource AppBackBrush}" HorizontalAlignment="Left" Margin="10,5,0,5" ToolTip="自动检索设备" Width="20"/>
-            <local:ImageButton x:Name="ConnectedIcon" ToolTip="查看试验台信息" ImageSource="/Fip;component/Images/connected_icon.png" HorizontalAlignment="Left" Margin="10,5,0,5" ClickEvent="ConnectedIcon_MouseLeftButtonUp" NormalOp="0.5"></local:ImageButton>
+            <local:IconButton x:Name="SearchDeviceButton"  ButtonIcon="SourceBranch" IconColor="{StaticResource ButtonColor}"  NormalBackColor="{StaticResource AppBackBrush}" HorizontalAlignment="Left" Margin="10,5,0,5" ToolTip="自动检索设备" Width="20"/>
+            <!--连接按钮-->
+            <local:ImageButton x:Name="ConnectedIcon" Visibility="Collapsed" ToolTip="查看试验台信息" ImageSource="/Fip;component/Images/connected_icon.png" HorizontalAlignment="Left" Margin="10,5,0,5" ClickEvent="ConnectedIcon_MouseLeftButtonUp" NormalOp="0.5"></local:ImageButton>
 
             <!--试验台设备信息-->
             <Popup x:Name="DeviceToolTip" StaysOpen="False" Placement="Top" AllowsTransparency="True" HorizontalOffset="100" PlacementTarget="{Binding ElementName=ConnectedIcon}" PopupAnimation="Fade" VerticalOffset="-3">
                 <Grid Height="95">
+                    
                     <Image Source="/Fip;component/Images/triangular.png" VerticalAlignment="Bottom" Width="30" Height="30" Margin="0,0,0,-6">
                         <Image.Effect>
                             <DropShadowEffect Color="#FFBBBBBB" ShadowDepth="0" BlurRadius="10"/>
@@ -70,14 +74,17 @@
                         </Border.Effect>
                         <Grid>
                             <StackPanel>
+                                <!--设备名-->
                                 <Grid Height="25">
                                     <Image Source="/Fip;component/Images/device_name.png" Width="16" Height="16" Margin="9,0,0,0" HorizontalAlignment="Left" ToolTip="设备名"></Image>
                                     <TextBlock x:Name="DeviceName" Text="设备名" Foreground="{DynamicResource NormalTextColor}" Margin="40,0,10,0" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
                                 </Grid>
+                                <!--生产厂家-->
                                 <Grid Height="25">
                                     <Image Source="/Fip;component/Images/device_vender.png" Width="16" Height="16" Margin="9,0,0,0" HorizontalAlignment="Left" ToolTip="生产厂家"></Image>
                                     <TextBlock x:Name="DeviceVender" Text="生产厂家" Foreground="{DynamicResource NormalTextColor}" Margin="40,0,10,0" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
                                 </Grid>
+                                <!--设备出厂（制造）时间-->
                                 <Grid Height="25">
                                     <Image Source="/Fip;component/Images/device_time.png" Width="14" Height="14" Margin="10,0,0,0" HorizontalAlignment="Left" ToolTip="生产时间"></Image>
                                     <TextBlock x:Name="DeviceMakeTime" Text="2019.3.10" Foreground="{DynamicResource NormalTextColor}" Margin="40,0,10,0" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
@@ -85,6 +92,7 @@
                             </StackPanel>
                         </Grid>
                     </Border>
+                    
                     <Image Source="/Fip;component/Images/triangular.png" VerticalAlignment="Bottom" Width="30" Height="30" Margin="0,0,0,-6"></Image>
                 </Grid>
             </Popup>
@@ -110,12 +118,13 @@
                         </Border.Effect>
                         <Grid>
                             <ScrollViewer Style="{StaticResource MScrollView}" Margin="0,0,0,20">
+                                <!--日志信息容器-->
                                 <StackPanel x:Name="LogMessageContainer" Margin="5,0">
                                     
                                 </StackPanel>
                             </ScrollViewer>
                             <!--所有日志已读按钮-->
-                            <local:IconButton x:Name="AllLogChecked" ButtonIcon="CheckAll" IconColor="{StaticResource SpecialColor2}" NormalBackColor="{StaticResource AppBackBrush}" VerticalAlignment="Bottom" Width="20" Height="20" Margin="0,0,5,0" HorizontalAlignment="Right" ToolTip="所有日志已读"></local:IconButton>
+                            <local:IconButton x:Name="AllLogChecked" ButtonIcon="CheckAll" IconColor="{StaticResource SpecialColor2}" NormalBackColor="{StaticResource AppBackBrush}" VerticalAlignment="Bottom" Width="20" Height="20" Margin="0,0,5,0" HorizontalAlignment="Right" ToolTip="所有日志已读" IconClick="CheckAllButton_Click"></local:IconButton>
                         </Grid>
                     </Border>
 

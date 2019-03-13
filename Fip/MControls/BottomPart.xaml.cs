@@ -45,6 +45,16 @@ namespace Fip.MControls
         }
 
         /// <summary>
+        /// 所有已阅按钮点击
+        /// </summary>
+        private void CheckAllButton_Click()
+        {
+            LogMessageContainer.Children.Clear();
+            //直接变成普通level
+            LogIcon.ImageSource = "/Fip;component/Images/message_normal.png";
+        }
+
+        /// <summary>
         /// 打印日志
         /// </summary>
         /// <param name="text">日志信息</param>
@@ -62,7 +72,7 @@ namespace Fip.MControls
             Unity.UpdateLogIcon();
         }
 
-        /// <summary>
+        /// <summary>   
         /// 更新日志标志，根据内容切换图标
         /// </summary>
         private void UpdateLogIcon()
@@ -90,6 +100,27 @@ namespace Fip.MControls
                     break;
             }
 
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+           
+        }
+
+        /// <summary>
+        /// 加载图标显示
+        /// </summary>
+        public static void LoadingIcon_Appear()
+        {
+            Unity.RollingIcon.Visibility = Visibility.Visible;
+        }
+
+        /// <summary>
+        /// 加载图标隐藏
+        /// </summary>
+        public static void LoadingIcon_Disappear()
+        {
+            Unity.RollingIcon.Visibility = Visibility.Collapsed;
         }
     }
 }
