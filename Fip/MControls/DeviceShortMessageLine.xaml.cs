@@ -54,50 +54,66 @@ namespace Fip.MControls
 
         }
 
-        private void RootGrid_MouseEnter(object sender, MouseEventArgs e)
+        private void UserControl_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            IsSelected = true;
+            //执行代理事件
+            if (SelectEvent != null)
+            {
+                SelectEvent.Invoke(this);
+            }
+        }
+
+        private void UserControl_MouseEnter(object sender, MouseEventArgs e)
         {
             //只有在没有测试的时候才可以删除和修改
-            if(!Testing)
+            if (!Testing)
             {
                 ModifyButton.Visibility = Visibility.Visible;
                 RemoveButton.Visibility = Visibility.Visible;
             }
-            ExportButton.Visibility = Visibility.Visible;
+            DetailButton.Visibility = Visibility.Visible;
 
             //改变背景颜色
             RootGrid.Background = (SolidColorBrush)FindResource("SelectedColor");
         }
 
-        private void RootGrid_MouseLeave(object sender, MouseEventArgs e)
+        private void UserControl_MouseLeave(object sender, MouseEventArgs e)
         {
             ModifyButton.Visibility = Visibility.Collapsed;
             RemoveButton.Visibility = Visibility.Collapsed;
-            ExportButton.Visibility = Visibility.Collapsed;
+            DetailButton.Visibility = Visibility.Collapsed;
 
             //只有没有被选中的时候才会变回正常颜色
-            if(!IsSelected)
+            if (!IsSelected)
             {
                 RootGrid.Background = (SolidColorBrush)FindResource("AppBackBrush");
             }
         }
 
-        private void RootGrid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        /// <summary>
+        /// 离开被选中状态
+        /// </summary>
+        public void Selected_Cancel()
         {
-            //双击并且没有被选择
-            if(e.ClickCount >= 2 && !IsSelected)
-            {
-                IsSelected = true;
-                //执行代理事件
-                if(SelectEvent != null)
-                {
-                    SelectEvent.Invoke(this);
-                }
-            }
+            IsSelected = false;
+            //恢复背景
+            RootGrid.Background = (SolidColorBrush)FindResource("AppBackBrush");
+        }
+
+        /// <summary>
+        /// 离开正在测试状态
+        /// </summary>
+        public void Testing_Cancel()
+        {
+            Testing = false;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             
         }
+
+       
     }
 }

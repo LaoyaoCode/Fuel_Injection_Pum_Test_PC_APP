@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="Fip.MControls.DeviceSMessageControler"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Fip.MControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" Width="580" Height="414" Loaded="UserControl_Loaded">
+    <!--器件面板容器-->
+    <Grid x:Name="RootGrid">
+        <Grid Height="30" VerticalAlignment="Top">
+            <TextBox BorderBrush="{x:Null}" Foreground="{StaticResource NormalTextColor}" BorderThickness="0" VerticalAlignment="Center" FontSize="16" SelectionBrush="{DynamicResource SelectedColor}" Margin="20,0,130,0" CaretBrush="{DynamicResource NormalTextColor}">
+                <TextBox.Resources>
+                    <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
+                        <VisualBrush.Visual>
+                            <TextBlock Text="请输入搜索关键字(Enter确认)..." Foreground="{StaticResource NormalTextColor}"/>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </TextBox.Resources>
+                <TextBox.Style>
+                    <Style TargetType="TextBox">
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="{x:Null}">
+                                <Setter Property="Background" Value="{StaticResource HintText}"/>
+                            </Trigger>
+                            <Trigger Property="Text" Value="">
+                                <Setter Property="Background" Value="{StaticResource HintText}"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+            <local:IconButton x:Name="ExportAllButton" ToolTip="导出所有器件信息" ButtonIcon="FileExport" IconColor="{DynamicResource SpecialColor3}" Width="20" Height="20" HorizontalAlignment="Right" Margin="0,0,10,0" NormalBackColor="{StaticResource AppBackBrush}" VerticalAlignment="Center"></local:IconButton>
+            <local:IconButton ToolTip="添加器件信息" ButtonIcon="FilePlus" IconColor="{DynamicResource SpecialColor2}" Width="20" Height="20" HorizontalAlignment="Right" Margin="0,0,90,0" NormalBackColor="{StaticResource AppBackBrush}" VerticalAlignment="Center"></local:IconButton>
+            <local:IconButton ToolTip="从文件导入器件信息" ButtonIcon="FileImport" IconColor="{StaticResource SpecialColor}" Width="20" Height="20" HorizontalAlignment="Right" Margin="0,0,50,0" NormalBackColor="{StaticResource AppBackBrush}" VerticalAlignment="Center"></local:IconButton>
+            <Rectangle Fill="{DynamicResource SpecialColor2}" Height="2" Margin="20,0,130,0" VerticalAlignment="Bottom"></Rectangle>
+        </Grid>
+        <ScrollViewer Style="{StaticResource MScrollView}" Margin="0,35,0,0">
+            <!--器件短信息容器-->
+            <StackPanel x:Name="DeviceSMesageContainer"></StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

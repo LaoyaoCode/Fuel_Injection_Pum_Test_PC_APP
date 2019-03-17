@@ -7,6 +7,7 @@
     <SolidColorBrush x:Key="NormalTextColor" Color="#FF646464"/>
     <SolidColorBrush x:Key="SpecialColor" Color="#FF5722" />
     <SolidColorBrush x:Key="SpecialColor2" Color="#1296db"/>
+    <SolidColorBrush x:Key="SpecialColor3" Color="#E91E63"/>
     <SolidColorBrush x:Key="ButtonColor" Color="#FF707070"/>
 
     <SolidColorBrush x:Key="NormalLevelColor" Color="#FF686868"/>

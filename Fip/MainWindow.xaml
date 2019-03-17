@@ -67,7 +67,9 @@
         </Grid>
 
         <Grid Margin="0,30">
+            <!--左边菜单-->
             <Grid x:Name="LeftMenuGrid" Width="200" HorizontalAlignment="Left">
+                <!--分界线-->
                 <Rectangle HorizontalAlignment="Right" Width="1" Margin="0,0,0.5,0">
                     <Rectangle.Fill>
                         <RadialGradientBrush>
@@ -77,13 +79,13 @@
                     </Rectangle.Fill>
                 </Rectangle>
             </Grid>
+            
             <Grid x:Name="RightFuntionContainer" Margin="200,0,0,0">
-
-                <ScrollViewer Style="{StaticResource MScrollView}">
-                    <StackPanel></StackPanel>
-                </ScrollViewer>
+                <MControls:DeviceSMessageControler></MControls:DeviceSMessageControler>
             </Grid>
         </Grid>
+        
+        
         <MControls:BottomPart x:Name="BPart" VerticalAlignment="Bottom" Height="30" Margin="0"></MControls:BottomPart>
             
         
