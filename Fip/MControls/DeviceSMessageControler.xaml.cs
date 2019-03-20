@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Fip.Dialog;
 
 namespace Fip.MControls
 {
@@ -50,6 +51,19 @@ namespace Fip.MControls
             });
 
             DeviceSMesageContainer.Children.Add(line);
+        }
+
+
+        private void AddNewDeviceButton_Click()
+        {
+            NewDeviceDialog dialog = new NewDeviceDialog();
+            dialog.Owner = MainWindow.MWindow;
+
+            //完成输入工作
+            if(dialog.ShowDialog().Value)
+            {
+
+            }
         }
     }
 }

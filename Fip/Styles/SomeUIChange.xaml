@@ -95,7 +95,7 @@
 
                         <RepeatButton x:Name="DecreaseRepeat" Style="{DynamicResource LaoyaosRepeatButton}" Command="ScrollBar.LineUpCommand" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
                             <Grid>
-                                <Image x:Name="DecreaseArrow" Source="UIImage\ScrollButtonIcon.png" RenderTransformOrigin="0.5,0.5" Width="Auto" Height="Auto" VerticalAlignment="Stretch" Stretch="Fill" >
+                                <!--<Image x:Name="DecreaseArrow" Source="UIImage\ScrollButtonIcon.png" RenderTransformOrigin="0.5,0.5" Width="Auto" Height="Auto" VerticalAlignment="Stretch" Stretch="Fill" >
                                     <Image.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform/>
@@ -104,7 +104,7 @@
                                             <TranslateTransform/>
                                         </TransformGroup>
                                     </Image.RenderTransform>
-                                </Image>
+                                </Image>-->
                             </Grid>
                         </RepeatButton>
 
@@ -123,7 +123,7 @@
 
                         <RepeatButton Grid.Row="2" x:Name="IncreaseRepeat" Style="{DynamicResource LaoyaosRepeatButton}" Command="ScrollBar.LineDownCommand" Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}">
                             <Grid>
-                                <Image x:Name="IncreaseArrow" Width="Auto" Height="Auto" Source="UIImage\ScrollButtonIcon.png" Stretch="Fill" />
+                                <!--<Image x:Name="IncreaseArrow" Width="Auto" Height="Auto" Source="UIImage\ScrollButtonIcon.png" Stretch="Fill" />-->
                             </Grid>
                         </RepeatButton>
                     </Grid>
@@ -288,5 +288,62 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+    
+    <Style x:Key="MTextBox" TargetType="{x:Type TextBox}">
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="AllowDrop" Value="true"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border x:Name="border" SnapsToDevicePixels="True" CornerRadius="12" Background="#FFF0F0F0" BorderThickness="0">
+                       
+                        <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Margin="10,3"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            
+                            <Setter Property="Effect" TargetName="border">
+                                <Setter.Value>
+                                    <DropShadowEffect Direction="0" ShadowDepth="0" BlurRadius="5"  Color="#4C1296DB">
+                                       
+                                    </DropShadowEffect>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="true">
+                            
+                            <Setter Property="Effect" TargetName="border">
+                                <Setter.Value>
+                                    <DropShadowEffect Direction="0" ShadowDepth="0" BlurRadius="5" Color="#4C1296DB">
+                                       
+                                    </DropShadowEffect>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                    <Condition Property="IsSelectionActive" Value="false"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                
+            </MultiTrigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>

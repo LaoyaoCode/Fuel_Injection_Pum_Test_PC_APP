@@ -8,34 +8,32 @@
              d:DesignHeight="300" d:DesignWidth="300" Width="580" Height="414" Loaded="UserControl_Loaded">
     <!--器件面板容器-->
     <Grid x:Name="RootGrid">
-        <Grid Height="30" VerticalAlignment="Top">
-            <TextBox BorderBrush="{x:Null}" Foreground="{StaticResource NormalTextColor}" BorderThickness="0" VerticalAlignment="Center" FontSize="16" SelectionBrush="{DynamicResource SelectedColor}" Margin="20,0,130,0" CaretBrush="{DynamicResource NormalTextColor}">
-                <TextBox.Resources>
-                    <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
-                        <VisualBrush.Visual>
-                            <TextBlock Text="请输入搜索关键字(Enter确认)..." Foreground="{StaticResource NormalTextColor}"/>
-                        </VisualBrush.Visual>
-                    </VisualBrush>
-                </TextBox.Resources>
-                <TextBox.Style>
-                    <Style TargetType="TextBox">
-                        <Style.Triggers>
-                            <Trigger Property="Text" Value="{x:Null}">
-                                <Setter Property="Background" Value="{StaticResource HintText}"/>
-                            </Trigger>
-                            <Trigger Property="Text" Value="">
-                                <Setter Property="Background" Value="{StaticResource HintText}"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBox.Style>
-            </TextBox>
-            <local:IconButton x:Name="ExportAllButton" ToolTip="导出所有器件信息" ButtonIcon="FileExport" IconColor="{DynamicResource SpecialColor3}" Width="20" Height="20" HorizontalAlignment="Right" Margin="0,0,10,0" NormalBackColor="{StaticResource AppBackBrush}" VerticalAlignment="Center"></local:IconButton>
-            <local:IconButton ToolTip="添加器件信息" ButtonIcon="FilePlus" IconColor="{DynamicResource SpecialColor2}" Width="20" Height="20" HorizontalAlignment="Right" Margin="0,0,90,0" NormalBackColor="{StaticResource AppBackBrush}" VerticalAlignment="Center"></local:IconButton>
-            <local:IconButton ToolTip="从文件导入器件信息" ButtonIcon="FileImport" IconColor="{StaticResource SpecialColor}" Width="20" Height="20" HorizontalAlignment="Right" Margin="0,0,50,0" NormalBackColor="{StaticResource AppBackBrush}" VerticalAlignment="Center"></local:IconButton>
-            <Rectangle Fill="{DynamicResource SpecialColor2}" Height="2" Margin="20,0,130,0" VerticalAlignment="Bottom"></Rectangle>
+        <Grid Height="40" VerticalAlignment="Top">
+            <TextBox  Margin="20,0,300,0" Style="{StaticResource MTextBox}" VerticalAlignment="Center" Foreground="{StaticResource NormalTextColor}" CaretBrush="{StaticResource SpecialColor2}" SelectionBrush="{DynamicResource SpecialColor2}" />
+            <local:ImageButton Width="20" ToolTip="关键字搜索" ImageSource="/Fip;component/Images/search.png" Height="20" NormalOp="0.5" HorizontalAlignment="Left" Margin="300,0,0,0"/>
+            <Rectangle Width="1" HorizontalAlignment="Left" Margin="380,0,0,0">
+                <Rectangle.Fill>
+                    <RadialGradientBrush>
+                        <GradientStop Color="#7F646464" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </RadialGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Grid HorizontalAlignment="Right" Width="180">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <local:IconButton x:Name="ExportAllButton" Grid.Column="1" ToolTip="导出所有器件信息" ButtonIcon="FileExport" IconColor="{DynamicResource SpecialColor3}" Width="16" Height="16" HorizontalAlignment="Center" Margin="0" NormalBackColor="{StaticResource AppBackBrush}" VerticalAlignment="Center"></local:IconButton>
+                <local:IconButton ToolTip="添加器件信息" Grid.Column="0" IconClick="AddNewDeviceButton_Click" ButtonIcon="FilePlus" IconColor="{DynamicResource SpecialColor2}" Width="16" HorizontalAlignment="Center" Margin="0" NormalBackColor="{StaticResource AppBackBrush}" VerticalAlignment="Center" Height="16"/>
+                <local:IconButton ToolTip="从文件导入器件信息" Grid.Column="2" ButtonIcon="FileImport" IconColor="{StaticResource SpecialColor}" Width="16" Height="16" HorizontalAlignment="Center" Margin="0" NormalBackColor="{StaticResource AppBackBrush}" VerticalAlignment="Center"></local:IconButton>
+            </Grid>
+
+
         </Grid>
-        <ScrollViewer Style="{StaticResource MScrollView}" Margin="0,35,0,0">
+        <ScrollViewer Style="{StaticResource MScrollView}" Margin="0,40,0,0">
             <!--器件短信息容器-->
             <StackPanel x:Name="DeviceSMesageContainer"></StackPanel>
         </ScrollViewer>

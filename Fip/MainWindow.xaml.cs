@@ -22,9 +22,12 @@ namespace Fip
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static  MainWindow MWindow = null;
+
         public MainWindow()
         {
             InitializeComponent();
+            MWindow = this;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

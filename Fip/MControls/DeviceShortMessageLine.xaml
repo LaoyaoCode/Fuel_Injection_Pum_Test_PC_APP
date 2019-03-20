@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="577" Width="577" Height="50" Loaded="UserControl_Loaded" PreviewMouseDoubleClick="UserControl_PreviewMouseDoubleClick" MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave">
     
-    <Grid x:Name="RootGrid" Background="{DynamicResource AppBackBrush}">
+    <Grid x:Name="RootGrid" Background="{StaticResource AppBackBrush}">
 
         <!--无图片图标时的文字图标-->
         <Border x:Name="NoImageIcon" Visibility="Hidden" Width="30" Height="30" CornerRadius="45" HorizontalAlignment="Left" Margin="20,0,0,0" Background="{DynamicResource LineBrush}">

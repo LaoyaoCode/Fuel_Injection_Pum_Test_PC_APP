@@ -1,0 +1,159 @@
+﻿<Window x:Class="Fip.Dialog.NewDeviceDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Fip.Dialog"
+        mc:Ignorable="d"
+        xmlns:Tools="clr-namespace:Fip.Dialog.Tools"
+        xmlns:MControls="clr-namespace:Fip.MControls"
+        Title="New Device Dialog" x:Name="window" ShowInTaskbar="False" AllowsTransparency="True"  Background="{x:Null}" Height="371" Width="600"  WindowStyle="None" ResizeMode="CanMinimize"   WindowStartupLocation="CenterOwner" BorderThickness="10" Loaded="window_Loaded">
+
+    <Window.Resources>
+        <!--加载动画-->
+        <Storyboard x:Key="LoadAnimation">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="window">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <!--最大化动画-->
+        <Storyboard x:Key="MaxAnimation">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="RootGrid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseIn" />
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="RootGrid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseIn" />
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <!--圆形按钮style-->
+        <Style x:Key="M_CB_Style" TargetType="{x:Type Tools:CircleButton_NDD}">
+            <Setter Property="ActiveColor" Value="{StaticResource ButtonColor}"></Setter>
+            <Setter Property="NormalColor" Value="{StaticResource SelectedColor}"></Setter>
+            <Setter Property="FinishColor" Value="{StaticResource SpecialColor2}"></Setter>
+            <Setter Property="ErrorColor" Value="{StaticResource SpecialColor3}"></Setter>
+        </Style>
+    </Window.Resources>
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard x:Name="LoadAnimation_BeginStoryboard" Storyboard="{StaticResource LoadAnimation}"/>
+            <BeginStoryboard Storyboard="{StaticResource MaxAnimation}" />
+        </EventTrigger>
+    </Window.Triggers>
+
+    <Grid x:Name="RootGrid" RenderTransformOrigin="0.5,1">
+        <Grid.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform/>
+                <SkewTransform/>
+                <RotateTransform/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </Grid.RenderTransform>
+        <Border BorderBrush="White"  CornerRadius="5" Background="White">
+            <Border.Effect>
+                <DropShadowEffect Color="#FFBBBBBB" ShadowDepth="0" BlurRadius="10"/>
+            </Border.Effect>
+        </Border>
+
+        <Grid VerticalAlignment="Top" Height="30" Margin="0">
+            <!--背景矩形-->
+            <Border  Background="{StaticResource AppBackBrush}" CornerRadius="5"  MouseLeftButtonDown="DargWindowMove"/>
+            <Image  HorizontalAlignment="Left" Margin="10,5,3,5" MouseLeftButtonDown="DargWindowMove" Source="/Fip;component/Images/dialog_icon.png" VerticalAlignment="Center"/>
+
+            <MControls:IconButton x:Name="CloseWindowsButton" IconClick="CloseButton_Click" ButtonIcon="Close" NormalBackColor="{DynamicResource AppBackBrush}" HorizontalAlignment="Right" Width="15" Foreground="{x:Null}" IconColor="Red" ToolTip="关闭对话框" Margin="0,0,10,0" Height="15"/>
+        </Grid>
+
+        <Grid x:Name="MainContentContainer" Margin="0,30,0,30" ClipToBounds="True">
+            <Grid x:Name="MainContent" HorizontalAlignment="Left" Width="5800">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" Background="{DynamicResource SpecialColor}">
+                    <TextBlock Text="0" FontSize="72" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                </Grid>
+                <Grid Grid.Column="1" Background="{DynamicResource SpecialColor2}">
+                    <TextBlock Text="1" FontSize="72" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                </Grid>
+                <Grid Grid.Column="2" Background="{DynamicResource SpecialColor3}">
+                    <TextBlock Text="2" FontSize="72" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                </Grid>
+                <Grid Grid.Column="3" Background="{DynamicResource SpecialColor}">
+                    <TextBlock Text="3" FontSize="72" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                </Grid>
+                <Grid Grid.Column="4" Background="{DynamicResource SpecialColor2}">
+                    <TextBlock Text="4" FontSize="72" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                </Grid>
+                <Grid Grid.Column="5" Background="{DynamicResource SpecialColor3}">
+                    <TextBlock Text="5" FontSize="72" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                </Grid>
+                <Grid Grid.Column="6" Background="{DynamicResource SpecialColor}">
+                    <TextBlock Text="6" FontSize="72" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                </Grid>
+                <Grid Grid.Column="7" Background="{DynamicResource SpecialColor2}">
+                    <TextBlock Text="7" FontSize="72" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                </Grid>
+                <Grid Grid.Column="8" Background="{DynamicResource SpecialColor3}">
+                    <TextBlock Text="8" FontSize="72" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                </Grid>
+                <Grid Grid.Column="9" Background="{DynamicResource SpecialColor}">
+                    <TextBlock Text="9" FontSize="72" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                </Grid>
+            </Grid>
+        </Grid>
+        
+        
+        <!--底部步骤按钮-->
+        <Grid VerticalAlignment="Bottom" Height="30" Margin="0">
+            <Grid Margin="100,0" x:Name="StepButtonContainer">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!--启动工况-->
+                <Tools:CircleButton_NDD Grid.Column="0" ButtonTag="0" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
+                <!--怠速工况-->
+                <Tools:CircleButton_NDD Grid.Column="1" ButtonTag="1" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
+                <Tools:CircleButton_NDD Grid.Column="2" ButtonTag="2" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
+                <Tools:CircleButton_NDD Grid.Column="3" ButtonTag="3" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
+                <Tools:CircleButton_NDD Grid.Column="4" ButtonTag="4" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
+                <Tools:CircleButton_NDD Grid.Column="5" ButtonTag="5" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
+                <Tools:CircleButton_NDD Grid.Column="6" ButtonTag="6" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
+                <Tools:CircleButton_NDD Grid.Column="7" ButtonTag="7" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
+                <Tools:CircleButton_NDD Grid.Column="8" ButtonTag="8" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
+                <!--一些独立值的设定-->
+                <Tools:CircleButton_NDD Grid.Column="9" ButtonTag="9" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
