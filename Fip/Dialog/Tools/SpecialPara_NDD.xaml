@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="Fip.Dialog.Tools.SpecialPara_NDD"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Fip.Dialog.Tools"
+             mc:Ignorable="d" 
+             xmlns:MControls ="clr-namespace:Fip.MControls"
+             d:DesignHeight="300" d:DesignWidth="300"  Width="580" Height="291">
+    <Grid Background="{StaticResource AppBackBrush}">
+        <Grid VerticalAlignment="Top" Height="60">
+            <TextBlock Text="油泵编号" VerticalAlignment="Center" Foreground="{StaticResource NormalTextColor}" HorizontalAlignment="Left" Margin="50,0,0,0"></TextBlock>
+            <TextBox Style="{StaticResource MTextBox}" Foreground="{DynamicResource NormalTextColor}" SelectionBrush="{DynamicResource SpecialColor2}" CaretBrush="{DynamicResource SpecialColor2}" Margin="180,0,50,0" VerticalAlignment="Center"></TextBox>
+        </Grid>
+        <Grid VerticalAlignment="Top" Height="60" Margin="0,60,0,0">
+            <TextBlock Text="油泵型号" VerticalAlignment="Center" Foreground="{StaticResource NormalTextColor}" HorizontalAlignment="Left" Margin="50,0,0,0"></TextBlock>
+            <TextBox Style="{StaticResource MTextBox}" Foreground="{DynamicResource NormalTextColor}" SelectionBrush="{DynamicResource SpecialColor2}" CaretBrush="{DynamicResource SpecialColor2}" Margin="180,0,50,0" VerticalAlignment="Center"></TextBox>
+        </Grid>
+        <Grid VerticalAlignment="Top" Margin="0,120,0,0" Height="60" >
+            <TextBlock Text="燃油温度设定(℃)" VerticalAlignment="Center" Foreground="{StaticResource NormalTextColor}" HorizontalAlignment="Left" Margin="50,0,0,0"></TextBlock>
+            <local:RangeValueInput_NDD HorizontalAlignment="Left" Margin="180,0,0,0"></local:RangeValueInput_NDD>
+        </Grid>           
+    </Grid>
+</UserControl>

@@ -23,7 +23,7 @@ namespace Fip.MControls
         /// <summary>
         /// 唯一实例
         /// </summary>
-        private static BottomPart Unity = null;
+        public static BottomPart Unity = null;
 
         public BottomPart()
         {
@@ -104,18 +104,7 @@ namespace Fip.MControls
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            Log("dsekudbufbhurf", LogMessage.LevelEnum.Error);
-            Log("dsekudbufbasfefewferferfhurf", LogMessage.LevelEnum.Error);
-            Log("dsekudbusefsefsdfsdfsdfsdfdsfsdfdsfdsfdsfdsfsdfdsffbhurf", LogMessage.LevelEnum.Error);
-            Log("dsekudbufbhurf", LogMessage.LevelEnum.Error);
-            Log("dsekudbufbhurf", LogMessage.LevelEnum.Error);
-            Log("dsekudbufsdfsdfsfbhurf", LogMessage.LevelEnum.Error);
-            Log("dsekdsadasdaudbufbhurf", LogMessage.LevelEnum.Normal);
-            Log("dsekudbufbhurf", LogMessage.LevelEnum.Error);
-            Log("dsedsffsdfsdkudbufbhurf", LogMessage.LevelEnum.Important);
-            Log("dsekudbufbhurf", LogMessage.LevelEnum.Error);
-            Log("dsekudbufbhurf", LogMessage.LevelEnum.Error);
-            Log("dsekudbufbhurf", LogMessage.LevelEnum.Error);
+           
         }
 
         /// <summary>

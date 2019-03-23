@@ -11,14 +11,7 @@
         <Grid Height="40" VerticalAlignment="Top">
             <TextBox  Margin="20,0,300,0" Style="{StaticResource MTextBox}" VerticalAlignment="Center" Foreground="{StaticResource NormalTextColor}" CaretBrush="{StaticResource SpecialColor2}" SelectionBrush="{DynamicResource SpecialColor2}" />
             <local:ImageButton Width="20" ToolTip="关键字搜索" ImageSource="/Fip;component/Images/search.png" Height="20" NormalOp="0.5" HorizontalAlignment="Left" Margin="300,0,0,0"/>
-            <Rectangle Width="1" HorizontalAlignment="Left" Margin="380,0,0,0">
-                <Rectangle.Fill>
-                    <RadialGradientBrush>
-                        <GradientStop Color="#7F646464" Offset="0"/>
-                        <GradientStop Color="White" Offset="1"/>
-                    </RadialGradientBrush>
-                </Rectangle.Fill>
-            </Rectangle>
+            <Rectangle Width="1" HorizontalAlignment="Left" Margin="380,0,0,0" Fill="{StaticResource GrayLine_RG_Brush}"></Rectangle>
             <Grid HorizontalAlignment="Right" Width="180">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>

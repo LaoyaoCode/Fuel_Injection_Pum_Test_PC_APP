@@ -14,4 +14,10 @@
     <SolidColorBrush x:Key="ImportantLevelColor" Color="#FF1296DB"/>
     <SolidColorBrush x:Key="ErrorLevelColor" Color="#E91E63"/>
     <SolidColorBrush x:Key="SelectedColor" Color="#CCE6E6E6"/>
+
+    <RadialGradientBrush x:Key="GrayLine_RG_Brush">
+        <GradientStop Color="#7F646464" Offset="0"/>
+        <GradientStop Color="White" Offset="1"/>
+    </RadialGradientBrush>
+    
 </ResourceDictionary>

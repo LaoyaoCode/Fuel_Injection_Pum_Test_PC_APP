@@ -116,8 +116,8 @@
                 <Grid Grid.Column="8" Background="{DynamicResource SpecialColor3}">
                     <TextBlock Text="8" FontSize="72" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
                 </Grid>
-                <Grid Grid.Column="9" Background="{DynamicResource SpecialColor}">
-                    <TextBlock Text="9" FontSize="72" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                <Grid Grid.Column="9"  Background="{StaticResource AppBackBrush}">
+                    <Tools:SpecialPara_NDD></Tools:SpecialPara_NDD>
                 </Grid>
             </Grid>
         </Grid>

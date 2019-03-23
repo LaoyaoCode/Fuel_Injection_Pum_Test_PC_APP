@@ -35,7 +35,7 @@ namespace Fip.Code.DB
         public RangeValue R_RackTravel = null;
         /// <summary>
         /// 需要接受的值 RECIEVE
-        /// 不均匀，只能为一个数
+        /// 不均匀度，只能为一个数
         /// </summary>
         public float R_Asymmetry = -1;
 

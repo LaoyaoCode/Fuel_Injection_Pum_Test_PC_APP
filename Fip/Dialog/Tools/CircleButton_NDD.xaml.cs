@@ -149,6 +149,24 @@ namespace Fip.Dialog.Tools
         }
 
         /// <summary>
+        /// 虚拟按钮点击事件
+        /// </summary>
+        public void VirtualButton_Click()
+        {
+            if(!IsClick)
+            {
+                //调用回调事件
+                if (ClickEvent != null)
+                {
+                    ClickEvent.Invoke(ButtonTag, this);
+                }
+
+                IsClick = true;
+            }
+            Circle.Background = ActiveColor;
+        }
+
+        /// <summary>
         /// 返回没有被点击的状态
         /// </summary>
         public void BackToNormalCondition()

@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 using Fip.MControls;
+using Fip.Code.DB;
 
 namespace Fip
 {
@@ -32,7 +33,18 @@ namespace Fip
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-           
+            try
+            {
+                new DBControler();
+                BottomPart.Log("数据库检查完成", LogMessage.LevelEnum.Normal);
+            }
+            catch (Exception)
+            {
+                BottomPart.Log("数据库连接失败", LogMessage.LevelEnum.Error);
+            }
+ 
+            
+
         }
 
         /// <summary>

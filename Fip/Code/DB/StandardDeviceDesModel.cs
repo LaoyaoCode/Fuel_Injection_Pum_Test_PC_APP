@@ -56,16 +56,18 @@ namespace Fip.Code.DB
         /// </summary>
         public RangeValue Tem = null;
         /// <summary>
-        /// 油泵编号（唯一编号）（可以是中文加字符串）（UNIQUE）
+        /// 油泵编号
         /// </summary>
         public String EquCode = null;
         /// <summary>
-        /// 转化为16进制的图标文件内容（可为空，代表没有选择图标）
+        /// 转化为16进制的图标文件内容（可为空，代表没有选择图标）取消图标
         /// </summary>
-        public String IconHex = null;
+        //public String IconHex = null;
         /// <summary>
-        /// 油泵设备名
+        /// 油泵型号
         /// </summary>
-        public String Name = null;
+        public String EquType = null;
+
+        //油泵编号 和 油泵型号 不能存在两条数据这两者都相同
     }
 }

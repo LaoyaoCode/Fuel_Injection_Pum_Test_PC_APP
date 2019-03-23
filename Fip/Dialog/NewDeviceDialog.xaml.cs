@@ -60,6 +60,8 @@ namespace Fip.Dialog
             {
                 button.ClickEvent = StepButton_Click;
             }
+
+            ((CircleButton_NDD)StepButtonContainer.Children[0]).VirtualButton_Click();
         }
 
         private void StepButton_Click(String tag , CircleButton_NDD which)

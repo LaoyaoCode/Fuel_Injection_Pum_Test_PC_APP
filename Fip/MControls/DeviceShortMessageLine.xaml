@@ -5,30 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Fip.MControls"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="577" Width="577" Height="50" Loaded="UserControl_Loaded" PreviewMouseDoubleClick="UserControl_PreviewMouseDoubleClick" MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave">
+             d:DesignHeight="300" d:DesignWidth="577" Width="577" Height="35" Loaded="UserControl_Loaded" PreviewMouseDoubleClick="UserControl_PreviewMouseDoubleClick" MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave">
     
     <Grid x:Name="RootGrid" Background="{StaticResource AppBackBrush}">
 
         <!--无图片图标时的文字图标-->
-        <Border x:Name="NoImageIcon" Visibility="Hidden" Width="30" Height="30" CornerRadius="45" HorizontalAlignment="Left" Margin="20,0,0,0" Background="{DynamicResource LineBrush}">
-            <TextBlock x:Name="InitialTB" Text="天" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Foreground="{DynamicResource AppBackBrush}"></TextBlock>
+        <Border x:Name="NoImageIcon" Visibility="Visible" Width="20" Height="20" CornerRadius="45" HorizontalAlignment="Left" Margin="20,0,0,0" Background="{DynamicResource LineBrush}">
+            <TextBlock x:Name="InitialTB" Text="天" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" Foreground="{DynamicResource AppBackBrush}"></TextBlock>
         </Border>
-        <!--图片图标-->
-        <Border x:Name="ImageIcon" Visibility="Visible" Width="30" Height="30" CornerRadius="45" HorizontalAlignment="Left" Margin="20,0,0,0" BorderThickness="0" BorderBrush="{x:Null}">
-            <Border.Effect>
-                <BlurEffect/>
-            </Border.Effect>
-            <Border.Background>
-                <ImageBrush x:Name="ImageIcon_Brush" ImageSource="/Fip;component/Images/ICON_TEST.png" Stretch="UniformToFill"/>
-            </Border.Background>
-        </Border>
-        
-        <!--器件名字-->
-        <TextBlock x:Name="DeviceName" Text="康明斯 6CTAA" Margin="80,0,130,0" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Foreground="{StaticResource NormalTextColor}" FontSize="14"/>
 
-        <local:IconButton x:Name="ModifyButton" Visibility="Collapsed" ToolTip="修改配置" ButtonIcon="Feather" IconColor="{StaticResource SpecialColor2}" Margin="0,0,90,0" HorizontalAlignment="Right" VerticalAlignment="Center" Width="20" Height="20" NormalBackColor="{StaticResource SelectedColor}"></local:IconButton>
-        <local:IconButton x:Name="DetailButton" Visibility="Collapsed" ToolTip="查看细节" ButtonIcon="EyeOutline" IconColor="{StaticResource SpecialColor}" HorizontalAlignment="Right" Margin="0,0,48,0" Width="20" VerticalAlignment="Center" Height="20" NormalBackColor="{StaticResource SelectedColor}"></local:IconButton>
-        <local:IconButton x:Name="RemoveButton" Visibility="Collapsed" ToolTip="删除器件" ButtonIcon="Close" IconColor="Red" HorizontalAlignment="Right" Margin="0,0,10,0" Width="15" Height="15" VerticalAlignment="Center" NormalBackColor="{StaticResource SelectedColor}"></local:IconButton>
+        <!--器件名字-->
+        <TextBlock x:Name="DeviceName" Text="康明斯 6CTAA" Margin="80,0,130,0" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Foreground="{StaticResource NormalTextColor}" FontSize="12"/>
+
+        <local:IconButton x:Name="ModifyButton" Visibility="Collapsed" ToolTip="修改配置" ButtonIcon="Feather" IconColor="{StaticResource SpecialColor2}" Margin="0,0,90,0" HorizontalAlignment="Right" VerticalAlignment="Center" Width="15" Height="15" NormalBackColor="{StaticResource SelectedColor}"></local:IconButton>
+        <local:IconButton x:Name="DetailButton" Visibility="Collapsed" ToolTip="查看细节" ButtonIcon="EyeOutline" IconColor="{StaticResource SpecialColor}" HorizontalAlignment="Right" Margin="0,0,48,0" Width="15" VerticalAlignment="Center" Height="15" NormalBackColor="{StaticResource SelectedColor}"></local:IconButton>
+        <local:IconButton x:Name="RemoveButton" Visibility="Collapsed" ToolTip="删除器件" ButtonIcon="Close" IconColor="Red" HorizontalAlignment="Right" Margin="0,0,10,0" Width="12" Height="12" VerticalAlignment="Center" NormalBackColor="{StaticResource SelectedColor}"></local:IconButton>
     
     </Grid>
 </UserControl>

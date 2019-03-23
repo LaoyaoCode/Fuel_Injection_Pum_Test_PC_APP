@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="Fip.Dialog.Tools.RangeValueInput_NDD"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Fip.Dialog.Tools"
+             mc:Ignorable="d" 
+             xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             d:DesignHeight="300" d:DesignWidth="300" Width="350" Height="40">
+    <Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle x:Name="StateRect_Min" Grid.Column="0" Fill="{DynamicResource SpecialColor3}" Height="2" VerticalAlignment="Center" Opacity="0.9"></Rectangle>
+            <Rectangle x:Name="StateRect_Max" Grid.Column="1" Fill="{DynamicResource SpecialColor3}" Height="2" VerticalAlignment="Center" Opacity="0.9"></Rectangle>
+        </Grid>
+
+        <Grid x:Name="ErrorIcon" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Border Background="{DynamicResource SpecialColor3}" Width="15" Height="15" CornerRadius="40">
+                <Grid>
+                    <TextBlock Text="≤" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,2" Foreground="{DynamicResource AppBackBrush}"/>
+                    <icons:PackIconMaterial Kind="Close" Width="10" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#66000000"></icons:PackIconMaterial>
+                </Grid>
+            </Border>
+        </Grid>
+        <TextBox x:Name="MinValueTB" TextChanged="MinValueTB_TextChanged" Style="{StaticResource MTextBox}" VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" CaretBrush="{StaticResource SpecialColor2}" SelectionBrush="{StaticResource SpecialColor2}" Foreground="{StaticResource NormalTextColor}"></TextBox>
+        <TextBox x:Name="MaxValueTB" TextChanged="MaxValueTB_TextChanged" Style="{StaticResource MTextBox}" VerticalAlignment="Center" HorizontalAlignment="Right" Width="150" CaretBrush="{StaticResource SpecialColor2}" SelectionBrush="{StaticResource SpecialColor2}" Foreground="{StaticResource NormalTextColor}"></TextBox>
+    </Grid>
+</UserControl>

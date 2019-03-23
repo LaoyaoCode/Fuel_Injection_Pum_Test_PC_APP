@@ -30,7 +30,17 @@ namespace Fip.MControls
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            
+            AddDSMessage(1);
+            AddDSMessage(1);
+            AddDSMessage(1);
+            AddDSMessage(1);
+            AddDSMessage(1);
+            AddDSMessage(1);
+            AddDSMessage(1);
+            AddDSMessage(1);
+            AddDSMessage(1);
+            AddDSMessage(1);
+            AddDSMessage(1);
         }
 
         /// <summary>
