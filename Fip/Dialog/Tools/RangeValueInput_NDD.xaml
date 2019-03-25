@@ -26,6 +26,6 @@
             </Border>
         </Grid>
         <TextBox x:Name="MinValueTB" TextChanged="MinValueTB_TextChanged" Style="{StaticResource MTextBox}" VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" CaretBrush="{StaticResource SpecialColor2}" SelectionBrush="{StaticResource SpecialColor2}" Foreground="{StaticResource NormalTextColor}"></TextBox>
-        <TextBox x:Name="MaxValueTB" TextChanged="MaxValueTB_TextChanged" Style="{StaticResource MTextBox}" VerticalAlignment="Center" HorizontalAlignment="Right" Width="150" CaretBrush="{StaticResource SpecialColor2}" SelectionBrush="{StaticResource SpecialColor2}" Foreground="{StaticResource NormalTextColor}"></TextBox>
+        <TextBox x:Name="MaxValueTB" ToolTip="输入$符号代表正无穷" TextChanged="MaxValueTB_TextChanged" Style="{StaticResource MTextBox}" VerticalAlignment="Center" HorizontalAlignment="Right" Width="150" CaretBrush="{StaticResource SpecialColor2}" SelectionBrush="{StaticResource SpecialColor2}" Foreground="{StaticResource NormalTextColor}"></TextBox>
     </Grid>
 </UserControl>

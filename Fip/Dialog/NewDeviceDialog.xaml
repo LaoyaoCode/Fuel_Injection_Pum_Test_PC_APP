@@ -89,8 +89,8 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0" Background="{DynamicResource SpecialColor}">
-                    <TextBlock Text="0" FontSize="72" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                <Grid Grid.Column="0" Tag="StartWorkContainer">
+                    <Tools:NormalPara_NDD ParaName="启动工况"></Tools:NormalPara_NDD>
                 </Grid>
                 <Grid Grid.Column="1" Background="{DynamicResource SpecialColor2}">
                     <TextBlock Text="1" FontSize="72" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
@@ -155,5 +155,7 @@
 
             </Grid>
         </Grid>
+
+
     </Grid>
 </Window>

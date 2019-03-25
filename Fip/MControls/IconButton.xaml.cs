@@ -23,6 +23,8 @@ namespace Fip.MControls
     {
         public delegate void IconClickDel();
 
+        public delegate void IconClick_ParaDel(IconButton which);
+
         public IconClickDel IconClick
         {
             get { return (IconClickDel)GetValue(IconClickProperty); }
@@ -76,6 +78,18 @@ namespace Fip.MControls
 
 
 
+
+        public IconClick_ParaDel IconClick_ParaEvent
+        {
+            get { return (IconClick_ParaDel)GetValue(IconClick_ParaEventProperty); }
+            set { SetValue(IconClick_ParaEventProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IconClick_ParaEvent.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IconClick_ParaEventProperty =
+            DependencyProperty.Register("IconClick_ParaEvent", typeof(IconClick_ParaDel), typeof(IconButton), new PropertyMetadata(null));
+
+
         public IconButton()
         {
             InitializeComponent();
@@ -86,6 +100,11 @@ namespace Fip.MControls
             if (IconClick != null)
             {
                 IconClick.Invoke();
+            }
+
+            if(IconClick_ParaEvent != null)
+            {
+                IconClick_ParaEvent.Invoke(this);
             }
         }
     }

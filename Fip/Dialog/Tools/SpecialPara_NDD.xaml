@@ -9,16 +9,30 @@
              d:DesignHeight="300" d:DesignWidth="300"  Width="580" Height="291">
     <Grid Background="{StaticResource AppBackBrush}">
         <Grid VerticalAlignment="Top" Height="60">
-            <TextBlock Text="油泵编号" VerticalAlignment="Center" Foreground="{StaticResource NormalTextColor}" HorizontalAlignment="Left" Margin="50,0,0,0"></TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="油泵编号" VerticalAlignment="Center" Foreground="{StaticResource NormalTextColor}" HorizontalAlignment="Left" Margin="50,0,0,0"></TextBlock>
+                <TextBlock Text="*" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource SpecialColor3}" FontSize="24" Margin="2,0,0,0"></TextBlock>
+            </StackPanel>
+
             <TextBox Style="{StaticResource MTextBox}" Foreground="{DynamicResource NormalTextColor}" SelectionBrush="{DynamicResource SpecialColor2}" CaretBrush="{DynamicResource SpecialColor2}" Margin="180,0,50,0" VerticalAlignment="Center"></TextBox>
         </Grid>
         <Grid VerticalAlignment="Top" Height="60" Margin="0,60,0,0">
-            <TextBlock Text="油泵型号" VerticalAlignment="Center" Foreground="{StaticResource NormalTextColor}" HorizontalAlignment="Left" Margin="50,0,0,0"></TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="油泵型号" VerticalAlignment="Center" Foreground="{StaticResource NormalTextColor}" HorizontalAlignment="Left" Margin="50,0,0,0"></TextBlock>
+                <TextBlock Text="*" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource SpecialColor3}" FontSize="24" Margin="2,0,0,0"></TextBlock>
+            </StackPanel>
             <TextBox Style="{StaticResource MTextBox}" Foreground="{DynamicResource NormalTextColor}" SelectionBrush="{DynamicResource SpecialColor2}" CaretBrush="{DynamicResource SpecialColor2}" Margin="180,0,50,0" VerticalAlignment="Center"></TextBox>
         </Grid>
         <Grid VerticalAlignment="Top" Margin="0,120,0,0" Height="60" >
-            <TextBlock Text="燃油温度设定(℃)" VerticalAlignment="Center" Foreground="{StaticResource NormalTextColor}" HorizontalAlignment="Left" Margin="50,0,0,0"></TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="燃油温度设定(℃)" VerticalAlignment="Center" Foreground="{StaticResource NormalTextColor}" HorizontalAlignment="Left" Margin="50,0,0,0"></TextBlock>
+                <TextBlock Text="*" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource SpecialColor3}" FontSize="24" Margin="2,0,0,0"></TextBlock>
+            </StackPanel>
+            
             <local:RangeValueInput_NDD HorizontalAlignment="Left" Margin="180,0,0,0"></local:RangeValueInput_NDD>
-        </Grid>           
+        </Grid>
+
+        <MControls:ImageButton ToolTip="提交数据" ImageSource="/Fip;component/Images/submit.png" VerticalAlignment="Bottom" Height="40" Width="40" NormalOp="0.5" Margin="0,0,0,40"></MControls:ImageButton>
+        
     </Grid>
 </UserControl>

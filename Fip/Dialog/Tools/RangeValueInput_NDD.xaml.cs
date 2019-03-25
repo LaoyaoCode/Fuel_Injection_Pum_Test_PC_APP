@@ -28,6 +28,10 @@ namespace Fip.Dialog.Tools
         /// 最小值
         /// </summary>
         private float _Min = -1;
+        /// <summary>
+        /// 是否到达正无限
+        /// </summary>
+        private bool IsInfinity = false;
 
         public RangeValueInput_NDD()
         {
@@ -53,6 +57,7 @@ namespace Fip.Dialog.Tools
 
             MaxValueTB.Text = _Max.ToString();
             MinValueTB.Text = _Min.ToString();
+
             //检查用户输入
             CheckTheValue();
         }
@@ -80,22 +85,33 @@ namespace Fip.Dialog.Tools
         private void CheckTheValue()
         {
             float min, max;
-            //成功转换最大值
-            if(float.TryParse(MaxValueTB.Text , out max))
+
+            
+            //最大值为无限
+            if(MaxValueTB.Text=="$")
+            {
+                _Max = float.MaxValue;
+                StateRect_Max.Fill = (SolidColorBrush)FindResource("SpecialColor2");
+                IsInfinity = true;
+            }
+            //成功转换最大值,并且为正数
+            else if (float.TryParse(MaxValueTB.Text , out max) && max > 0)
             {
                 _Max = max;
                 StateRect_Max.Fill = (SolidColorBrush)FindResource("SpecialColor2");
+                IsInfinity = false;
             }
             //转化错误
             else
             {
                 _Max = -1;
                 StateRect_Max.Fill = (SolidColorBrush)FindResource("SpecialColor3");
+                IsInfinity = false;
             }
 
 
-            //成功转换最小值
-            if (float.TryParse(MinValueTB.Text, out min))
+            //成功转换最小值，并且为正数或0
+            if (float.TryParse(MinValueTB.Text, out min) && min >= 0)
             {
                 _Min = min;
                 StateRect_Min.Fill = (SolidColorBrush)FindResource("SpecialColor2");
@@ -118,12 +134,24 @@ namespace Fip.Dialog.Tools
         }
 
         /// <summary>
+        /// 设置值
+        /// </summary>
+        /// <param name="max">最大值字符串</param>
+        /// <param name="min">最小值字符串</param>
+        public void SetRangeValue(String max , String min)
+        {
+            MaxValueTB.Text = max;
+            MinValueTB.Text = min;
+
+            CheckTheValue();
+        }
+        /// <summary>
         /// 输入值是否符合要求
         /// </summary>
         /// <returns></returns>
         public bool IsValueRight()
         {
-            if(_Max > 0 && _Min > 0 && _Max > _Min)
+            if(_Max > 0 && _Min >= 0 && _Max > _Min)
             {
                 return true;
             }

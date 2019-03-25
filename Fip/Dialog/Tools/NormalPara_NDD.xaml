@@ -1,0 +1,110 @@
+﻿<UserControl x:Class="Fip.Dialog.Tools.NormalPara_NDD"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Fip.Dialog.Tools"
+             mc:Ignorable="d" 
+             x:Name="userControl"
+             xmlns:MControls="clr-namespace:Fip.MControls"
+             d:DesignHeight="300" d:DesignWidth="300" Width="580" Height="291" Background="{StaticResource AppBackBrush}" Loaded="userControl_Loaded">
+    <Grid>
+        <ScrollViewer Style="{StaticResource MScrollView}">
+            <StackPanel Orientation="Vertical" x:Name="TotalParasContainer">
+                <Grid Height="60">
+                    <MControls:IconButton x:Name="AddNewRuleButton" IconClick="AddNewRuleButton_Click" ToolTip="增加新的规则" ButtonIcon="Plus" IconColor="{DynamicResource SpecialColor2}" NormalBackColor="{DynamicResource AppBackBrush}" Width="14" Height="14" HorizontalAlignment="Left" Margin="12,0,0,0"></MControls:IconButton>
+                    <TextBlock Text="{Binding ParaName , ElementName= userControl}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Foreground="{DynamicResource NormalTextColor}" Margin="50,0,0,0" FontWeight="Bold" />
+                </Grid>
+                <!--转速-->
+                <Grid Height="60" Tag="S_RotateSpeed">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <TextBlock Text="转速(RPM)" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50,0,0,0" Foreground="{DynamicResource NormalTextColor}"></TextBlock>
+                        <TextBlock Text="*" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource SpecialColor3}" FontSize="24" Margin="2,0,0,0"></TextBlock>
+                    </StackPanel>
+                    <TextBox Style="{StaticResource MTextBox}" Foreground="{DynamicResource NormalTextColor}" SelectionBrush="{DynamicResource SpecialColor2}" CaretBrush="{DynamicResource SpecialColor2}" Margin="170,0,260,0" VerticalAlignment="Center"></TextBox>
+                </Grid>
+                
+                <!--自由组合规则的值必须是第三个儿子，后面代码需要-->
+                <!--喷油次数-->
+                <Grid Height="60" Visibility="Collapsed" x:Name="S_InjectionTimeContainer" Tag="S_InjectionTime" Background="{StaticResource AppBackBrush}" MouseEnter="Para_MouseEnter" MouseLeave="Para_MouseLeave">
+                    <MControls:IconButton Visibility="Collapsed" IconClick_ParaEvent="CloseButton_Click" ButtonIcon="Close" IconColor="{DynamicResource SpecialColor3}" NormalBackColor="{DynamicResource AppBackBrush}" Width="14" Height="14" HorizontalAlignment="Left" Margin="12,0,0,0"></MControls:IconButton>
+                    <TextBlock Text="喷油次数(次)" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50,0,0,0" Foreground="{DynamicResource NormalTextColor}"></TextBlock>
+                    <TextBox Style="{StaticResource MTextBox}" Foreground="{DynamicResource NormalTextColor}" SelectionBrush="{DynamicResource SpecialColor2}" CaretBrush="{DynamicResource SpecialColor2}" Margin="170,0,260,0" VerticalAlignment="Center"></TextBox>
+                </Grid>
+                <!--喷油量-->
+                <Grid Height="60" Visibility="Collapsed" x:Name="R_InjectionQuantityContainer" Tag="R_InjectionQuantity" Background="{StaticResource AppBackBrush}" MouseEnter="Para_MouseEnter" MouseLeave="Para_MouseLeave">
+                    <MControls:IconButton Visibility="Collapsed" IconClick_ParaEvent="CloseButton_Click" ButtonIcon="Close" IconColor="{DynamicResource SpecialColor3}" NormalBackColor="{DynamicResource AppBackBrush}" Width="14" Height="14" HorizontalAlignment="Left" Margin="12,0,0,0"></MControls:IconButton>
+                    <TextBlock Text="喷油量(ml)" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50,0,0,0" Foreground="{DynamicResource NormalTextColor}"></TextBlock>
+                    <local:RangeValueInput_NDD HorizontalAlignment="Left" Margin="170,0,0,0"/>
+                </Grid>
+                <!--齿杆行程-->
+                <Grid Height="60" Visibility="Collapsed" x:Name="R_RackTravelContainer" Tag="R_RackTravel" Background="{StaticResource AppBackBrush}" MouseEnter="Para_MouseEnter" MouseLeave="Para_MouseLeave">
+                    <MControls:IconButton Visibility="Collapsed" IconClick_ParaEvent="CloseButton_Click" ButtonIcon="Close" IconColor="{DynamicResource SpecialColor3}" NormalBackColor="{DynamicResource AppBackBrush}" Width="14" Height="14" HorizontalAlignment="Left" Margin="12,0,0,0"></MControls:IconButton>
+                    <TextBlock Text="齿杆行程(mm)" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50,0,0,0" Foreground="{DynamicResource NormalTextColor}"></TextBlock>
+                    <local:RangeValueInput_NDD HorizontalAlignment="Left" Margin="170,0,0,0"/>
+                </Grid>
+                <!--不均匀度-->
+                <Grid Height="60" Visibility="Collapsed" x:Name="R_AsymmetryContainer" Tag="R_Asymmetry" Background="{StaticResource AppBackBrush}" MouseEnter="Para_MouseEnter" MouseLeave="Para_MouseLeave">
+                    <MControls:IconButton Visibility="Collapsed" IconClick_ParaEvent="CloseButton_Click" ButtonIcon="Close" IconColor="{DynamicResource SpecialColor3}" NormalBackColor="{DynamicResource AppBackBrush}" Width="14" Height="14" HorizontalAlignment="Left" Margin="12,0,0,0"></MControls:IconButton>
+                    <TextBlock Text="不均匀(ml)" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50,0,0,0" Foreground="{DynamicResource NormalTextColor}"></TextBlock>
+                    <TextBox Style="{StaticResource MTextBox}" Foreground="{DynamicResource NormalTextColor}" SelectionBrush="{DynamicResource SpecialColor2}" CaretBrush="{DynamicResource SpecialColor2}" Margin="170,0,260,0" VerticalAlignment="Center"></TextBox>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+
+
+        <!--组合规则弹窗-->
+        <Popup x:Name="NewRuleContainer" StaysOpen="False" Placement="Bottom" AllowsTransparency="True" HorizontalOffset="104" PlacementTarget="{Binding ElementName=AddNewRuleButton}" PopupAnimation="Fade" VerticalOffset="3">
+            <Grid>
+
+                <Image Source="/Fip;component/Images/triangular.png" VerticalAlignment="Top" Width="30" Height="30" Margin="0,-6,0,0" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="180"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                    <Image.Effect>
+                        <DropShadowEffect Color="#FFBBBBBB" ShadowDepth="0" BlurRadius="10"/>
+                    </Image.Effect>
+                </Image>
+
+                <Border Background="White" Width="220" CornerRadius="10" BorderThickness="10">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#FFBBBBBB" ShadowDepth="0" BlurRadius="10"/>
+                    </Border.Effect>
+                    <!--所有需要添加的规则-->
+                    <StackPanel Orientation="Vertical" Margin="0,5" x:Name="RuleSP">
+                        <Grid Height="30" Tag="S_InjectionTime" MouseEnter="ARuleContainer_MouseEnter" MouseLeave="ARuleContainer_MouseLeave" Background="{DynamicResource AppBackBrush}" MouseLeftButtonUp="ARuleContainer_MouseLeftButtonUp">
+                            <TextBlock Text="喷油次数(次)" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource NormalTextColor}"></TextBlock>
+                        </Grid>
+                        <Grid Height="30" Tag="R_InjectionQuantity" MouseEnter="ARuleContainer_MouseEnter" MouseLeave="ARuleContainer_MouseLeave" Background="{DynamicResource AppBackBrush}" MouseLeftButtonUp="ARuleContainer_MouseLeftButtonUp">
+                            <TextBlock Text="喷油量(ml)" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource NormalTextColor}"></TextBlock>
+                        </Grid>
+                        <Grid Height="30" Tag="R_RackTravel" MouseEnter="ARuleContainer_MouseEnter" MouseLeave="ARuleContainer_MouseLeave" Background="{DynamicResource AppBackBrush}" MouseLeftButtonUp="ARuleContainer_MouseLeftButtonUp">
+                            <TextBlock Text="齿杆行程(mm)" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource NormalTextColor}"></TextBlock>
+                        </Grid>
+                        <Grid Height="30" Tag="R_Asymmetry" MouseEnter="ARuleContainer_MouseEnter" MouseLeave="ARuleContainer_MouseLeave" Background="{DynamicResource AppBackBrush}" MouseLeftButtonUp="ARuleContainer_MouseLeftButtonUp">
+                            <TextBlock Text="不均匀(ml)" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource NormalTextColor}"></TextBlock>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <Image Source="/Fip;component/Images/triangular.png" VerticalAlignment="Top" Width="30" Height="30" Margin="0,-6,0,0" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="180"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+
+            </Grid>
+        </Popup>
+
+    </Grid>
+</UserControl>
