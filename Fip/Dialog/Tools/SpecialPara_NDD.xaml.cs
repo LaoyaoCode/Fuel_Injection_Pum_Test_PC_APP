@@ -24,5 +24,33 @@ namespace Fip.Dialog.Tools
         {
             InitializeComponent();
         }
+
+        /// <summary>
+        /// 值是否正确
+        /// </summary>
+        /// <returns></returns>
+        public bool IsValueRight()
+        {
+            String code = EquCode_TB.Text.Trim() , type = EquType_TB.Text.Trim();
+          
+            if(String.IsNullOrEmpty(code) || String.IsNullOrWhiteSpace(code))
+            {
+                return false;
+            }
+
+            if (String.IsNullOrEmpty(type) || String.IsNullOrWhiteSpace(type))
+            {
+                return false;
+            }
+
+            if(Tem_RV.IsValueRight())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

@@ -194,5 +194,14 @@ namespace Fip.Dialog.Tools
                     break;
             }
         }
+
+        /// <summary>
+        /// 改变按钮的状态
+        /// </summary>
+        /// <param name="state"></param>
+        public void ChangeState(StateEnum state)
+        {
+            State = state;
+        }
     }
 }

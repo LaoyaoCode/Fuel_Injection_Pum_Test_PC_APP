@@ -85,17 +85,17 @@ namespace Fip.Dialog.Tools
         private void CheckTheValue()
         {
             float min, max;
+            String maxS = MaxValueTB.Text.Trim(), minS = MinValueTB.Text.Trim();
 
-            
             //最大值为无限
-            if(MaxValueTB.Text=="$")
+            if (maxS == "$")
             {
                 _Max = float.MaxValue;
                 StateRect_Max.Fill = (SolidColorBrush)FindResource("SpecialColor2");
                 IsInfinity = true;
             }
             //成功转换最大值,并且为正数
-            else if (float.TryParse(MaxValueTB.Text , out max) && max > 0)
+            else if (float.TryParse(maxS, out max) && max > 0)
             {
                 _Max = max;
                 StateRect_Max.Fill = (SolidColorBrush)FindResource("SpecialColor2");
@@ -111,7 +111,7 @@ namespace Fip.Dialog.Tools
 
 
             //成功转换最小值，并且为正数或0
-            if (float.TryParse(MinValueTB.Text, out min) && min >= 0)
+            if (float.TryParse(minS, out min) && min >= 0)
             {
                 _Min = min;
                 StateRect_Min.Fill = (SolidColorBrush)FindResource("SpecialColor2");

@@ -21,7 +21,7 @@
                         <TextBlock Text="转速(RPM)" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50,0,0,0" Foreground="{DynamicResource NormalTextColor}"></TextBlock>
                         <TextBlock Text="*" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource SpecialColor3}" FontSize="24" Margin="2,0,0,0"></TextBlock>
                     </StackPanel>
-                    <TextBox Style="{StaticResource MTextBox}" Foreground="{DynamicResource NormalTextColor}" SelectionBrush="{DynamicResource SpecialColor2}" CaretBrush="{DynamicResource SpecialColor2}" Margin="170,0,260,0" VerticalAlignment="Center"></TextBox>
+                    <TextBox x:Name="S_RotateSpeed_TB" Style="{StaticResource MTextBox}" Foreground="{DynamicResource NormalTextColor}" SelectionBrush="{DynamicResource SpecialColor2}" CaretBrush="{DynamicResource SpecialColor2}" Margin="170,0,260,0" VerticalAlignment="Center"></TextBox>
                 </Grid>
                 
                 <!--自由组合规则的值必须是第三个儿子，后面代码需要-->

@@ -194,6 +194,60 @@ namespace Fip.Dialog.Tools
             }
         }
 
-       
+       /// <summary>
+       /// 检查值是否合理
+       /// </summary>
+       /// <returns></returns>
+        public bool IsValueRight()
+        {
+            bool result = true;
+            String speedString = S_RotateSpeed_TB.Text;
+            int speed;
+
+            //速度无法解析为整数 , 或者输入数据为负数
+            if (!int.TryParse(speedString.Trim(), out speed) || speed < 0)
+            {
+                result = false;
+            }
+
+            for (int counter = 2; counter < TotalParasContainer.Children.Count; counter++)
+            {
+                String tag = ((Grid)TotalParasContainer.Children[counter]).Tag.ToString();
+
+                //为范围数
+                if (tag == "R_InjectionQuantity" || tag == "R_RackTravel")
+                {
+                    RangeValueInput_NDD value = (RangeValueInput_NDD)(((Grid)TotalParasContainer.Children[counter]).Children[2]);
+                    //范围数据出现了错误
+                    if (!value.IsValueRight())
+                    {
+                        result = false;
+                        break;
+                    }
+                }
+                //喷油次数，单数，整数
+                else if(tag == "S_InjectionTime")
+                {
+                    int value; 
+                    if (!int.TryParse(((TextBox)(((Grid)TotalParasContainer.Children[counter]).Children[2])).Text.Trim(), out value) || value < 0)
+                    {
+                        result = false;
+                        break;
+                    }
+                }
+                //不均匀度，单数，浮点
+                else
+                {
+                    float value;
+                    if (!float.TryParse(((TextBox)(((Grid)TotalParasContainer.Children[counter]).Children[2])).Text.Trim(), out value) || value < 0)
+                    {
+                        result = false;
+                        break;
+                    }
+                }
+            }
+
+            return result;
+        }
     }
 }

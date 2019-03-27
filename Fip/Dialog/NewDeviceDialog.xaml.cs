@@ -69,6 +69,33 @@ namespace Fip.Dialog
             if (NowActiveButton != null)
             {
                 //检查数据，然后根据数据来判断修改状态枚举
+                int index = int.Parse(NowActiveButton.ButtonTag);
+
+                if(index <= 8)
+                {
+                    NormalPara_NDD value = (NormalPara_NDD)((Grid)(MainContent.Children[index])).Children[0];
+
+                    if(value.IsValueRight())
+                    {
+                        NowActiveButton.ChangeState(CircleButton_NDD.StateEnum.Finish);
+                    }
+                    else
+                    {
+                        NowActiveButton.ChangeState(CircleButton_NDD.StateEnum.Error);
+                    }
+                }
+                else
+                {
+                    SpecialPara_NDD value = (SpecialPara_NDD)((Grid)(MainContent.Children[index])).Children[0];
+                    if (value.IsValueRight())
+                    {
+                        NowActiveButton.ChangeState(CircleButton_NDD.StateEnum.Finish);
+                    }
+                    else
+                    {
+                        NowActiveButton.ChangeState(CircleButton_NDD.StateEnum.Error);
+                    }
+                }
 
                 //返回到普通的状态，并且根据之前修改的状态枚举来改变颜色
                 NowActiveButton.BackToNormalCondition();
@@ -79,6 +106,10 @@ namespace Fip.Dialog
             NowActiveButton = which;
         }
 
+        /// <summary>
+        /// 切换场景动画
+        /// </summary>
+        /// <param name="index"></param>
         private void StepAnimation(int index)
         {
             Thickness now = MainContent.Margin;

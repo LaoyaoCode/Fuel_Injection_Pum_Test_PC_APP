@@ -74,6 +74,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Dialog\MessageDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dialog\NewDeviceDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -106,6 +110,9 @@
     <Compile Include="Code\DB\ParaModel.cs" />
     <Compile Include="Code\DB\StandardDeviceDesModel.cs" />
     <Compile Include="Code\PathStaticCollection.cs" />
+    <Compile Include="Dialog\MessageDialog.xaml.cs">
+      <DependentUpon>MessageDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialog\NewDeviceDialog.xaml.cs">
       <DependentUpon>NewDeviceDialog.xaml</DependentUpon>
     </Compile>
