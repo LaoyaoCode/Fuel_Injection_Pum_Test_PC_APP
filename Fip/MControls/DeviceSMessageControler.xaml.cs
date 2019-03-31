@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Fip.Dialog;
+using Fip.Code.DB;
 
 namespace Fip.MControls
 {
@@ -30,26 +31,19 @@ namespace Fip.MControls
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            AddDSMessage(1);
-            AddDSMessage(1);
-            AddDSMessage(1);
-            AddDSMessage(1);
-            AddDSMessage(1);
-            AddDSMessage(1);
-            AddDSMessage(1);
-            AddDSMessage(1);
-            AddDSMessage(1);
-            AddDSMessage(1);
-            AddDSMessage(1);
+            foreach(StandardDeviceDesModel model in DBControler.UnityIns.GetSSDesAllShortRecord())
+            {
+                AddDSMessage(model.Id, model.EquType);
+            }
         }
 
         /// <summary>
         /// 添加器件信息(显示部分，不包含数据库操作)
         /// </summary>
         /// <param name="id">信息Id</param>
-        private void AddDSMessage(int id)
+        private void AddDSMessage(int id , String equType)
         {
-            DeviceShortMessageLine line = new DeviceShortMessageLine(id, (DeviceShortMessageLine which) =>
+            DeviceShortMessageLine line = new DeviceShortMessageLine(id, equType,(DeviceShortMessageLine which) =>
             {
                 //之前的器件取消选择状态
                 if (NowUseDevice != null)

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Fip.Code.DB;
 
 namespace Fip.Dialog.Tools
 {
@@ -50,6 +51,46 @@ namespace Fip.Dialog.Tools
             else
             {
                 return false;
+            }
+        }
+
+        public String GetEquCode()
+        {
+            String code = EquCode_TB.Text.Trim();
+            if (String.IsNullOrEmpty(code) || String.IsNullOrWhiteSpace(code))
+            {
+                return String.Empty;
+            }
+            else
+            {
+                return code;
+            }
+               
+        }
+
+        public String GetEquType()
+        {
+            String type = EquType_TB.Text.Trim();
+
+            if (String.IsNullOrEmpty(type) || String.IsNullOrWhiteSpace(type))
+            {
+                return String.Empty;
+            }
+            else
+            {
+                return type;
+            }
+        }
+
+        public RangeValue GetTem()
+        {
+            if(!Tem_RV.IsValueRight())
+            {
+                return null;
+            }
+            else
+            {
+                return Tem_RV.GetRangeValue();
             }
         }
     }

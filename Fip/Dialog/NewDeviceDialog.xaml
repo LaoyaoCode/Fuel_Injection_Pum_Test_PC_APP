@@ -89,7 +89,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0" Tag="StartWorkContainer">
+                <Grid Grid.Column="0" Tag="StartWork">
                     <Tools:NormalPara_NDD ParaName="启动工况"></Tools:NormalPara_NDD>
                 </Grid>
                 <Grid Grid.Column="1" Tag="IdlingWork">
@@ -117,8 +117,8 @@
                     <Tools:NormalPara_NDD ParaName="高速断油"></Tools:NormalPara_NDD>
                 </Grid>
                 <Grid Grid.Column="9"  Background="{StaticResource AppBackBrush}">
-                    <Tools:SpecialPara_NDD></Tools:SpecialPara_NDD>
-                    <MControls:ImageButton x:Name="SubmitDataButton" ToolTip="提交数据" ImageSource="/Fip;component/Images/submit.png" VerticalAlignment="Bottom" Height="40" Width="40" NormalOp="0.5" Margin="0,0,0,40"></MControls:ImageButton>
+                    <Tools:SpecialPara_NDD x:Name="SpecialPara"></Tools:SpecialPara_NDD>
+                    <MControls:ImageButton x:Name="SubmitDataButton" ToolTip="提交数据" ImageSource="/Fip;component/Images/submit.png" VerticalAlignment="Bottom" Height="40" Width="40" NormalOp="0.5" Margin="0,0,0,40" ClickEvent="SubmitButtonClick"></MControls:ImageButton>
                 </Grid>
             </Grid>
         </Grid>

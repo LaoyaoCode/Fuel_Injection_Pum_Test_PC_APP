@@ -44,14 +44,16 @@ namespace Fip.MControls
         /// 
         /// </summary>
         /// <param name="id">器件id</param>
+        /// <param name="equType">油泵型号</param>
         /// <param name="del">被点击选择代理事件</param>
-        public DeviceShortMessageLine(int id ,SelectDel del = null)
+        public DeviceShortMessageLine(int id ,String equType , SelectDel del = null)
         {
             InitializeComponent();
             DeviceID = id;
-            SelectEvent = del;
-            //根据id获取需要的信息（icon 器件名）
 
+            SelectEvent = del;
+            DeviceName.Text = equType;
+            InitialTB.Text = equType.ToCharArray()[0].ToString();
         }
 
         private void UserControl_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Fip.Code.DB;
 
 namespace Fip.Dialog.Tools
 {
@@ -169,6 +170,15 @@ namespace Fip.Dialog.Tools
         private void MaxValueTB_TextChanged(object sender, TextChangedEventArgs e)
         {
             CheckTheValue();
+        }
+
+        /// <summary>
+        /// 获取范围数据值
+        /// </summary>
+        /// <returns></returns>
+        public RangeValue GetRangeValue()
+        {
+            return new RangeValue(_Min, _Max, IsInfinity);
         }
     }
 }

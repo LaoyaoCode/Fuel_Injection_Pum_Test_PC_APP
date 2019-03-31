@@ -48,6 +48,11 @@ namespace Fip.Code.DB
         /// </summary>
         private const char PARA_LINK = '/';
 
+        public ParaModel()
+        {
+
+        }
+
         public ParaModel(String para)
         {
             String[] data = para.Split(PARA_LINK);
@@ -97,12 +102,12 @@ namespace Fip.Code.DB
         {
             StringBuilder builder = new StringBuilder();
 
-            if(S_RotateSpeed < 0)
+            if(S_RotateSpeed > 0)
             {
                 builder.Append("SRS" + NAME_VALUE_LINK + S_RotateSpeed + PARA_LINK);
             }
 
-            if(S_InjectionTime < 0)
+            if(S_InjectionTime > 0)
             {
                 builder.Append("SIT" + NAME_VALUE_LINK + S_InjectionTime + PARA_LINK);
             }
@@ -117,7 +122,7 @@ namespace Fip.Code.DB
                 builder.Append("RRT" + NAME_VALUE_LINK + R_RackTravel.ToString() + PARA_LINK);
             }
 
-            if(R_Asymmetry < 0)
+            if(R_Asymmetry > 0)
             {
                 builder.Append("RA" + NAME_VALUE_LINK + R_Asymmetry.ToString() + PARA_LINK);
             }
@@ -142,6 +147,24 @@ namespace Fip.Code.DB
         /// 是否是正无限
         /// </summary>
         private bool IsINFINITY = false;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="min">最小值</param>
+        /// <param name="max">最大值</param>
+        /// <param name="isInfinity">是否达到了正无限</param>
+        public RangeValue(float min , float max , bool isInfinity = false)
+        {
+            IsINFINITY = isInfinity;
+            
+            if(IsINFINITY)
+            {
+                _Max = float.MaxValue;
+            }
+
+            _Min = min;
+        }
 
         /// <summary>
         /// 通过描述字符串来生成对象

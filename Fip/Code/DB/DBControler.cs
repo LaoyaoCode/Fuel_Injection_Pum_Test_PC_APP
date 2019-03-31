@@ -30,7 +30,7 @@ namespace Fip.Code.DB
         private static String CreateSDDesTableSqlStatement =
             "CREATE TABLE IF NOT EXISTS " + SDDesTableName
             + "("
-            + "Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
+            + "Id INTEGER PRIMARY KEY AUTOINCREMENT,"
             + "StartWork TEXT NOT NULL,"
             + "IdlingWork TEXT NOT NULL,"
             + "IdlingBreak TEXT NOT NULL,"
@@ -143,7 +143,10 @@ namespace Fip.Code.DB
             //连接数据库
             using (SQLiteConnection sqlConnect = new SQLiteConnection(ConnectingString))
             {
-                String commandString = "SELECT Id,Name,IconHex FROM " + SDDesTableName;
+                String commandString = "SELECT Id,EquType FROM " + SDDesTableName;
+
+                sqlConnect.Open();
+
                 SQLiteCommand command = sqlConnect.CreateCommand();
                 command.CommandText = commandString;
 
@@ -157,9 +160,9 @@ namespace Fip.Code.DB
                         try
                         {
                             //获取用于显示的简短数据
-                            record.Id = int.Parse(reader["StartWork"].ToString());
+                            record.Id = int.Parse(reader["Id"].ToString());
                             //record.IconHex = reader["IconHex"].ToString();
-                            record.EquCode = reader["EquCode"].ToString();
+                            record.EquType = reader["EquType"].ToString();
 
                             datas.Add(record);
                         }
@@ -187,9 +190,9 @@ namespace Fip.Code.DB
         {
             int id = -1;
             string sql = string.Format("Insert Into " + SDDesTableName +
-                "(StartWork, IdlingBreak, ReviseBegin, ReviseEnd,DemWork,AdjWork,HighBreak,Tem,EquCode,EquType) Values" +
-                "('{0}', '{1}', '{2}', '{3}','{4}', '{5}', '{6}', '{7}','{8}', '{9}')",
-                model.StartWork, model.IdlingBreak, model.ReviseBegin, model.ReviseEnd, model.DemWork,
+                "(StartWork,IdlingWork, IdlingBreak, ReviseBegin,ReviseWork, ReviseEnd,DemWork,AdjWork,HighBreak,Tem,EquCode,EquType) Values" +
+                "('{0}', '{1}', '{2}', '{3}','{4}', '{5}', '{6}', '{7}','{8}', '{9}','{10}','{11}')",
+                model.StartWork,model.IdlingWork, model.IdlingBreak, model.ReviseBegin,model.ReviseWork, model.ReviseEnd, model.DemWork,
                 model.AdjWork, model.HighBreak, model.Tem, model.EquCode, /*model.IconHex,*/ model.EquType);
 
             //连接数据库
@@ -231,10 +234,10 @@ namespace Fip.Code.DB
         {
             bool isSuccess = false;
 
-            string sql = string.Format("UPDATE " + SDDesTableName + " SET StartWork = '{1}',IdlingBreak='{2}'," +
-                "ReviseBegin='{3}',ReviseEnd='{4}',DemWork='{5}',AdjWork='{6}',HighBreak='{7}',Tem='{8}'," +
-                "EquCode='{9}',EquType='{10}' WHERE Id = '{0}'", model.Id, model.StartWork,
-                model.IdlingBreak, model.ReviseBegin, model.ReviseEnd, model.DemWork,
+            string sql = string.Format("UPDATE " + SDDesTableName + " SET StartWork = '{1}',IdlingWork='{2}',IdlingBreak='{3}'," +
+                "ReviseBegin='{4}',ReviseWork='{5}',ReviseEnd='{6}',DemWork='{7}',AdjWork='{8}',HighBreak='{9}',Tem='{10}'," +
+                "EquCode='{11}',EquType='{12}' WHERE Id = '{0}'", model.Id, model.StartWork,model.IdlingWork,
+                model.IdlingBreak, model.ReviseBegin, model.ReviseWork, model.ReviseEnd, model.DemWork,
                 model.AdjWork, model.HighBreak, model.Tem, model.EquCode, /*model.IconHex,*/ model.EquType);
 
             //连接数据库
@@ -290,17 +293,17 @@ namespace Fip.Code.DB
         /// 检查是否重复 ， 即 油泵编号 和 油泵型号 都相同
         /// 测试标准器件参数表
         /// </summary>
-        /// <param name="model"></param>
         /// <returns></returns>
-        public bool CheckSSDesRepetition(StandardDeviceDesModel model)
+        public bool CheckSSDesRepetition(String code , String type , out int id)
         {
             bool result = false;
+            id = -1;
 
             //连接数据库
             using (SQLiteConnection sqlConnect = new SQLiteConnection(ConnectingString))
             {
-                String commandString = String.Format("SELECT Id FROM " + SDDesTableName + " WHERE EquCode='{0}' AND EquType='{1}'", model.EquCode, model.EquType);
-
+                String commandString = String.Format("SELECT Id FROM " + SDDesTableName + " WHERE EquCode='{0}' AND EquType='{1}'", code,type);
+                sqlConnect.Open();
                 SQLiteCommand command = sqlConnect.CreateCommand();
                 command.CommandText = commandString;
 
@@ -310,6 +313,7 @@ namespace Fip.Code.DB
                     //如果查询到了相同的行，则返回true
                     if(reader.HasRows)
                     {
+                        id = int.Parse(reader["Id"].ToString());
                         result =  true;
                     }
                 }

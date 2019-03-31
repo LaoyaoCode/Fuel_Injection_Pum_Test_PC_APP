@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Fip.MControls;
+using Fip.Code.DB;
 
 namespace Fip.Dialog.Tools
 {
@@ -248,6 +249,46 @@ namespace Fip.Dialog.Tools
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// 获取模型值
+        /// </summary>
+        /// <returns>null代表数据不正确</returns>
+        public ParaModel GetModelValue()
+        {
+            ParaModel model = new ParaModel();
+
+            //数据不正确返回为空
+            if(!IsValueRight())
+            {
+                return null;
+            }
+            //获取转速
+            model.S_RotateSpeed = int.Parse(S_RotateSpeed_TB.Text);
+            //获取组合数据
+            for (int counter = 2; counter < TotalParasContainer.Children.Count; counter++)
+            {
+                String tag = ((Grid)TotalParasContainer.Children[counter]).Tag.ToString();
+
+                switch (tag)
+                {
+                    case "R_InjectionQuantity":
+                        model.R_InjectionQuantity = ((RangeValueInput_NDD)(((Grid)TotalParasContainer.Children[counter]).Children[2])).GetRangeValue();
+                        break;
+                    case "R_RackTravel":
+                        model.R_RackTravel = ((RangeValueInput_NDD)(((Grid)TotalParasContainer.Children[counter]).Children[2])).GetRangeValue();
+                        break;
+                    case "S_InjectionTime":
+                        model.S_InjectionTime = int.Parse(((TextBox)(((Grid)TotalParasContainer.Children[counter]).Children[2])).Text.Trim());
+                        break;
+                    case "R_Asymmetry":
+                        model.R_Asymmetry = float.Parse(((TextBox)(((Grid)TotalParasContainer.Children[counter]).Children[2])).Text.Trim());
+                        break;
+                }
+            }
+
+            return model;
         }
     }
 }

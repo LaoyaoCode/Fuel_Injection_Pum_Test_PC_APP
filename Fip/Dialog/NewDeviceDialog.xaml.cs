@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Fip.Dialog.Tools;
+using Fip.Code.DB;
+using Fip.MControls;
 
 namespace Fip.Dialog
 {
@@ -118,6 +120,119 @@ namespace Fip.Dialog
             int time = (int)(Math.Sqrt(Math.Abs(target.Left - now.Left))) * 10;
             ThicknessAnimation animation = new ThicknessAnimation(now, target, new Duration(new TimeSpan(0,0,0,0, time) ) );
             MainContent.BeginAnimation(Grid.MarginProperty, animation);
+        }
+
+        private void SubmitButtonClick()
+        {
+            StandardDeviceDesModel sModel = new StandardDeviceDesModel();
+
+            for(int counter = 0; counter  < MainContent.Children.Count; counter++)
+            {
+                if(counter <= 8)
+                {
+                    if(!((NormalPara_NDD)((Grid)MainContent.Children[counter]).Children[0]).IsValueRight())
+                    {
+                        MessageDialog dialog = new MessageDialog("数据填写不正确(红色按钮部分)!");
+                        if(dialog.ShowDialog().Value)
+                        {
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    if (!((SpecialPara_NDD)((Grid)MainContent.Children[counter]).Children[0]).IsValueRight())
+                    {
+                        MessageDialog dialog = new MessageDialog("数据填写不正确(红色按钮部分)!");
+                        if (dialog.ShowDialog().Value)
+                        {
+                            return;
+                        }
+                    }
+                }
+
+                //填装数据
+                switch(counter)
+                {
+                    case 0:
+                        sModel.StartWork = ((NormalPara_NDD)((Grid)MainContent.Children[counter]).Children[0]).GetModelValue();
+                        break;
+                    case 1:
+                        sModel.IdlingWork = ((NormalPara_NDD)((Grid)MainContent.Children[counter]).Children[0]).GetModelValue();
+                        break;
+                    case 2:
+                        sModel.IdlingBreak = ((NormalPara_NDD)((Grid)MainContent.Children[counter]).Children[0]).GetModelValue();
+                        break;
+                    case 3:
+                        sModel.ReviseBegin = ((NormalPara_NDD)((Grid)MainContent.Children[counter]).Children[0]).GetModelValue();
+                        break;
+                    case 4:
+                        sModel.ReviseWork = ((NormalPara_NDD)((Grid)MainContent.Children[counter]).Children[0]).GetModelValue();
+                        break;
+                    case 5:
+                        sModel.ReviseEnd = ((NormalPara_NDD)((Grid)MainContent.Children[counter]).Children[0]).GetModelValue();
+                        break;
+                    case 6:
+                        sModel.DemWork = ((NormalPara_NDD)((Grid)MainContent.Children[counter]).Children[0]).GetModelValue();
+                        break;
+                    case 7:
+                        sModel.AdjWork = ((NormalPara_NDD)((Grid)MainContent.Children[counter]).Children[0]).GetModelValue();
+                        break;
+                    case 8:
+                        sModel.HighBreak = ((NormalPara_NDD)((Grid)MainContent.Children[counter]).Children[0]).GetModelValue();
+                        break;
+                    case 9:
+                        SpecialPara_NDD sPara = (SpecialPara_NDD)((Grid)MainContent.Children[counter]).Children[0];
+                        sModel.Tem = sPara.GetTem();
+                        sModel.EquCode = sPara.GetEquCode();
+                        sModel.EquType = sPara.GetEquType();
+                        break;
+                }
+            }
+
+            int repetitionId = 0;
+            //查重,如果出现了型号和编号重复
+            if(DBControler.UnityIns.CheckSSDesRepetition(SpecialPara.GetEquCode() , SpecialPara.GetEquType() , out repetitionId))
+            {
+                MessageDialog dialog = new MessageDialog("数据库中已存在该器件(油泵编号和型号完全相同)\n是否覆盖数据?");
+                //无需覆盖，直接返回
+                if (!dialog.ShowDialog().Value)
+                {
+                    return;
+                }
+                //覆盖数据
+                else
+                {
+                    sModel.Id = repetitionId;
+                    //修改成功
+                    if(DBControler.UnityIns.ModifySSDesRecord(sModel))
+                    {
+                        BottomPart.Log(String.Format("覆盖数据成功(<编号:{0}><型号:{1}>)", sModel.EquCode, sModel.EquType) , LogMessage.LevelEnum.Normal);
+                        this.DialogResult = true;
+                    }
+                    else
+                    {
+                        BottomPart.Log(String.Format("覆盖数据失败(<编号:{0}><型号:{1}>)", sModel.EquCode, sModel.EquType), LogMessage.LevelEnum.Error);
+                        this.DialogResult = false;
+                    }  
+                }
+            }
+            //没有重复的编号和型号
+            else
+            {
+                int newId = DBControler.UnityIns.AddSSDesRecord(sModel);
+                //插入失败
+                if(newId < 0 )
+                {
+                    BottomPart.Log(String.Format("添加新器件信息失败"), LogMessage.LevelEnum.Error);
+                    this.DialogResult = false;
+                }
+                else
+                {
+                    BottomPart.Log(String.Format("添加新器件信息成功(<编号:{0}><型号:{1}>)", sModel.EquCode, sModel.EquType), LogMessage.LevelEnum.Normal);
+                    this.DialogResult = true;
+                }
+            }
         }
     }
 }

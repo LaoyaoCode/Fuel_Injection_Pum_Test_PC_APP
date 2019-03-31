@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fip.Dialog"
         mc:Ignorable="d"
-        Title="Message Dialog" x:Name="window" ShowInTaskbar="False" AllowsTransparency="True"  Background="{x:Null}" Height="247" Width="400"  WindowStyle="None" ResizeMode="CanMinimize"   WindowStartupLocation="CenterOwner" BorderThickness="10">
+        Title="Message Dialog" x:Name="window" ShowInTaskbar="False" AllowsTransparency="True"  Background="{x:Null}" Height="247" Width="400"  WindowStyle="None" ResizeMode="CanMinimize" Loaded="window_Loaded"   WindowStartupLocation="CenterOwner" BorderThickness="10">
+    
     <Window.Resources>
         <!--加载动画-->
         <Storyboard x:Key="LoadAnimation">
@@ -64,33 +65,33 @@
         </Grid>
 
         <Grid Margin="0,30,0,60">
-            <TextBlock x:Name="Content" Margin="10" TextAlignment="Center" VerticalAlignment="Center" LineHeight="25" FontSize="14" Foreground="{DynamicResource NormalTextColor}">
+            <TextBlock x:Name="ContentTB" Margin="10" TextAlignment="Center" VerticalAlignment="Center" LineHeight="25" FontSize="14" Foreground="{DynamicResource NormalTextColor}">
                 This is line 1.<LineBreak/> 
                 This is line 2.
             </TextBlock>
         </Grid>
 
-        <Grid VerticalAlignment="Bottom" Height="60">
+        <Grid VerticalAlignment="Bottom" Height="60" x:Name="SureButtonGroup">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0">
-                <Border BorderBrush="{DynamicResource LineBrush}" BorderThickness="1" Width="65" Height="29" CornerRadius="3" Background="{DynamicResource AppBackBrush}">
+                <Border BorderBrush="{DynamicResource LineBrush}" BorderThickness="1" Width="65" Height="29" CornerRadius="3" Background="{DynamicResource AppBackBrush}" Opacity="0.5" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseLeftButtonUp="CancelButton_MouseLeftButtonUp">
                     <TextBlock Text="Cancel" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource NormalTextColor}"/>
                 </Border>
             </Grid>
 
             <Grid Grid.Column="1" >
-                <Border BorderBrush="{DynamicResource LineBrush}" BorderThickness="1" Width="65" Height="29" CornerRadius="3" Background="{DynamicResource AppBackBrush}">
+                <Border BorderBrush="{DynamicResource LineBrush}" BorderThickness="1" Width="65" Height="29" CornerRadius="3" Background="{DynamicResource AppBackBrush}" Opacity="0.5" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseLeftButtonUp="OKButton_MouseLeftButtonUp">
                     <TextBlock Text="OK" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource NormalTextColor}"/>
                 </Border>
             </Grid>
         </Grid>
 
-        <Grid VerticalAlignment="Bottom" Height="60">
-            <Border BorderBrush="{DynamicResource LineBrush}" BorderThickness="1" Width="65" Height="29" CornerRadius="3" Background="{DynamicResource AppBackBrush}">
+        <Grid VerticalAlignment="Bottom" Height="60" x:Name="MessageGroup">
+            <Border BorderBrush="{DynamicResource LineBrush}" BorderThickness="1" Width="65" Height="29" CornerRadius="3" Background="{DynamicResource AppBackBrush}" Opacity="0.5" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseLeftButtonUp="OKButton_MouseLeftButtonUp">
                 <TextBlock Text="OK" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource NormalTextColor}"/>
             </Border>
         </Grid>
