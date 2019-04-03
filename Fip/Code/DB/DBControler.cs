@@ -143,7 +143,7 @@ namespace Fip.Code.DB
             //连接数据库
             using (SQLiteConnection sqlConnect = new SQLiteConnection(ConnectingString))
             {
-                String commandString = "SELECT Id,EquType FROM " + SDDesTableName;
+                String commandString = "SELECT Id,EquType,EquCode FROM " + SDDesTableName;
 
                 sqlConnect.Open();
 
@@ -163,6 +163,7 @@ namespace Fip.Code.DB
                             record.Id = int.Parse(reader["Id"].ToString());
                             //record.IconHex = reader["IconHex"].ToString();
                             record.EquType = reader["EquType"].ToString();
+                            record.EquCode = reader["EquCode"].ToString();
 
                             datas.Add(record);
                         }
@@ -313,6 +314,7 @@ namespace Fip.Code.DB
                     //如果查询到了相同的行，则返回true
                     if(reader.HasRows)
                     {
+                        reader.Read();
                         id = int.Parse(reader["Id"].ToString());
                         result =  true;
                     }

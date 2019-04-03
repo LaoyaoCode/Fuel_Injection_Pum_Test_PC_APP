@@ -65,7 +65,7 @@
         </Grid>
 
         <Grid Margin="0,30,0,60">
-            <TextBlock x:Name="ContentTB" Margin="10" TextAlignment="Center" VerticalAlignment="Center" LineHeight="25" FontSize="14" Foreground="{DynamicResource NormalTextColor}">
+            <TextBlock x:Name="ContentTB" Margin="10" TextAlignment="Center" VerticalAlignment="Center" LineHeight="35" FontSize="14" Foreground="{DynamicResource NormalTextColor}">
                 This is line 1.<LineBreak/> 
                 This is line 2.
             </TextBlock>

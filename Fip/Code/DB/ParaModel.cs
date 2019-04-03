@@ -157,7 +157,8 @@ namespace Fip.Code.DB
         public RangeValue(float min , float max , bool isInfinity = false)
         {
             IsINFINITY = isInfinity;
-            
+
+            _Max = max;
             if(IsINFINITY)
             {
                 _Max = float.MaxValue;

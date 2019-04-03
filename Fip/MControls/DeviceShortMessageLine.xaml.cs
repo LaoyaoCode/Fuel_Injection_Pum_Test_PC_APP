@@ -45,15 +45,16 @@ namespace Fip.MControls
         /// </summary>
         /// <param name="id">器件id</param>
         /// <param name="equType">油泵型号</param>
+        /// <param name="equCode">喷油泵编码</param>
         /// <param name="del">被点击选择代理事件</param>
-        public DeviceShortMessageLine(int id ,String equType , SelectDel del = null)
+        public DeviceShortMessageLine(int id ,String equType ,String equCode, SelectDel del = null)
         {
             InitializeComponent();
             DeviceID = id;
 
             SelectEvent = del;
             DeviceName.Text = equType;
-            InitialTB.Text = equType.ToCharArray()[0].ToString();
+            InitialTB.Text = equCode.ToCharArray()[0].ToString();
         }
 
         private void UserControl_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -116,6 +117,33 @@ namespace Fip.MControls
             
         }
 
-       
+        /// <summary>
+        /// 获取短器件的ID
+        /// </summary>
+        /// <returns></returns>
+        public int GetID()
+        {
+            return DeviceID;
+        }
+
+        /// <summary>
+        /// 修改喷油泵型号
+        /// </summary>
+        /// <param name="equType">喷油泵型号</param>
+        /// <param name="equCode">喷油泵编码</param>
+        public void ModifyEquType(String equType , String equCode)
+        {
+            DeviceName.Text = equType;
+            InitialTB.Text = equCode.ToCharArray()[0].ToString();
+        }
+        
+        /// <summary>
+        /// 是否正在使用这个器件信息来测试
+        /// </summary>
+        /// <returns></returns>
+        public bool IsTesting()
+        {
+            return Testing;
+        }
     }
 }
