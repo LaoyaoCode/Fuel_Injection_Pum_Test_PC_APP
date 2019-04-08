@@ -19,5 +19,10 @@ namespace Fip.Code
         /// 数据记录数据表路径
         /// </summary>
         public static String RecordDBPath = DatasDirPath + "\\Records.s3db";
+
+        /// <summary>
+        /// 浮点数据显示保留小数位数
+        /// </summary>
+        public static int Round_Number = 3;
     }
 }

@@ -27,6 +27,27 @@ namespace Fip.Dialog.Tools
         }
 
         /// <summary>
+        /// 设置输入的信息
+        /// </summary>
+        /// <param name="euqCode"></param>
+        /// <param name="equType"></param>
+        /// <param name="tem"></param>
+        public void SetMessage(String euqCode , String equType , RangeValue tem)
+        {
+            EquCode_TB.Text = euqCode;
+            EquType_TB.Text = equType;
+            
+            if(tem.IsInfinity())
+            {
+                Tem_RV.SetRangeValue_Infinity(tem.GetMin().ToString());
+            }
+            else
+            {
+                Tem_RV.SetRangeValue(tem.GetMax().ToString(), tem.GetMin().ToString());
+            }
+        }
+
+        /// <summary>
         /// 值是否正确
         /// </summary>
         /// <returns></returns>

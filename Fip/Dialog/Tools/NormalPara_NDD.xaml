@@ -18,7 +18,7 @@
                 <!--转速-->
                 <Grid Height="60" Tag="S_RotateSpeed">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <TextBlock Text="转速(RPM)" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50,0,0,0" Foreground="{DynamicResource NormalTextColor}"></TextBlock>
+                        <TextBlock Text="转速(rpm)" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50,0,0,0" Foreground="{DynamicResource NormalTextColor}"></TextBlock>
                         <TextBlock Text="*" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource SpecialColor3}" FontSize="24" Margin="2,0,0,0"></TextBlock>
                     </StackPanel>
                     <TextBox x:Name="S_RotateSpeed_TB" Style="{StaticResource MTextBox}" Foreground="{DynamicResource NormalTextColor}" SelectionBrush="{DynamicResource SpecialColor2}" CaretBrush="{DynamicResource SpecialColor2}" Margin="170,0,260,0" VerticalAlignment="Center"></TextBox>
@@ -77,16 +77,16 @@
                     </Border.Effect>
                     <!--所有需要添加的规则-->
                     <StackPanel Orientation="Vertical" Margin="0,5" x:Name="RuleSP">
-                        <Grid Height="30" Tag="S_InjectionTime" MouseEnter="ARuleContainer_MouseEnter" MouseLeave="ARuleContainer_MouseLeave" Background="{DynamicResource AppBackBrush}" MouseLeftButtonUp="ARuleContainer_MouseLeftButtonUp">
+                        <Grid Height="30" x:Name="Add_S_InjectionTime_Button" Tag="S_InjectionTime" MouseEnter="ARuleContainer_MouseEnter" MouseLeave="ARuleContainer_MouseLeave" Background="{DynamicResource AppBackBrush}" MouseLeftButtonUp="ARuleContainer_MouseLeftButtonUp">
                             <TextBlock Text="喷油次数(次)" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource NormalTextColor}"></TextBlock>
                         </Grid>
-                        <Grid Height="30" Tag="R_InjectionQuantity" MouseEnter="ARuleContainer_MouseEnter" MouseLeave="ARuleContainer_MouseLeave" Background="{DynamicResource AppBackBrush}" MouseLeftButtonUp="ARuleContainer_MouseLeftButtonUp">
+                        <Grid Height="30" x:Name="Add_R_InjectionQuantity_Button" Tag="R_InjectionQuantity" MouseEnter="ARuleContainer_MouseEnter" MouseLeave="ARuleContainer_MouseLeave" Background="{DynamicResource AppBackBrush}" MouseLeftButtonUp="ARuleContainer_MouseLeftButtonUp">
                             <TextBlock Text="喷油量(ml)" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource NormalTextColor}"></TextBlock>
                         </Grid>
-                        <Grid Height="30" Tag="R_RackTravel" MouseEnter="ARuleContainer_MouseEnter" MouseLeave="ARuleContainer_MouseLeave" Background="{DynamicResource AppBackBrush}" MouseLeftButtonUp="ARuleContainer_MouseLeftButtonUp">
+                        <Grid Height="30" x:Name="Add_R_RackTravel_Button" Tag="R_RackTravel" MouseEnter="ARuleContainer_MouseEnter" MouseLeave="ARuleContainer_MouseLeave" Background="{DynamicResource AppBackBrush}" MouseLeftButtonUp="ARuleContainer_MouseLeftButtonUp">
                             <TextBlock Text="齿杆行程(mm)" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource NormalTextColor}"></TextBlock>
                         </Grid>
-                        <Grid Height="30" Tag="R_Asymmetry" MouseEnter="ARuleContainer_MouseEnter" MouseLeave="ARuleContainer_MouseLeave" Background="{DynamicResource AppBackBrush}" MouseLeftButtonUp="ARuleContainer_MouseLeftButtonUp">
+                        <Grid Height="30" x:Name="Add_R_Asymmetry_Button" Tag="R_Asymmetry" MouseEnter="ARuleContainer_MouseEnter" MouseLeave="ARuleContainer_MouseLeave" Background="{DynamicResource AppBackBrush}" MouseLeftButtonUp="ARuleContainer_MouseLeftButtonUp">
                             <TextBlock Text="不均匀(ml)" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource NormalTextColor}"></TextBlock>
                         </Grid>
                     </StackPanel>

@@ -39,6 +39,11 @@ namespace Fip.Dialog
             InitializeComponent();
         }
 
+        public NewDeviceDialog(StandardDeviceDesModel model)
+        {
+
+        }
+
         /// <summary>
         /// 窗口top bar拖动
         /// </summary>

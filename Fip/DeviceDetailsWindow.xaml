@@ -5,8 +5,109 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fip"
         mc:Ignorable="d"
-        Title="DeviceDetailsWindow" Height="300" Width="300">
-    <Grid>
-        
+        xmlns:Tools="clr-namespace:Fip.Dialog.Tools"
+        xmlns:MControls="clr-namespace:Fip.MControls"
+         Title="Device Detail Window" x:Name="window" ShowInTaskbar="False" AllowsTransparency="True"  Background="{x:Null}" Height="450" Width="300"  WindowStyle="None" ResizeMode="CanMinimize"   WindowStartupLocation="CenterOwner" BorderThickness="10" Loaded="window_Loaded">
+
+    <Window.Resources>
+        <!--加载动画-->
+        <Storyboard x:Key="LoadAnimation">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="window">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <!--最大化动画-->
+        <Storyboard x:Key="MaxAnimation">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="RootGrid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseIn" />
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="RootGrid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseIn" />
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <!--圆形按钮style-->
+        <Style x:Key="M_CB_Style" TargetType="{x:Type Tools:CircleButton_NDD}">
+            <Setter Property="ActiveColor" Value="{StaticResource ButtonColor}"></Setter>
+            <Setter Property="NormalColor" Value="{StaticResource SelectedColor}"></Setter>
+            <Setter Property="FinishColor" Value="{StaticResource SpecialColor2}"></Setter>
+            <Setter Property="ErrorColor" Value="{StaticResource SpecialColor3}"></Setter>
+        </Style>
+    </Window.Resources>
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard x:Name="LoadAnimation_BeginStoryboard" Storyboard="{StaticResource LoadAnimation}"/>
+            <BeginStoryboard Storyboard="{StaticResource MaxAnimation}" />
+        </EventTrigger>
+    </Window.Triggers>
+
+    <Grid x:Name="RootGrid" RenderTransformOrigin="0.5,1">
+        <Grid.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform/>
+                <SkewTransform/>
+                <RotateTransform/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </Grid.RenderTransform>
+        <Border BorderBrush="White"  CornerRadius="5" Background="White">
+            <Border.Effect>
+                <DropShadowEffect Color="#FFBBBBBB" ShadowDepth="0" BlurRadius="10"/>
+            </Border.Effect>
+        </Border>
+
+        <Grid VerticalAlignment="Top" Height="30" Margin="0">
+            <!--背景矩形-->
+            <Border  Background="{StaticResource AppBackBrush}" CornerRadius="5"  MouseLeftButtonDown="DargWindowMove"/>
+            <Image  HorizontalAlignment="Left" Margin="10,5,3,5" MouseLeftButtonDown="DargWindowMove" Source="Images/details_icon.png" VerticalAlignment="Center"/>
+
+            <MControls:IconButton x:Name="CloseWindowsButton" IconClick="CloseButton_Click" ButtonIcon="Close" NormalBackColor="{DynamicResource AppBackBrush}" HorizontalAlignment="Right" Width="15" Foreground="{x:Null}" IconColor="Red" ToolTip="关闭对话框" Margin="0,0,10,0" Height="15"/>
+        </Grid>
+
+        <ScrollViewer Style="{StaticResource MScrollView}" Margin="10,30,0,0">
+            <StackPanel Margin="0,0,10,0">
+                <Grid Height="40" >
+                    <TextBlock VerticalAlignment="Center" Foreground="{DynamicResource NormalTextColor}" Width="110" HorizontalAlignment="Left" FontWeight="Bold">油泵编码</TextBlock>
+                    <TextBlock x:Name="EquCode_TB" TextTrimming="CharacterEllipsis"  VerticalAlignment="Center" Foreground="{DynamicResource NormalTextColor}" Margin="120,0,0,0">XXXXXX</TextBlock>
+                </Grid>
+                <Grid Height="40" >
+                    <TextBlock VerticalAlignment="Center" Foreground="{DynamicResource NormalTextColor}" Width="110" HorizontalAlignment="Left" FontWeight="Bold">油泵型号</TextBlock>
+                    <TextBlock x:Name="EquType_TB" TextTrimming="CharacterEllipsis"  VerticalAlignment="Center" Foreground="{DynamicResource NormalTextColor}" Margin="120,0,0,0">XXXXXXX</TextBlock>
+                </Grid>
+                <Grid Height="40" >
+                    <TextBlock VerticalAlignment="Center" Foreground="{DynamicResource NormalTextColor}" Width="110" HorizontalAlignment="Left" FontWeight="Bold">测试燃油温度(℃)</TextBlock>
+                    <TextBlock x:Name="Tem_TB" VerticalAlignment="Center" Foreground="{DynamicResource NormalTextColor}" Margin="120,0,0,0">15 - 20</TextBlock>
+                </Grid>
+                <!--启动工况-->
+                <MControls:DeviceDetails_Part x:Name="StartWork_Part" HeaderName="启动工况"></MControls:DeviceDetails_Part>
+                <!--怠速工况-->
+                <MControls:DeviceDetails_Part x:Name="IdlingWork_Part" HeaderName="怠速工况"></MControls:DeviceDetails_Part>
+                <!--怠速断油-->
+                <MControls:DeviceDetails_Part x:Name="IdlingBreak_Part" HeaderName="怠速断油"></MControls:DeviceDetails_Part>
+                <!--校正起作用-->
+                <MControls:DeviceDetails_Part x:Name="ReviseBegin_Part" HeaderName="校正起作用"></MControls:DeviceDetails_Part>
+                <!--校正工况-->
+                <MControls:DeviceDetails_Part x:Name="ReviseWork_Part" HeaderName="校正工况"></MControls:DeviceDetails_Part>
+                <!--校正结束-->
+                <MControls:DeviceDetails_Part x:Name="ReviseEnd_Part" HeaderName="校正结束"></MControls:DeviceDetails_Part>
+                <!--标定工况-->
+                <MControls:DeviceDetails_Part x:Name="DemWork_Part" HeaderName="标定工况"></MControls:DeviceDetails_Part>
+                <!--调速工况-->
+                <MControls:DeviceDetails_Part x:Name="AdjWork_Part" HeaderName="调速工况"></MControls:DeviceDetails_Part>
+                <!--高速断油-->
+                <MControls:DeviceDetails_Part x:Name="HighBreak_Part" HeaderName="高速断油"></MControls:DeviceDetails_Part>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>

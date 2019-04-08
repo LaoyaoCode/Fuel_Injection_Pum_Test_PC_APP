@@ -290,5 +290,69 @@ namespace Fip.Dialog.Tools
 
             return model;
         }
+
+        /// <summary>
+        /// 设置信息
+        /// </summary>
+        /// <param name="model"></param>
+        public void SetMessage(ParaModel model)
+        {
+            RangeValueInput_NDD input = null;
+            RangeValue value = null;
+            S_RotateSpeed_TB.Text = model.S_RotateSpeed.ToString();
+
+            if(model.S_InjectionTime > 0)
+            {
+                //模拟点击，选取了喷油次数规则
+                ARuleContainer_MouseLeftButtonUp(Add_S_InjectionTime_Button, null);
+                ((TextBox)S_InjectionTimeContainer.Children[2]).Text = model.S_InjectionTime.ToString();
+            }
+
+            if(model.R_InjectionQuantity != null)
+            {
+                //模拟点击
+                ARuleContainer_MouseLeftButtonUp(Add_R_InjectionQuantity_Button, null);
+
+                
+                input = ((RangeValueInput_NDD)R_InjectionQuantityContainer.Children[2]);
+                value = model.R_InjectionQuantity;
+
+                //设置参数
+                if (value.IsInfinity())
+                {
+                    input.SetRangeValue_Infinity(value.GetMin().ToString());
+                }
+                else
+                {
+                    input.SetRangeValue(value.GetMax().ToString(), value.GetMin().ToString());
+                }
+            }
+
+            if(model.R_RackTravel != null)
+            {
+                //模拟点击
+                ARuleContainer_MouseLeftButtonUp(Add_R_RackTravel_Button, null);
+
+                input = ((RangeValueInput_NDD)R_RackTravelContainer.Children[2]);
+                value =model.R_RackTravel;
+
+                //设置参数
+                if (value.IsInfinity())
+                {
+                    input.SetRangeValue_Infinity(value.GetMin().ToString());
+                }
+                else
+                {
+                    input.SetRangeValue(value.GetMax().ToString(), value.GetMin().ToString());
+                }
+            }
+
+            if(model.R_Asymmetry > 0)
+            {
+                //模拟点击
+                ARuleContainer_MouseLeftButtonUp(Add_R_Asymmetry_Button, null);
+                ((TextBox)R_AsymmetryContainer.Children[2]).Text = model.R_Asymmetry.ToString();
+            }
+        }
     }
 }

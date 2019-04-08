@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="Fip.MControls.DeviceDetails_Part"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Fip.MControls"
+             mc:Ignorable="d" 
+             d:DesignWidth="300" Width="270" x:Name="userControl">
+    <Grid>
+        <Rectangle Height="1" VerticalAlignment="Top" Fill="{DynamicResource GrayLine_RG_Brush}" Margin="0,10,10,0"></Rectangle>
+        <StackPanel Orientation="Vertical" Margin="0,10">
+            <Grid Height="40" >
+                <TextBlock x:Name="HeaderTB" Text="{Binding HeaderName,ElementName=userControl}" VerticalAlignment="Center" Foreground="{DynamicResource SpecialColor2}" Width="110" HorizontalAlignment="Left" FontWeight="Bold" FontSize="14"></TextBlock>
+            </Grid>
+            <Grid Height="40" >
+                <TextBlock VerticalAlignment="Center" Foreground="{DynamicResource NormalTextColor}" Width="110" HorizontalAlignment="Left" FontWeight="Bold">转速(rpm)</TextBlock>
+                <TextBlock x:Name="S_RotateSpeed_TB" VerticalAlignment="Center" Foreground="{DynamicResource NormalTextColor}" Margin="120,0,0,0">XXXXXX</TextBlock>
+            </Grid>
+            <Grid Height="40" Visibility="Collapsed">
+                <TextBlock VerticalAlignment="Center" Foreground="{DynamicResource NormalTextColor}" Width="110" HorizontalAlignment="Left" FontWeight="Bold">喷油次数</TextBlock>
+                <TextBlock x:Name="S_InjectionTime_TB" VerticalAlignment="Center" Foreground="{DynamicResource NormalTextColor}" Margin="120,0,0,0">XXXXXX</TextBlock>
+            </Grid>
+            <Grid Height="40" Visibility="Collapsed">
+                <TextBlock VerticalAlignment="Center" Foreground="{DynamicResource NormalTextColor}" Width="110" HorizontalAlignment="Left" FontWeight="Bold">喷油量(ml)</TextBlock>
+                <TextBlock x:Name="R_InjectionQuantity_TB" VerticalAlignment="Center" Foreground="{DynamicResource NormalTextColor}" Margin="120,0,0,0">XXXXXX</TextBlock>
+            </Grid>
+            <Grid Height="40" Visibility="Collapsed">
+                <TextBlock VerticalAlignment="Center" Foreground="{DynamicResource NormalTextColor}" Width="110" HorizontalAlignment="Left" FontWeight="Bold">齿杆行程(mm)</TextBlock>
+                <TextBlock x:Name="R_RackTravel_TB" VerticalAlignment="Center" Foreground="{DynamicResource NormalTextColor}" Margin="120,0,0,0">XXXXXX</TextBlock>
+            </Grid>
+            <Grid Height="40" Visibility="Collapsed">
+                <TextBlock VerticalAlignment="Center" Foreground="{DynamicResource NormalTextColor}" Width="110" HorizontalAlignment="Left" FontWeight="Bold">不均匀度(mm)</TextBlock>
+                <TextBlock x:Name="R_Asymmetry_TB" VerticalAlignment="Center" Foreground="{DynamicResource NormalTextColor}" Margin="120,0,0,0">XXXXXX</TextBlock>
+            </Grid>
+        </StackPanel>
+    </Grid>
+    
+</UserControl>

@@ -147,6 +147,18 @@ namespace Fip.Dialog.Tools
             CheckTheValue();
         }
         /// <summary>
+        /// 正无穷数据设置
+        /// </summary>
+        /// <param name="min"></param>
+        public void SetRangeValue_Infinity(String min)
+        {
+            MaxValueTB.Text = "$";
+            MinValueTB.Text = min;
+
+            CheckTheValue();
+        }
+
+        /// <summary>
         /// 输入值是否符合要求
         /// </summary>
         /// <returns></returns>

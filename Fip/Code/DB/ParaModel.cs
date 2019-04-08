@@ -258,6 +258,22 @@ namespace Fip.Code.DB
         {
             return _Max;
         }
+
+        /// <summary>
+        /// 获取用于显示的字符串
+        /// </summary>
+        /// <returns></returns>
+        public String GetDisplayString()
+        {
+            if(IsINFINITY)
+            {
+                return Math.Round(_Min, PathStaticCollection.Round_Number).ToString() + " - " + "∞";
+            }
+            else
+            {
+                return Math.Round(_Min, PathStaticCollection.Round_Number).ToString() + " - " + Math.Round(_Max, PathStaticCollection.Round_Number).ToString();
+            }
+        }
     }
 
 

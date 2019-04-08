@@ -143,6 +143,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MControls\DeviceDetails_Part.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MControls\DeviceShortMessageLine.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -179,6 +183,9 @@
   <ItemGroup>
     <Compile Include="MControls\BottomPart.xaml.cs">
       <DependentUpon>BottomPart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MControls\DeviceDetails_Part.xaml.cs">
+      <DependentUpon>DeviceDetails_Part.xaml</DependentUpon>
     </Compile>
     <Compile Include="MControls\DeviceShortMessageLine.xaml.cs">
       <DependentUpon>DeviceShortMessageLine.xaml</DependentUpon>

@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Fip.Dialog;
+using Fip.Code.DB;
 
 namespace Fip.MControls
 {
@@ -32,6 +34,10 @@ namespace Fip.MControls
         /// 器件ID
         /// </summary>
         private int DeviceID = 0;
+
+        private String EquCode = String.Empty;
+        private String EquType = String.Empty;
+
         /// <summary>
         /// 被选择代理事件
         /// </summary>
@@ -55,6 +61,9 @@ namespace Fip.MControls
             SelectEvent = del;
             DeviceName.Text = equType;
             InitialTB.Text = equCode.ToCharArray()[0].ToString();
+
+            EquCode = equCode;
+            EquType = equType;
         }
 
         private void UserControl_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -144,6 +153,39 @@ namespace Fip.MControls
         public bool IsTesting()
         {
             return Testing;
+        }
+
+        private void SeeDetailButton_Click()
+        {
+            DeviceDetailsWindow detail = new DeviceDetailsWindow(DeviceID);
+            detail.Show();
+        }
+
+        private void DeleteButton_Click()
+        {
+            //正在测试，无法删除该器件
+            if(Testing)
+            {
+                MessageDialog dialogForError = new MessageDialog("该器件信息正在被使用无法删除");
+                return;
+            }
+
+            MessageDialog dialog = new MessageDialog(String.Format("是否确认删除该标准器件测试信息?\n喷油泵型号 : {0}\n喷油泵编号 : {1}" , EquType ,EquCode), true);
+
+            //确认删除
+            if(dialog.ShowDialog().Value)
+            {
+                if(DBControler.UnityIns.DeleteSSDesRecord(DeviceID))
+                {
+                    BottomPart.Log("成功删除", LogMessage.LevelEnum.Important);
+                    //移除自己的显示
+                    ((StackPanel)(this.Parent)).Children.Remove(this);
+                }
+                else
+                {
+                    BottomPart.Log("删除失败", LogMessage.LevelEnum.Important);
+                }
+            }
         }
     }
 }
