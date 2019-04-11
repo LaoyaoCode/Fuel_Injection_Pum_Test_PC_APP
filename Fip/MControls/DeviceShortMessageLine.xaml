@@ -17,7 +17,7 @@
         <!--器件名字-->
         <TextBlock x:Name="DeviceName" Text="康明斯 6CTAA" Margin="80,0,130,0" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Foreground="{StaticResource NormalTextColor}" FontSize="12"/>
 
-        <local:IconButton x:Name="ModifyButton" Visibility="Collapsed" ToolTip="修改配置" ButtonIcon="Feather" IconColor="{StaticResource SpecialColor2}" Margin="0,0,90,0" HorizontalAlignment="Right" VerticalAlignment="Center" Width="15" Height="15" NormalBackColor="{StaticResource SelectedColor}"></local:IconButton>
+        <local:IconButton x:Name="ModifyButton" Visibility="Collapsed" ToolTip="修改配置" IconClick="ModifyButton_Click"  ButtonIcon="Feather" IconColor="{StaticResource SpecialColor2}" Margin="0,0,90,0" HorizontalAlignment="Right" VerticalAlignment="Center" Width="15" Height="15" NormalBackColor="{StaticResource SelectedColor}"></local:IconButton>
         <local:IconButton x:Name="DetailButton" Visibility="Collapsed" ToolTip="查看细节" IconClick="SeeDetailButton_Click" ButtonIcon="EyeOutline" IconColor="{StaticResource SpecialColor}" HorizontalAlignment="Right" Margin="0,0,48,0" Width="15" VerticalAlignment="Center" Height="15" NormalBackColor="{StaticResource SelectedColor}"></local:IconButton>
         <local:IconButton x:Name="RemoveButton" Visibility="Collapsed" ToolTip="删除器件" IconClick="DeleteButton_Click" ButtonIcon="Close" IconColor="Red" HorizontalAlignment="Right" Margin="0,0,10,0" Width="12" Height="12" VerticalAlignment="Center" NormalBackColor="{StaticResource SelectedColor}"></local:IconButton>
     

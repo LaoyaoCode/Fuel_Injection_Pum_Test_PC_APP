@@ -34,14 +34,24 @@ namespace Fip.Dialog
 
         private StandardDeviceDesModel _Result = null;
 
+        private StandardDeviceDesModel AdvanceData = null;
+        private bool IsModify = false;
+
         public NewDeviceDialog()
         {
             InitializeComponent();
         }
 
-        public NewDeviceDialog(StandardDeviceDesModel model)
+        /// <summary>
+        /// 预先填装数据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="isModify">是否是修改数据</param>
+        public NewDeviceDialog(StandardDeviceDesModel model , bool isModify = false)
         {
-
+            InitializeComponent();
+            AdvanceData = model;
+            IsModify = isModify;
         }
 
         /// <summary>
@@ -71,6 +81,23 @@ namespace Fip.Dialog
             }
 
             ((CircleButton_NDD)StepButtonContainer.Children[0]).VirtualButton_Click();
+
+            if(AdvanceData != null)
+            {
+                StartWork_NP.SetMessage(AdvanceData.StartWork);
+                IdlingWork_NP.SetMessage(AdvanceData.IdlingWork);
+                IdlingBreak_NP.SetMessage(AdvanceData.IdlingBreak);
+                ReviseBegin_NP.SetMessage(AdvanceData.ReviseBegin);
+                ReviseWork_NP.SetMessage(AdvanceData.ReviseWork);
+                ReviseEnd_NP.SetMessage(AdvanceData.ReviseEnd);
+                DemWork_NP.SetMessage(AdvanceData.DemWork);
+                AdjWork_NP.SetMessage(AdvanceData.AdjWork);
+                HighBreak_NP.SetMessage(AdvanceData.HighBreak);
+
+                SpecialPara.SetMessage(AdvanceData.EquCode, AdvanceData.EquType, AdvanceData.Tem, IsModify);
+            }
+
+            
         }
 
         private void StepButton_Click(String tag , CircleButton_NDD which)

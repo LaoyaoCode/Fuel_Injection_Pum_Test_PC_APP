@@ -161,6 +161,43 @@ namespace Fip.MControls
             detail.Show();
         }
 
+        private void ModifyButton_Click()
+        {
+            //正在测试，无法删除该器件
+            if (Testing)
+            {
+                MessageDialog dialogForError = new MessageDialog("该器件信息正在被使用无法修改");
+                return;
+            }
+
+            StandardDeviceDesModel model = DBControler.UnityIns.GetSSDesTotalRecord(DeviceID);
+            if(model != null)
+            {
+                NewDeviceDialog newDDialog = new NewDeviceDialog(model, true);
+                if(newDDialog.ShowDialog().Value)
+                {
+                    MessageDialog sureDialog = new MessageDialog(String.Format("是否确认修改该标准器件测试信息?\n喷油泵型号 : {0}\n喷油泵编号 : {1}", EquType, EquCode), true);
+
+                    //确认修改
+                    if (sureDialog.ShowDialog().Value)
+                    {
+                        StandardDeviceDesModel result = newDDialog.GetResult();
+                        result.Id = DeviceID;
+
+                        if (DBControler.UnityIns.ModifySSDesRecord(result))
+                        {
+                            BottomPart.Log("成功修改", LogMessage.LevelEnum.Important);
+                        }
+                        else
+                        {
+                            BottomPart.Log("修改失败", LogMessage.LevelEnum.Error);
+                        }
+                    }
+                    
+                }
+            }
+        }
+
         private void DeleteButton_Click()
         {
             //正在测试，无法删除该器件

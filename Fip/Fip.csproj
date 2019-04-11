@@ -114,6 +114,7 @@
     <Compile Include="Code\DB\ParaModel.cs" />
     <Compile Include="Code\DB\StandardDeviceDesModel.cs" />
     <Compile Include="Code\PathStaticCollection.cs" />
+    <Compile Include="Code\Trans\ITrans.cs" />
     <Compile Include="DeviceDetailsWindow.xaml.cs">
       <DependentUpon>DeviceDetailsWindow.xaml</DependentUpon>
     </Compile>

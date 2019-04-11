@@ -32,7 +32,8 @@ namespace Fip.Dialog.Tools
         /// <param name="euqCode"></param>
         /// <param name="equType"></param>
         /// <param name="tem"></param>
-        public void SetMessage(String euqCode , String equType , RangeValue tem)
+        /// <param name="isModify">是否是修改模式，如果是，则器件编号和型号不能改变</param>
+        public void SetMessage(String euqCode , String equType , RangeValue tem , bool isModify = false)
         {
             EquCode_TB.Text = euqCode;
             EquType_TB.Text = equType;
@@ -44,6 +45,12 @@ namespace Fip.Dialog.Tools
             else
             {
                 Tem_RV.SetRangeValue(tem.GetMax().ToString(), tem.GetMin().ToString());
+            }
+
+            if(isModify)
+            {
+                EquCode_TB.IsEnabled = false;
+                EquType_TB.IsEnabled = false;
             }
         }
 

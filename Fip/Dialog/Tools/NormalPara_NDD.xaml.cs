@@ -43,10 +43,7 @@ namespace Fip.Dialog.Tools
         public NormalPara_NDD()
         {
             InitializeComponent();
-        }
 
-        private void userControl_Loaded(object sender, RoutedEventArgs e)
-        {
             S_InjectionTime_G = S_InjectionTimeContainer;
             R_InjectionQuantity_G = R_InjectionQuantityContainer;
             R_RackTravel_G = R_RackTravelContainer;
@@ -54,6 +51,11 @@ namespace Fip.Dialog.Tools
 
             //移除组合规则
             TotalParasContainer.Children.RemoveRange(2, 4);
+        }
+
+        private void userControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            
         }
 
         /// <summary>
