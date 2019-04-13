@@ -54,7 +54,7 @@
         </Image>
         <Grid HorizontalAlignment="Left" Width="40">
             <!--检索设备按钮-->
-            <local:IconButton x:Name="SearchDeviceButton"  ButtonIcon="SourceBranch" IconColor="{StaticResource ButtonColor}"  NormalBackColor="{StaticResource AppBackBrush}" HorizontalAlignment="Left" Margin="10,5,0,5" ToolTip="自动检索设备" Width="20"/>
+            <local:IconButton x:Name="SearchDeviceButton"  IconClick="SearchButton_Click" ButtonIcon="SourceBranch" IconColor="{StaticResource ButtonColor}"  NormalBackColor="{StaticResource AppBackBrush}" HorizontalAlignment="Left" Margin="10,5,0,5" ToolTip="自动检索设备" Width="20"/>
             <!--连接按钮-->
             <local:ImageButton x:Name="ConnectedIcon" Visibility="Collapsed" ToolTip="查看试验台信息" ImageSource="/Fip;component/Images/connected_icon.png" HorizontalAlignment="Left" Margin="10,5,0,5" ClickEvent="ConnectedIcon_MouseLeftButtonUp" NormalOp="0.5"></local:ImageButton>
 

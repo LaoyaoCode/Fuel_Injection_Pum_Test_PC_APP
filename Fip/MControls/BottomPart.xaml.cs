@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Fip.Code.Trans;
+
 
 namespace Fip.MControls
 {
@@ -25,11 +27,15 @@ namespace Fip.MControls
         /// </summary>
         public static BottomPart Unity = null;
 
+        private bool IsConnected = false;
+
         public BottomPart()
         {
             InitializeComponent();
 
             Unity = this;
+
+            new TcpIpTrans(DeviceLostConnect);
         }
 
         private void ConnectedIcon_MouseLeftButtonUp()
@@ -106,6 +112,19 @@ namespace Fip.MControls
         {
            
         }
+        
+        /// <summary>
+        /// 搜索按钮被点击
+        /// </summary>
+        private void SearchButton_Click()
+        {
+            TcpIpTrans.UnityIns.ConnectToDeviceAsync((result , message , type)=>
+            {
+                IsConnected = true;
+            });
+            SearchDeviceButton.IsEnabled = false;
+            LoadingIcon_Appear();
+        }
 
         /// <summary>
         /// 加载图标显示
@@ -121,6 +140,14 @@ namespace Fip.MControls
         public static void LoadingIcon_Disappear()
         {
             Unity.RollingIcon.Visibility = Visibility.Collapsed;
+        }
+
+        /// <summary>
+        /// 器件失去了连接
+        /// </summary>
+        private void DeviceLostConnect()
+        {
+
         }
     }
 }

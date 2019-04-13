@@ -23,14 +23,35 @@ namespace Fip.Code.Trans
             /// 回复正确，另一方接收数据正确
             /// </summary>
             ANSWER_SUCCESS ,
+            /// <summary>
+            /// 连接命令，需要平台返回自身数据
+            /// </summary>
+            CONNECT ,
+            /// <summary>
+            /// 设置指令命令
+            /// </summary>
+            SET_PARA,
+            /// <summary>
+            /// 返回结果命令
+            /// </summary>
+            BACK_RESULT,
         }
 
+       
+
         public delegate void ResultDel(bool result , String data , CommandEnum command = CommandEnum.NONE);
-        private ResultDel GetMessageEvent;
+        private event ResultDel GetMessageEvent;
+
+        public delegate void LostConnectDel();
+        /// <summary>
+        /// 失去连接代理函数
+        /// </summary>
+        private event LostConnectDel LostConnectEvent;
+
         /// <summary>
         /// 等待回复时间
         /// </summary>
-        private static readonly int WAIT_ANSWER_TIME_MS = 100 ;
+        private static readonly int WAIT_ANSWER_TIME_MS = 3000 ;
         /// <summary>
         /// 最大连接时间,MS计算
         /// </summary>
@@ -38,7 +59,7 @@ namespace Fip.Code.Trans
         /// <summary>
         /// 最大重发次数
         /// </summary>
-        private static readonly int MAX_RESEND_TIME = 5;
+        //private static readonly int MAX_RESEND_TIME = 5;
 
         /// <summary>
         /// 获取的数据列表
@@ -53,21 +74,31 @@ namespace Fip.Code.Trans
         /// <summary>
         /// 互斥对象，用于阻塞发送线程直到收到返回的数据判断是否接受完全
         /// </summary>
-        private Mutex AnswerMutex = new Mutex();
+        //private SemaphoreSlim AnswerSS = new SemaphoreSlim(1);
         /// <summary>
         /// 答复是否正确
         /// </summary>
-        private bool IsAnwerRight = false;
+        //private bool IsAnwerRight = false;
+
+        private ResultDel SendMDel = null;
+
+        public ITrans(LostConnectDel del)
+        {
+            LostConnectEvent += del;
+        }
 
         /// <summary>
-        /// 异步连接设备
+        /// 失去连接
         /// </summary>
-        /// <param name="del">结果代理函数</param>
-        /// <returns>是否连接成功</returns>
-        public void ConnectDeviceAutoAsync(ResultDel del)
+        protected void LostConnect()
         {
-
+            LostConnectEvent.Invoke();
         }
+        /// <summary>
+        /// 连接到设备函数
+        /// </summary>
+        /// <returns>null成功，有信息则是错误信息</returns>
+        public abstract void ConnectToDeviceAsync(ResultDel del);
 
         public async void SendMeesageAsync(String content , CommandEnum command , ResultDel del)
         {
@@ -98,7 +129,7 @@ namespace Fip.Code.Trans
                 verify ^= message[counter];
             }
 
-            message[message.Length - -5] = verify;
+            message[message.Length - 5] = verify;
             //填装数据尾部
             for (int counter = message.Length - 1; counter >= message.Length - 4; counter--)
             {
@@ -108,20 +139,36 @@ namespace Fip.Code.Trans
             //开始异步操作
             await Task.Run(new Action(()=>
             {
-                for(int counter = 0; counter < MAX_RESEND_TIME; counter++)
-                {
-                    //如果发送成功
-                    if (SendMessage_Real(message))
-                    {
-                        //如果是接受数据失败或者接收数据成功的指令，则对面不需要返回是否接受成功
-                        if (command == CommandEnum.ANSWER_FAILED || command == CommandEnum.ANSWER_SUCCESS)
-                        {
-                            return;
-                        }
+                SendMDel = del;
 
+                //如果发送成功
+                if (SendMessage_Real(message))
+                {
+                    /*
+                    //如果是接受数据失败或者接收数据成功的指令，则对面不需要返回是否接受成功
+                    if (command == CommandEnum.ANSWER_FAILED || command == CommandEnum.ANSWER_SUCCESS)
+                    {
+                        return;
+                    }*/
+                }
+                //发送数据失败
+                else
+                {
+                    if(del != null)
+                    {
+                        del.Invoke(false, "SNED_FAILED", CommandEnum.NONE);
+                    }
+                    
+                   // break;
+                }
+
+                /*
+                for (int counter = 0; counter < MAX_RESEND_TIME; counter++)
+                {
+                    
 
                         //阻塞线程，知道收到返回的数据
-                        if (AnswerMutex.WaitOne(WAIT_ANSWER_TIME_MS))
+                        if (AnswerSS.Wait(WAIT_ANSWER_TIME_MS))
                         {
                             //回信为成功接受
                             if(IsAnwerRight)
@@ -142,13 +189,8 @@ namespace Fip.Code.Trans
                             break;
                         }
                     }
-                    //发送数据失败
-                    else
-                    {
-                        del.Invoke(false, "SNED_FAILED", CommandEnum.NONE);
-                        break;
-                    }
-                }
+                    
+                }*/
                 
             })) ;
         }
@@ -223,18 +265,21 @@ namespace Fip.Code.Trans
             //接受到了数据
             else
             {
+             
                 //如果接收到是对方的回信指令，则无需回信
                 //命令为接收数据成功
-                if((CommandEnum)int.Parse(result[ANALYSE_KEY_COMMAND]) == CommandEnum.ANSWER_SUCCESS)
+                if ((CommandEnum)int.Parse(result[ANALYSE_KEY_COMMAND]) == CommandEnum.ANSWER_SUCCESS)
                 {
-                    IsAnwerRight = true;
-                    AnswerMutex.ReleaseMutex();
+                    SendMDel.Invoke(true, "SUCCESS", CommandEnum.NONE);
+                    //IsAnwerRight = true;
+                    //AnswerSS.Release();
                 }
                 //命令为接受数据失败
                 else if((CommandEnum)int.Parse(result[ANALYSE_KEY_COMMAND]) == CommandEnum.ANSWER_FAILED)
                 {
-                    IsAnwerRight = false;
-                    AnswerMutex.ReleaseMutex();
+                    SendMDel.Invoke(false, "ANSWER_OUT_OF_TIME", CommandEnum.NONE);
+                    //IsAnwerRight = false;
+                    //AnswerSS.Release();
                 }
                 //正常指令
                 else
@@ -259,7 +304,7 @@ namespace Fip.Code.Trans
             Dictionary<String, String> result = new Dictionary<string, string>();
 
             //校验数据
-            for (int counter = 5; counter < datas.Length - 5; counter++)
+            for (int counter = 4; counter < datas.Length - 5; counter++)
             {
                 verify ^= datas[counter];
             }

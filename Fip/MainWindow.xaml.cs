@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 using Fip.MControls;
 using Fip.Code.DB;
+using Fip.Code.Trans;
 
 namespace Fip
 {
@@ -42,8 +43,6 @@ namespace Fip
             {
                 BottomPart.Log("数据库连接失败", LogMessage.LevelEnum.Error);
             }
- 
-            
 
         }
 
@@ -88,6 +87,7 @@ namespace Fip
                 BeginStoryboard((Storyboard)this.Resources["MaxAnimation"]);
             }
         }
+
 
     }
 }
