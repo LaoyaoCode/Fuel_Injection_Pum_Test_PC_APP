@@ -66,6 +66,15 @@ namespace Fip.MControls
             EquType = equType;
         }
 
+        /// <summary>
+        /// 获取器件的型号
+        /// </summary>
+        /// <returns></returns>
+        public String GetEquType()
+        {
+            return EquType;
+        }
+
         private void UserControl_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             IsSelected = true;

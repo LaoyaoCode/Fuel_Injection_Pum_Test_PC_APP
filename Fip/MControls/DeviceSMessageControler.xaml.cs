@@ -57,6 +57,35 @@ namespace Fip.MControls
             DeviceSMesageContainer.Children.Add(line);
         }
 
+        private void SearchButton_Click()
+        {
+            //全部转化为小写
+            String message = SearchTB.Text.Trim().ToLower();
+
+            if(String.IsNullOrWhiteSpace(message) || String.IsNullOrEmpty(message))
+            {
+                foreach(DeviceShortMessageLine line in DeviceSMesageContainer.Children)
+                {
+                    line.Visibility = Visibility.Visible;
+                }
+            }
+            else
+            {
+                foreach (DeviceShortMessageLine line in DeviceSMesageContainer.Children)
+                {
+                    //如果包含搜索信息，则可见
+                    if(line.GetEquType().ToLower().Contains(message))
+                    {
+                        line.Visibility = Visibility.Visible;
+                    }
+                    //如果不包含搜索信息，则不可见
+                    else
+                    {
+                        line.Visibility = Visibility.Collapsed;
+                    }
+                }
+            }
+        }
 
         private void AddNewDeviceButton_Click()
         {
@@ -153,6 +182,20 @@ namespace Fip.MControls
                         });
                         DeviceSMesageContainer.Children.Add(newLine);
                     }
+                }
+            }
+        }
+
+        private void SearchTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //全部转化为小写
+            String message = SearchTB.Text.Trim().ToLower();
+
+            if (String.IsNullOrWhiteSpace(message) || String.IsNullOrEmpty(message))
+            {
+                foreach (DeviceShortMessageLine line in DeviceSMesageContainer.Children)
+                {
+                    line.Visibility = Visibility.Visible;
                 }
             }
         }

@@ -59,7 +59,7 @@ namespace Fip.Code.Trans
             R_Thread.Start();
 
             //发送指令，要求器件发送自身信息回来
-            SendMeesageAsync("", CommandEnum.CONNECT, del);
+            SendMeesageAsync("连接并且获取信息", CommandEnum.CONNECT, del);
         }
 
         protected override bool SendMessage_Real(byte[] message)
@@ -108,7 +108,7 @@ namespace Fip.Code.Trans
                         Add_Data(data);
                     }
                 }
-                catch
+                catch(Exception e)
                 {
                     //失去连接，则关闭套接字，然后调用失去连接函数，跳出无限循环
                     TCPSocket.Close();

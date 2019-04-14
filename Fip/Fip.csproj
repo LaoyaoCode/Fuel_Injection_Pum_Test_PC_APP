@@ -111,6 +111,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Code\DB\DBControler.cs" />
+    <Compile Include="Code\DB\HistoryModel.cs" />
     <Compile Include="Code\DB\ParaModel.cs" />
     <Compile Include="Code\DB\StandardDeviceDesModel.cs" />
     <Compile Include="Code\PathStaticCollection.cs" />

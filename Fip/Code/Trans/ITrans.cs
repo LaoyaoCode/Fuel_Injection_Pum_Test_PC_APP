@@ -49,14 +49,6 @@ namespace Fip.Code.Trans
         private event LostConnectDel LostConnectEvent;
 
         /// <summary>
-        /// 等待回复时间
-        /// </summary>
-        private static readonly int WAIT_ANSWER_TIME_MS = 3000 ;
-        /// <summary>
-        /// 最大连接时间,MS计算
-        /// </summary>
-        private static readonly int CONNECT_MAX_TIME_MS = 3000;
-        /// <summary>
         /// 最大重发次数
         /// </summary>
         //private static readonly int MAX_RESEND_TIME = 5;
@@ -71,16 +63,19 @@ namespace Fip.Code.Trans
         /// </summary>
         private static readonly String ANALYSE_KEY_COMMAND = "COMMAND";
         private static readonly String ANALYSE_KEY_DATA = "DATA";
-        /// <summary>
-        /// 互斥对象，用于阻塞发送线程直到收到返回的数据判断是否接受完全
-        /// </summary>
-        //private SemaphoreSlim AnswerSS = new SemaphoreSlim(1);
-        /// <summary>
-        /// 答复是否正确
-        /// </summary>
-        //private bool IsAnwerRight = false;
-
+        
+        //发送的数据，缓存
         private ResultDel SendMDel = null;
+        private String SendContent = null;
+        private CommandEnum SendCommand = CommandEnum.NONE;
+        /// <summary>
+        /// 重新发送的次数
+        /// </summary>
+        private int ResendTimes = 0;
+        /// <summary>
+        /// 最大重发次数
+        /// </summary>
+        private int MAX_RESEND = 5;
 
         public ITrans(LostConnectDel del)
         {
@@ -140,58 +135,26 @@ namespace Fip.Code.Trans
             await Task.Run(new Action(()=>
             {
                 SendMDel = del;
+                SendContent = content;
+                SendCommand = command;
+                ResendTimes = 0;
 
-                //如果发送成功
-                if (SendMessage_Real(message))
+                lock(this)
                 {
-                    /*
-                    //如果是接受数据失败或者接收数据成功的指令，则对面不需要返回是否接受成功
-                    if (command == CommandEnum.ANSWER_FAILED || command == CommandEnum.ANSWER_SUCCESS)
+                    //如果发送成功
+                    if (SendMessage_Real(message))
                     {
-                        return;
-                    }*/
-                }
-                //发送数据失败
-                else
-                {
-                    if(del != null)
-                    {
-                        del.Invoke(false, "SNED_FAILED", CommandEnum.NONE);
+                        //那么接受数据时会处理此处的发送代理
                     }
-                    
-                   // break;
-                }
-
-                /*
-                for (int counter = 0; counter < MAX_RESEND_TIME; counter++)
-                {
-                    
-
-                        //阻塞线程，知道收到返回的数据
-                        if (AnswerSS.Wait(WAIT_ANSWER_TIME_MS))
+                    //发送数据失败
+                    else
+                    {
+                        if (del != null)
                         {
-                            //回信为成功接受
-                            if(IsAnwerRight)
-                            {
-                                del.Invoke(true, "SUCCESS", CommandEnum.NONE);
-                                break;
-                            }
-                            //回信为接受失败，则重复发送
-                            else
-                            {
-                                continue;
-                            }
-                        }
-                        else
-                        {
-                            //超时没有回复，则视为直接失去了连接
-                            del.Invoke(false, "ANSWER_OUT_OF_TIME", CommandEnum.NONE);
-                            break;
+                            del.Invoke(false, "SNED_FAILED", CommandEnum.NONE);
                         }
                     }
-                    
-                }*/
-                
+                }
             })) ;
         }
 
@@ -271,23 +234,34 @@ namespace Fip.Code.Trans
                 if ((CommandEnum)int.Parse(result[ANALYSE_KEY_COMMAND]) == CommandEnum.ANSWER_SUCCESS)
                 {
                     SendMDel.Invoke(true, "SUCCESS", CommandEnum.NONE);
-                    //IsAnwerRight = true;
-                    //AnswerSS.Release();
                 }
                 //命令为接受数据失败
                 else if((CommandEnum)int.Parse(result[ANALYSE_KEY_COMMAND]) == CommandEnum.ANSWER_FAILED)
                 {
-                    SendMDel.Invoke(false, "ANSWER_OUT_OF_TIME", CommandEnum.NONE);
-                    //IsAnwerRight = false;
-                    //AnswerSS.Release();
+                    //SendMDel.Invoke(false, "ANSWER_OUT_OF_TIME", CommandEnum.NONE);
+                    //如果重发次数小于最大次数
+                    if(ResendTimes < MAX_RESEND)
+                    {
+                        //重新发送数据
+                        SendMeesageAsync(SendContent, SendCommand, SendMDel);
+                        //重发次数自增
+                        ResendTimes++;
+                    }
+                    else
+                    {
+                        //执行代理事件，发送讯息，标识失败，已经达到了最大重发次数
+                        SendMDel.Invoke(false, "SEND_FAILED_MAX_RESEND", CommandEnum.NONE);
+                    }
+                    
                 }
                 //正常指令
                 else
                 {
-                    //接受数据成功，则直接调用代理函数
-                    GetMessageEvent.Invoke(true, result[ANALYSE_KEY_DATA], (CommandEnum)int.Parse(result[ANALYSE_KEY_COMMAND]));
                     //回复接受成功
                     SendMeesageAsync("", CommandEnum.ANSWER_SUCCESS, null);
+                    //接受数据成功，则直接调用代理函数
+                    GetMessageEvent.Invoke(true, result[ANALYSE_KEY_DATA], (CommandEnum)int.Parse(result[ANALYSE_KEY_COMMAND]));
+                    
                 }
             }
         }

@@ -36,6 +36,7 @@ namespace Fip.MControls
             Unity = this;
 
             new TcpIpTrans(DeviceLostConnect);
+            TcpIpTrans.UnityIns.Add_GetMeeageDel(RecieveMessage);
         }
 
         private void ConnectedIcon_MouseLeftButtonUp()
@@ -120,7 +121,8 @@ namespace Fip.MControls
         {
             TcpIpTrans.UnityIns.ConnectToDeviceAsync((result , message , type)=>
             {
-                IsConnected = true;
+                //成功连接了，然后等待获取信息
+
             });
             SearchDeviceButton.IsEnabled = false;
             LoadingIcon_Appear();
@@ -148,6 +150,36 @@ namespace Fip.MControls
         private void DeviceLostConnect()
         {
 
+        }
+
+        /// <summary>
+        /// 接收到数据
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="data"></param>
+        /// <param name="command"></param>
+        private void RecieveMessage(bool result, String data, TcpIpTrans.CommandEnum command)
+        {
+            this.Dispatcher.Invoke(new Action(() =>
+            {
+                //接受到了连接数据，下位机发送了自身器件数据
+                if (command == ITrans.CommandEnum.CONNECT)
+                {
+                    IsConnected = true;
+                    //解析填装数据
+                    String[] message = data.Split('$');
+                    DeviceName.Text = message[0];
+                    DeviceVender.Text = message[1];
+                    DeviceMakeTime.Text = message[2];
+
+                    //加载图标消失
+                    LoadingIcon_Disappear();
+                    SearchDeviceButton.Visibility = Visibility.Hidden;
+                    ConnectedIcon.Visibility = Visibility.Visible;
+                    Log("连接测试台成功", LogMessage.LevelEnum.Important);
+                }
+            }));
+            
         }
     }
 }
