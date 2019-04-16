@@ -77,10 +77,25 @@ namespace Fip.Code.Trans
         /// </summary>
         private int MAX_RESEND = 5;
 
-        public ITrans(LostConnectDel del)
+        /// <summary>
+        /// 是否已经连接上了
+        /// </summary>
+        private bool IsConnected = false;
+
+        public ITrans()
+        {
+            
+        }
+
+        /// <summary>
+        /// 增加失去连接代理
+        /// </summary>
+        /// <param name="del"></param>
+        public void Add_LostConnectDel(LostConnectDel del)
         {
             LostConnectEvent += del;
         }
+
 
         /// <summary>
         /// 失去连接

@@ -70,7 +70,8 @@ namespace Fip.Code.DB
             + "EquCode TEXT NOT NULL,"
             + "EquType TEXT NOT NULL,"
             + "HDate TEXT NOT NULL,"
-            + "HTime TEXT NOT NULL"
+            + "HTime TEXT NOT NULL,"
+            + "IsPass TEXT NOT NULL"
             + ");";
 
         public DBControler()
@@ -395,6 +396,7 @@ namespace Fip.Code.DB
                             record.EquType = reader["EquType"].ToString();
                             record.HDate = reader["HDate"].ToString();
                             record.HTime = reader["HTime"].ToString();
+                            record.IsPass = bool.Parse(reader["IsPass"].ToString());
                             datas.Add(record);
                         }
                         catch (Exception)
@@ -438,21 +440,22 @@ namespace Fip.Code.DB
                         {
                             //读取所有的信息
                             record.Id = id;
-                            record.StartWork = new ParaModel(reader["StartWork"].ToString());
-                            record.IdlingWork = new ParaModel(reader["IdlingWork"].ToString());
-                            record.IdlingBreak = new ParaModel(reader["IdlingBreak"].ToString());
-                            record.ReviseBegin = new ParaModel(reader["ReviseBegin"].ToString());
-                            record.ReviseWork = new ParaModel(reader["ReviseWork"].ToString());
-                            record.ReviseEnd = new ParaModel(reader["ReviseEnd"].ToString());
-                            record.DemWork = new ParaModel(reader["DemWork"].ToString());
-                            record.AdjWork = new ParaModel(reader["AdjWork"].ToString());
-                            record.HighBreak = new ParaModel(reader["HighBreak"].ToString());
+                            record.StartWork = new HParaModel(reader["StartWork"].ToString());
+                            record.IdlingWork = new HParaModel(reader["IdlingWork"].ToString());
+                            record.IdlingBreak = new HParaModel(reader["IdlingBreak"].ToString());
+                            record.ReviseBegin = new HParaModel(reader["ReviseBegin"].ToString());
+                            record.ReviseWork = new HParaModel(reader["ReviseWork"].ToString());
+                            record.ReviseEnd = new HParaModel(reader["ReviseEnd"].ToString());
+                            record.DemWork = new HParaModel(reader["DemWork"].ToString());
+                            record.AdjWork = new HParaModel(reader["AdjWork"].ToString());
+                            record.HighBreak = new HParaModel(reader["HighBreak"].ToString());
                             record.Tem = new RangeValue(reader["Tem"].ToString());
                             record.EquCode = reader["EquCode"].ToString();
                            
                             record.EquType = reader["EquType"].ToString();
                             record.HDate = reader["HDate"].ToString();
                             record.HTime = reader["HTime"].ToString();
+                            record.IsPass = bool.Parse(reader["IsPass"].ToString());
                         }
                         catch (Exception)
                         {
@@ -479,10 +482,10 @@ namespace Fip.Code.DB
         {
             int id = -1;
             string sql = string.Format("Insert Into " + HistoryTableName +
-                "(StartWork,IdlingWork, IdlingBreak, ReviseBegin,ReviseWork, ReviseEnd,DemWork,AdjWork,HighBreak,Tem,EquCode,EquType,HDate,HTime) Values" +
-                "('{0}', '{1}', '{2}', '{3}','{4}', '{5}', '{6}', '{7}','{8}', '{9}','{10}','{11}','{12}','{13}')",
+                "(StartWork,IdlingWork, IdlingBreak, ReviseBegin,ReviseWork, ReviseEnd,DemWork,AdjWork,HighBreak,Tem,EquCode,EquType,HDate,HTime,IsPass) Values" +
+                "('{0}', '{1}', '{2}', '{3}','{4}', '{5}', '{6}', '{7}','{8}', '{9}','{10}','{11}','{12}','{13}' , '{14}')",
                 model.StartWork, model.IdlingWork, model.IdlingBreak, model.ReviseBegin, model.ReviseWork, model.ReviseEnd, model.DemWork,
-                model.AdjWork, model.HighBreak, model.Tem, model.EquCode, /*model.IconHex,*/ model.EquType , model.HDate , model.HTime);
+                model.AdjWork, model.HighBreak, model.Tem, model.EquCode, /*model.IconHex,*/ model.EquType , model.HDate , model.HTime , model.IsPass.ToString());
 
             //连接数据库
             using (SQLiteConnection sqlConnect = new SQLiteConnection(ConnectingString))

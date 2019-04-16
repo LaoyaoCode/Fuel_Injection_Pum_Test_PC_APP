@@ -47,18 +47,28 @@ namespace Fip.MControls
         private SelectDel SelectEvent = null;
 
         /// <summary>
+        /// 开始测试代理事件
+        /// </summary>
+        /// <param name="line"></param>
+        public delegate void StartDel(DeviceShortMessageLine line);
+
+        private StartDel StartEvent = null;
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="id">器件id</param>
         /// <param name="equType">油泵型号</param>
         /// <param name="equCode">喷油泵编码</param>
         /// <param name="del">被点击选择代理事件</param>
-        public DeviceShortMessageLine(int id ,String equType ,String equCode, SelectDel del = null)
+        public DeviceShortMessageLine(int id ,String equType ,String equCode, StartDel start, SelectDel del)
         {
             InitializeComponent();
             DeviceID = id;
 
             SelectEvent = del;
+            StartEvent = start;
+
             DeviceName.Text = equType;
             InitialTB.Text = equCode.ToCharArray()[0].ToString();
 
@@ -87,11 +97,12 @@ namespace Fip.MControls
 
         private void UserControl_MouseEnter(object sender, MouseEventArgs e)
         {
-            //只有在没有测试的时候才可以删除和修改
+            //只有在没有测试的时候才可以删除和修改,开始测试
             if (!Testing)
             {
                 ModifyButton.Visibility = Visibility.Visible;
                 RemoveButton.Visibility = Visibility.Visible;
+                StartButton.Visibility = Visibility.Visible;
             }
             DetailButton.Visibility = Visibility.Visible;
 
@@ -104,6 +115,7 @@ namespace Fip.MControls
             ModifyButton.Visibility = Visibility.Collapsed;
             RemoveButton.Visibility = Visibility.Collapsed;
             DetailButton.Visibility = Visibility.Collapsed;
+            StartButton.Visibility = Visibility.Collapsed;
 
             //只有没有被选中的时候才会变回正常颜色
             if (!IsSelected)
@@ -120,14 +132,6 @@ namespace Fip.MControls
             IsSelected = false;
             //恢复背景
             RootGrid.Background = (SolidColorBrush)FindResource("AppBackBrush");
-        }
-
-        /// <summary>
-        /// 离开正在测试状态
-        /// </summary>
-        public void Testing_Cancel()
-        {
-            Testing = false;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -155,6 +159,24 @@ namespace Fip.MControls
             InitialTB.Text = equCode.ToCharArray()[0].ToString();
         }
         
+        /// <summary>
+        /// 设置测试状态
+        /// </summary>
+        /// <param name="test"></param>
+        public void SetTesting(bool test)
+        {
+            Testing = test;
+
+            if(test)
+            {
+                RollingIcon.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                RollingIcon.Visibility = Visibility.Collapsed;
+            }
+        }
+
         /// <summary>
         /// 是否正在使用这个器件信息来测试
         /// </summary>
@@ -232,6 +254,14 @@ namespace Fip.MControls
                     BottomPart.Log("删除失败", LogMessage.LevelEnum.Important);
                 }
             }
+        }
+
+        /// <summary>
+        /// 开始按钮被点击，全权由外部代理
+        /// </summary>
+        private void StartButton_Click()
+        {
+            this.StartEvent.Invoke(this);
         }
     }
 }

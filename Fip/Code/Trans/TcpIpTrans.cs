@@ -31,7 +31,7 @@ namespace Fip.Code.Trans
 
         public static TcpIpTrans UnityIns = null;
 
-        public TcpIpTrans(LostConnectDel del):base(del)
+        public TcpIpTrans()
         {
             UnityIns = this;
         }

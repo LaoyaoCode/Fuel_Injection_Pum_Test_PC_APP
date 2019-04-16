@@ -35,7 +35,8 @@ namespace Fip.MControls
 
             Unity = this;
 
-            new TcpIpTrans(DeviceLostConnect);
+            new TcpIpTrans();
+            TcpIpTrans.UnityIns.Add_LostConnectDel(DeviceLostConnect);
             TcpIpTrans.UnityIns.Add_GetMeeageDel(RecieveMessage);
         }
 
@@ -149,7 +150,10 @@ namespace Fip.MControls
         /// </summary>
         private void DeviceLostConnect()
         {
-
+            IsConnected = false;
+            SearchDeviceButton.Visibility = Visibility.Visible;
+            ConnectedIcon.Visibility = Visibility.Collapsed;
+            Log("测试台失去连接", LogMessage.LevelEnum.Error);
         }
 
         /// <summary>

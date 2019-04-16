@@ -22,7 +22,9 @@ namespace Fip.MControls
     /// </summary>
     public partial class DeviceSMessageControler : UserControl
     {
-        private DeviceShortMessageLine NowUseDevice = null;
+        private DeviceShortMessageLine NowSelectDevice = null;
+
+        private DeviceShortMessageLine NowTestDevice = null;
 
         public DeviceSMessageControler()
         {
@@ -43,15 +45,15 @@ namespace Fip.MControls
         /// <param name="id">信息Id</param>
         private void AddDSMessage(int id , String equType , String equCode)
         {
-            DeviceShortMessageLine line = new DeviceShortMessageLine(id, equType, equCode,(DeviceShortMessageLine which) =>
+            DeviceShortMessageLine line = new DeviceShortMessageLine(id, equType, equCode, DeviceStartTest,(DeviceShortMessageLine which) =>
             {
                 //之前的器件取消选择状态
-                if (NowUseDevice != null)
+                if (NowSelectDevice != null)
                 {
-                    NowUseDevice.Selected_Cancel();
+                    NowSelectDevice.Selected_Cancel();
                 }
 
-                NowUseDevice = which;
+                NowSelectDevice = which;
             });
 
             DeviceSMesageContainer.Children.Add(line);
@@ -170,15 +172,15 @@ namespace Fip.MControls
                         BottomPart.Log(String.Format("添加新器件信息成功(<编号:{0}><型号:{1}>)", result.EquCode, result.EquType), LogMessage.LevelEnum.Normal);
                         
                         //新添加的器件信息
-                        DeviceShortMessageLine newLine = new DeviceShortMessageLine(result.Id, result.EquType, result.EquCode,(DeviceShortMessageLine which) =>
+                        DeviceShortMessageLine newLine = new DeviceShortMessageLine(result.Id, result.EquType, result.EquCode, DeviceStartTest , (DeviceShortMessageLine which) =>
                         {
                             //之前的器件取消选择状态
-                            if (NowUseDevice != null)
+                            if (NowSelectDevice != null)
                             {
-                                NowUseDevice.Selected_Cancel();
+                                NowSelectDevice.Selected_Cancel();
                             }
 
-                            NowUseDevice = which;
+                            NowSelectDevice = which;
                         });
                         DeviceSMesageContainer.Children.Add(newLine);
                     }
@@ -196,6 +198,29 @@ namespace Fip.MControls
                 foreach (DeviceShortMessageLine line in DeviceSMesageContainer.Children)
                 {
                     line.Visibility = Visibility.Visible;
+                }
+            }
+        }
+
+
+        private void DeviceStartTest(DeviceShortMessageLine line)
+        {
+            //有正在测试的器件，则需要等待
+            if(NowTestDevice != null)
+            {
+                MessageDialog dialog = new MessageDialog("有器件正在测试，请等待......");
+                dialog.ShowDialog();
+            }
+            //如果没有，则可以使用这个器件开始测试
+            else
+            {
+                MessageDialog dialog = new MessageDialog(String.Format("喷油泵型号 : {0}\n是否开始测试？", line.GetEquType()) , true);
+
+                //同意开始测试
+                if (dialog.ShowDialog().Value)
+                {
+                    line.SetTesting(true);
+                    NowTestDevice = line;
                 }
             }
         }
