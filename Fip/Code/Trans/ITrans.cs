@@ -27,14 +27,15 @@ namespace Fip.Code.Trans
             /// 连接命令，需要平台返回自身数据
             /// </summary>
             CONNECT ,
+           
             /// <summary>
-            /// 设置指令命令
+            /// 要求
             /// </summary>
-            SET_PARA,
+            REQUIRE,
             /// <summary>
-            /// 返回结果命令
+            /// 结果
             /// </summary>
-            BACK_RESULT,
+            RESULT,
         }
 
        
@@ -82,10 +83,16 @@ namespace Fip.Code.Trans
         /// </summary>
         private bool IsConnected = false;
 
+        public static ITrans UnityIns = null;
+
+
+
         public ITrans()
         {
-            
+            UnityIns = this;
         }
+
+        public abstract void Close();
 
         /// <summary>
         /// 增加失去连接代理
@@ -93,6 +100,7 @@ namespace Fip.Code.Trans
         /// <param name="del"></param>
         public void Add_LostConnectDel(LostConnectDel del)
         {
+            LostConnectEvent -= del;
             LostConnectEvent += del;
         }
 
@@ -186,6 +194,7 @@ namespace Fip.Code.Trans
         /// <param name="del"></param>
         public void Add_GetMeeageDel(ResultDel del)
         {
+            GetMessageEvent -= del;
             GetMessageEvent += del;
         }
 

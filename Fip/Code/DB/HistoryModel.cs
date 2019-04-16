@@ -82,7 +82,9 @@ namespace Fip.Code.DB
         {
             StringBuilder builder = new StringBuilder();
 
-            if(StartWork != null)
+            builder.Append("ID" + Connect + Id.ToString() + Seperater);
+
+            if (StartWork != null)
             {
                 builder.Append("SW" + Connect + StartWork.ToString() + Seperater);
             }
@@ -120,6 +122,10 @@ namespace Fip.Code.DB
                 builder.Append("DW" + Connect + DemWork.ToString() + Seperater);
             }
 
+            if (AdjWork != null)
+            {
+                builder.Append("AW" + Connect + AdjWork.ToString() + Seperater);
+            }
 
             if (HighBreak != null)
             {
@@ -178,6 +184,10 @@ namespace Fip.Code.DB
 
             switch (message[0])
             {
+                case "ID":
+                    this.Id = int.Parse(message[1]);
+                    break;
+
                 case "SW":
                     this.StartWork = new HParaModel(message[1]);
                     break;
@@ -205,6 +215,11 @@ namespace Fip.Code.DB
                 case "DW":
                     this.DemWork = new HParaModel(message[1]);
                     break;
+
+                case "AW":
+                    this.AdjWork = new HParaModel(message[1]);
+                    break;
+
 
                 case "HB":
                     this.HighBreak = new HParaModel(message[1]);

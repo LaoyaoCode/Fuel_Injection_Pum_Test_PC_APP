@@ -16,6 +16,8 @@ using System.Windows.Media.Animation;
 using Fip.MControls;
 using Fip.Code.DB;
 using Fip.Code.Trans;
+using System.Threading;
+using Fip.Code.Trans;
 
 namespace Fip
 {
@@ -51,6 +53,10 @@ namespace Fip
         /// </summary>
         private void CloseButton_Click()
         {
+            if(ITrans.UnityIns != null)
+            {
+                ITrans.UnityIns.Close();
+            }
 
             Application.Current.Shutdown();
         }

@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Fip.Dialog;
 using Fip.Code.DB;
+using Fip.Code.Trans;
 
 namespace Fip.MControls
 {
@@ -214,15 +215,129 @@ namespace Fip.MControls
             //如果没有，则可以使用这个器件开始测试
             else
             {
-                MessageDialog dialog = new MessageDialog(String.Format("喷油泵型号 : {0}\n是否开始测试？", line.GetEquType()) , true);
-
-                //同意开始测试
-                if (dialog.ShowDialog().Value)
+                if(BottomPart.Unity.IsConnect())
                 {
-                    line.SetTesting(true);
-                    NowTestDevice = line;
+                    MessageDialog dialog = new MessageDialog(String.Format("喷油泵型号 : {0}\n是否开始测试？", line.GetEquType()), true);
+
+                    //同意开始测试
+                    if (dialog.ShowDialog().Value)
+                    {
+                        line.SetTesting(true);
+                        NowTestDevice = line;
+                        StandardDeviceDesModel model = DBControler.UnityIns.GetSSDesTotalRecord(line.GetID());
+                        model.Id = line.GetID();
+
+                        //注册接受事件代理
+                        ITrans.UnityIns.Add_GetMeeageDel(this.RecieveData);
+
+
+                        ITrans.UnityIns.SendMeesageAsync(model.ToString(), ITrans.CommandEnum.REQUIRE, (result , data , commmand) =>
+                        {
+                            this.Dispatcher.Invoke(new Action(() =>
+                            {
+                                if (result)
+                                {
+                                    BottomPart.Log("发送喷油泵标准测试数据成功", LogMessage.LevelEnum.Important);
+                                }
+                                else
+                                {
+                                    BottomPart.Log("发送喷油泵标准测试数据失败", LogMessage.LevelEnum.Important);
+                                }
+                            }));
+                            
+                        });
+                    }
                 }
+                //还未连接，则提示
+                else
+                {
+                    MessageDialog dialog = new MessageDialog("测试台未连接，请先连接测试台");
+                    dialog.ShowDialog();
+                }
+               
             }
+        }
+
+        /// <summary>
+        /// 接受数据代理
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="data"></param>
+        /// <param name="command"></param>
+        private void RecieveData(bool result, String data, ITrans.CommandEnum command)
+        {
+            this.Dispatcher.Invoke(new Action(() =>
+            {
+                //接受到了数据
+                if (command == ITrans.CommandEnum.RESULT)
+                {
+                    HistoryModel model = new HistoryModel(data);
+
+                    if (model.Id == NowTestDevice.GetID())
+                    {
+                        StandardDeviceDesModel sdd = DBControler.UnityIns.GetSSDesTotalRecord(NowTestDevice.GetID());
+
+                        //测试状态取消
+                        NowTestDevice.SetTesting(false);
+                        NowTestDevice = null;
+
+                        CombinaPara(sdd, model);
+
+                        BottomPart.Log("接受结果数据成功", LogMessage.LevelEnum.Important);
+                    }
+                    else
+                    {
+                        BottomPart.Log("接受结果数据与当前测试数据ID不匹配", LogMessage.LevelEnum.Error);
+                    }
+
+                }
+            }));
+           
+           
+        }
+
+        /// <summary>
+        /// 组合参数
+        /// </summary>
+        /// <param name="sdd"></param>
+        /// <param name="model"></param>
+        public static void CombinaPara(StandardDeviceDesModel sdd , HistoryModel model)
+        {
+            model.AdjWork.S_RotateSpeed = sdd.AdjWork.S_RotateSpeed;
+            model.AdjWork.S_InjectionTime = sdd.AdjWork.S_InjectionTime;
+
+            model.DemWork.S_RotateSpeed = sdd.DemWork.S_RotateSpeed;
+            model.DemWork.S_InjectionTime = sdd.DemWork.S_InjectionTime;
+
+            model.EquCode = sdd.EquCode;
+            model.EquType = sdd.EquType;
+
+            model.HighBreak.S_RotateSpeed = sdd.HighBreak.S_RotateSpeed;
+            model.HighBreak.S_InjectionTime = sdd.HighBreak.S_InjectionTime;
+
+            model.IdlingBreak.S_RotateSpeed = sdd.IdlingBreak.S_RotateSpeed;
+            model.IdlingBreak.S_InjectionTime = sdd.IdlingBreak.S_InjectionTime;
+
+            model.IdlingWork.S_RotateSpeed = sdd.IdlingWork.S_RotateSpeed;
+            model.IdlingWork.S_InjectionTime = sdd.IdlingWork.S_InjectionTime;
+
+            model.ReviseBegin.S_RotateSpeed = sdd.ReviseBegin.S_RotateSpeed;
+            model.ReviseBegin.S_InjectionTime = sdd.ReviseBegin.S_InjectionTime;
+
+            model.ReviseEnd.S_RotateSpeed = sdd.ReviseEnd.S_RotateSpeed;
+            model.ReviseEnd.S_InjectionTime = sdd.ReviseEnd.S_InjectionTime;
+
+            model.ReviseWork.S_RotateSpeed = sdd.ReviseWork.S_RotateSpeed;
+            model.ReviseWork.S_InjectionTime = sdd.ReviseWork.S_InjectionTime;
+
+            model.StartWork.S_RotateSpeed = sdd.StartWork.S_RotateSpeed;
+            model.StartWork.S_InjectionTime = sdd.StartWork.S_InjectionTime;
+
+            //设置时间
+            model.HTime = DateTime.Now.ToShortTimeString();
+            model.HDate = DateTime.Now.ToShortDateString();
+
+            //测试数据是否符合要求
         }
     }
 }

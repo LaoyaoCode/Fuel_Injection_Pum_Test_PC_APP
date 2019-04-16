@@ -29,11 +29,9 @@ namespace Fip.Code.Trans
         /// </summary>
         private Socket TCPSocket = null;
 
-        public static TcpIpTrans UnityIns = null;
-
         public TcpIpTrans()
         {
-            UnityIns = this;
+            
         }
 
         public override void ConnectToDeviceAsync(ResultDel del)
@@ -116,6 +114,15 @@ namespace Fip.Code.Trans
                     LostConnect();
                     break;
                 }
+            }
+        }
+
+        public override void Close()
+        {
+            if(TCPSocket != null)
+            {
+                //关闭套接字
+                TCPSocket.Close();
             }
         }
     }

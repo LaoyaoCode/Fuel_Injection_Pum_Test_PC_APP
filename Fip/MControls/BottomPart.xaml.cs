@@ -27,7 +27,7 @@ namespace Fip.MControls
         /// </summary>
         public static BottomPart Unity = null;
 
-        private bool IsConnected = false;
+        private bool _IsConnected = false;
 
         public BottomPart()
         {
@@ -35,9 +35,15 @@ namespace Fip.MControls
 
             Unity = this;
 
+
+
+            //实例化传输方式，这里作为测试实例化的是TCP/IP传输方式，但是使用的都是ITRANS抽象类
             new TcpIpTrans();
-            TcpIpTrans.UnityIns.Add_LostConnectDel(DeviceLostConnect);
-            TcpIpTrans.UnityIns.Add_GetMeeageDel(RecieveMessage);
+
+
+
+            ITrans.UnityIns.Add_LostConnectDel(DeviceLostConnect);
+            ITrans.UnityIns.Add_GetMeeageDel(RecieveMessage);
         }
 
         private void ConnectedIcon_MouseLeftButtonUp()
@@ -120,7 +126,7 @@ namespace Fip.MControls
         /// </summary>
         private void SearchButton_Click()
         {
-            TcpIpTrans.UnityIns.ConnectToDeviceAsync((result , message , type)=>
+            ITrans.UnityIns.ConnectToDeviceAsync((result , message , type)=>
             {
                 //成功连接了，然后等待获取信息
 
@@ -150,10 +156,23 @@ namespace Fip.MControls
         /// </summary>
         private void DeviceLostConnect()
         {
-            IsConnected = false;
-            SearchDeviceButton.Visibility = Visibility.Visible;
-            ConnectedIcon.Visibility = Visibility.Collapsed;
-            Log("测试台失去连接", LogMessage.LevelEnum.Error);
+            this.Dispatcher.Invoke(new Action(() =>
+            {
+                _IsConnected = false;
+                SearchDeviceButton.Visibility = Visibility.Visible;
+                ConnectedIcon.Visibility = Visibility.Collapsed;
+                Log("测试台失去连接", LogMessage.LevelEnum.Error);
+            }));
+           
+        }
+
+        /// <summary>
+        /// 是否成功连接
+        /// </summary>
+        /// <returns></returns>
+        public bool IsConnect()
+        {
+            return _IsConnected;
         }
 
         /// <summary>
@@ -169,7 +188,7 @@ namespace Fip.MControls
                 //接受到了连接数据，下位机发送了自身器件数据
                 if (command == ITrans.CommandEnum.CONNECT)
                 {
-                    IsConnected = true;
+                    _IsConnected = true;
                     //解析填装数据
                     String[] message = data.Split('$');
                     DeviceName.Text = message[0];
