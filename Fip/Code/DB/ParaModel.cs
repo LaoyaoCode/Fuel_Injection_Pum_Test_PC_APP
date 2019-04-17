@@ -129,6 +129,41 @@ namespace Fip.Code.DB
 
             return builder.ToString();
         }
+
+        /// <summary>
+        /// 历史结果记录是否符合要求
+        /// </summary>
+        /// <param name="model">历史结果数据</param>
+        /// <returns></returns>
+        public bool IsMatchTheRequire(HParaModel model)
+        {
+            if(R_InjectionQuantity != null)
+            {
+                if(!R_InjectionQuantity.IsInRange(model.R_InjectionQuantity))
+                {
+                    return false;
+                }
+            }
+
+            if(R_Asymmetry > 0)
+            {
+                if(R_Asymmetry != model.R_Asymmetry)
+                {
+                    return false;
+                }
+            }
+
+            if(R_RackTravel != null)
+            {
+                if (!R_RackTravel.IsInRange(model.R_RackTravel))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+            
+        }
     }
 
     /// <summary>
@@ -224,6 +259,23 @@ namespace Fip.Code.DB
         public bool IsInRange(float number)
         {
             if(number>= _Min && number<= _Max)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 是否在范围之内
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public bool IsInRange(RangeValue value)
+        {
+            if (value.GetMin() >= _Min && value.GetMax() <= _Max)
             {
                 return true;
             }

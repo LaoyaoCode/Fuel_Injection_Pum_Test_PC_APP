@@ -375,7 +375,7 @@ namespace Fip.Code.DB
             //连接数据库
             using (SQLiteConnection sqlConnect = new SQLiteConnection(ConnectingString))
             {
-                String commandString = "SELECT Id,EquType,HDate,HTime FROM " + HistoryTableName;
+                String commandString = "SELECT Id,EquType,HDate,HTime,IsPass FROM " + HistoryTableName;
 
                 sqlConnect.Open();
 
@@ -399,7 +399,7 @@ namespace Fip.Code.DB
                             record.IsPass = bool.Parse(reader["IsPass"].ToString());
                             datas.Add(record);
                         }
-                        catch (Exception)
+                        catch (Exception e)
                         {
 
 
@@ -473,7 +473,7 @@ namespace Fip.Code.DB
         }
 
         /// <summary>
-        /// 插入一条新的记录(未测试)
+        /// 插入一条新的记录(未测试)(插入可行，但未检查完整性)
         /// 历史记录表
         /// </summary>
         /// <param name="model">需要添加的新模型</param>

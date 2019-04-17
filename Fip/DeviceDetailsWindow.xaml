@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:Tools="clr-namespace:Fip.Dialog.Tools"
         xmlns:MControls="clr-namespace:Fip.MControls"
-         Title="Device Detail Window" x:Name="window" ShowInTaskbar="False" AllowsTransparency="True"  Background="{x:Null}" Height="450" Width="300"  WindowStyle="None" ResizeMode="CanMinimize"   WindowStartupLocation="CenterOwner" BorderThickness="10" Loaded="window_Loaded">
+         Title="Device Detail Window" x:Name="window" ShowInTaskbar="True" AllowsTransparency="True"  Background="{x:Null}" Height="450" Width="300"  WindowStyle="None" ResizeMode="CanMinimize"   WindowStartupLocation="CenterOwner" BorderThickness="10" Loaded="window_Loaded">
 
     <Window.Resources>
         <!--加载动画-->

@@ -223,5 +223,96 @@ namespace Fip.Code.DB
             }
 
         }
+
+        /// <summary>
+        /// 历史测试记录是否符合要求
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool IsMatchRequire(HistoryModel model)
+        {
+            if(StartWork != null)
+            {
+                if(!StartWork.IsMatchTheRequire(model.StartWork))
+                {
+                    return false;
+                }
+            }
+
+
+            if (IdlingWork != null)
+            {
+                if (!IdlingWork.IsMatchTheRequire(model.IdlingWork))
+                {
+                    return false;
+                }
+            }
+
+            if (IdlingBreak != null)
+            {
+                if (!IdlingBreak.IsMatchTheRequire(model.IdlingBreak))
+                {
+                    return false;
+                }
+            }
+
+            if (ReviseBegin != null)
+            {
+                if (!ReviseBegin.IsMatchTheRequire(model.ReviseBegin))
+                {
+                    return false;
+                }
+            }
+
+            if (ReviseWork != null)
+            {
+                if (!ReviseWork.IsMatchTheRequire(model.ReviseWork))
+                {
+                    return false;
+                }
+            }
+
+            if (ReviseEnd != null)
+            {
+                if (!ReviseEnd.IsMatchTheRequire(model.ReviseEnd))
+                {
+                    return false;
+                }
+            }
+
+            if (DemWork != null)
+            {
+                if (!DemWork.IsMatchTheRequire(model.DemWork))
+                {
+                    return false;
+                }
+            }
+
+            if (AdjWork != null)
+            {
+                if (!AdjWork.IsMatchTheRequire(model.AdjWork))
+                {
+                    return false;
+                }
+            }
+
+            if (HighBreak != null)
+            {
+                if (!HighBreak.IsMatchTheRequire(model.HighBreak))
+                {
+                    return false;
+                }
+            }
+
+            if (Tem != null)
+            {
+                if (!Tem.IsInRange(model.Tem))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }

@@ -159,6 +159,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MControls\HistoryShortLine.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MControls\IconButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -196,6 +200,9 @@
     </Compile>
     <Compile Include="MControls\DeviceSMessageControler.xaml.cs">
       <DependentUpon>DeviceSMessageControler.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MControls\HistoryShortLine.xaml.cs">
+      <DependentUpon>HistoryShortLine.xaml</DependentUpon>
     </Compile>
     <Compile Include="MControls\IconButton.xaml.cs">
       <DependentUpon>IconButton.xaml</DependentUpon>
@@ -281,6 +288,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\start.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\pass.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.110.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.110.0\build\net46\System.Data.SQLite.Core.targets')" />

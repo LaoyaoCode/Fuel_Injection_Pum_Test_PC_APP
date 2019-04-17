@@ -275,6 +275,7 @@ namespace Fip.MControls
 
                     if (model.Id == NowTestDevice.GetID())
                     {
+                        int index = -1;
                         StandardDeviceDesModel sdd = DBControler.UnityIns.GetSSDesTotalRecord(NowTestDevice.GetID());
 
                         //测试状态取消
@@ -284,6 +285,19 @@ namespace Fip.MControls
                         CombinaPara(sdd, model);
 
                         BottomPart.Log("接受结果数据成功", LogMessage.LevelEnum.Important);
+
+                        index = DBControler.UnityIns.AddHistoryRecord(model);
+                        model.Id = index;
+
+                        if (index > 0)
+                        {
+                            BottomPart.Log("保存测试数据成功", LogMessage.LevelEnum.Important);
+                            MainWindow.MWindow.AddAHistoryLine(model);
+                        }
+                        else
+                        {
+                            BottomPart.Log("保存测试数据失败", LogMessage.LevelEnum.Error);
+                        }
                     }
                     else
                     {
@@ -338,6 +352,10 @@ namespace Fip.MControls
             model.HDate = DateTime.Now.ToShortDateString();
 
             //测试数据是否符合要求
+            model.IsPass = sdd.IsMatchRequire(model);
         }
+
+
+       
     }
 }

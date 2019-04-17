@@ -43,9 +43,27 @@ namespace Fip
             }
             catch (Exception)
             {
+                //数据库连接失败，直接返回
                 BottomPart.Log("数据库连接失败", LogMessage.LevelEnum.Error);
+                return;
             }
 
+            //实例化传输方式，这里作为测试实例化的是TCP/IP传输方式，但是使用的都是ITRANS抽象类
+            new TcpIpTrans();
+
+            List<HistoryModel> history = DBControler.UnityIns.GetHistoryAllShortRecord();
+            for(int counter = 0; counter < history.Count; counter++)
+            {
+                AddAHistoryLine(history[counter]);
+            }
+        }
+
+        public void AddAHistoryLine(HistoryModel model)
+        {
+            HistorySP.Children.Insert(0,new HistoryShortLine(model, (which) =>
+            {
+                //删除自身事件
+            }));
         }
 
         /// <summary>

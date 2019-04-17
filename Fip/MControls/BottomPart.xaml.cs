@@ -34,16 +34,6 @@ namespace Fip.MControls
             InitializeComponent();
 
             Unity = this;
-
-
-
-            //实例化传输方式，这里作为测试实例化的是TCP/IP传输方式，但是使用的都是ITRANS抽象类
-            new TcpIpTrans();
-
-
-
-            ITrans.UnityIns.Add_LostConnectDel(DeviceLostConnect);
-            ITrans.UnityIns.Add_GetMeeageDel(RecieveMessage);
         }
 
         private void ConnectedIcon_MouseLeftButtonUp()
@@ -126,6 +116,9 @@ namespace Fip.MControls
         /// </summary>
         private void SearchButton_Click()
         {
+            ITrans.UnityIns.Add_LostConnectDel(DeviceLostConnect);
+            ITrans.UnityIns.Add_GetMeeageDel(RecieveMessage);
+
             ITrans.UnityIns.ConnectToDeviceAsync((result , message , type)=>
             {
                 //成功连接了，然后等待获取信息
