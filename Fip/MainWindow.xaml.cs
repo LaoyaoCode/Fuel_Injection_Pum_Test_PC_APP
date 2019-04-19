@@ -18,6 +18,7 @@ using Fip.Code.DB;
 using Fip.Code.Trans;
 using System.Threading;
 using Fip.Code.Trans;
+using Fip.Dialog;
 
 namespace Fip
 {
@@ -62,7 +63,21 @@ namespace Fip
         {
             HistorySP.Children.Insert(0,new HistoryShortLine(model, (which) =>
             {
-                //删除自身事件
+                MessageDialog mDialog = new MessageDialog(String.Format("油泵型号 : {0}\n记录时间 : {1}\n是否确认删除该历史记录?", which.EquTypeTB.Text, which.TimeAndDateTB.Text), true);
+
+                if(mDialog.ShowDialog().Value)
+                {
+                    //确认需要删除
+                    if(DBControler.UnityIns.DeleteHistoryRecord(which.GetHId()))
+                    {
+                        //成功删除
+                        HistorySP.Children.Remove(which);
+                    }
+                    else
+                    {
+                        BottomPart.Log("删除历史记录失败", LogMessage.LevelEnum.Error);
+                    }
+                }
             }));
         }
 

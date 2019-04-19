@@ -69,7 +69,10 @@
         <Grid Margin="0,30">
             <!--左边菜单-->
             <Grid x:Name="LeftHistoryGrid" Width="200" HorizontalAlignment="Left">
-                <StackPanel x:Name="HistorySP" Orientation="Vertical"></StackPanel>
+                <ScrollViewer Style="{StaticResource MScrollView}">
+                    <StackPanel x:Name="HistorySP" Orientation="Vertical"></StackPanel>
+                </ScrollViewer>
+                
                 <!--分界线-->
                 <Rectangle HorizontalAlignment="Right" Width="1" Margin="0,0,0.5,0" Fill="{StaticResource GrayLine_RG_Brush}"></Rectangle>
             </Grid>

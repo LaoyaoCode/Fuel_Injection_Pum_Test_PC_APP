@@ -76,7 +76,5 @@ namespace Fip
         {
             this.window.Close();
         }
-
-        
     }
 }

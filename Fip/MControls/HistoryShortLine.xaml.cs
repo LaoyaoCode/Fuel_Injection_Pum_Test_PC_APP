@@ -72,7 +72,8 @@ namespace Fip.MControls
        
         private void SeeDetailButton_Click()
         {
-
+            HistoryDetailsWindow window = new HistoryDetailsWindow(HId);
+            window.Show();
         }
 
         private void DeleteButton_Click()

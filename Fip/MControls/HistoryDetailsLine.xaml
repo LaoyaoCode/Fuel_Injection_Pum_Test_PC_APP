@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="Fip.MControls.HistoryDetailsLine"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Fip.MControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" Height="30" Width="580">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="Header" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource NormalTextColor}" FontWeight="Bold">XXXX</TextBlock>
+        <TextBlock x:Name="S_RotateSpeedTB" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource NormalTextColor}">--</TextBlock>
+        <TextBlock x:Name="R_InjectionQuantityTB" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource NormalTextColor}">--</TextBlock>
+        <TextBlock x:Name="S_InjectionTimeTB" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource NormalTextColor}">--</TextBlock>
+        <TextBlock x:Name="R_RackTravelTB" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource NormalTextColor}">--</TextBlock>
+        <TextBlock x:Name="R_AsymmetryTB" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource NormalTextColor}">--</TextBlock>
+    </Grid>
+</UserControl>
