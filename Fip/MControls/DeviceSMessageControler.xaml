@@ -19,9 +19,10 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <local:IconButton x:Name="ExportAllButton" Grid.Column="1" ToolTip="导出所有器件信息" ButtonIcon="FileExport" IconColor="{DynamicResource SpecialColor3}" Width="16" Height="16" HorizontalAlignment="Center" Margin="0" NormalBackColor="{StaticResource AppBackBrush}" VerticalAlignment="Center"></local:IconButton>
                 <local:IconButton ToolTip="添加器件信息" Grid.Column="0" IconClick="AddNewDeviceButton_Click" ButtonIcon="FilePlus" IconColor="{DynamicResource SpecialColor2}" Width="16" HorizontalAlignment="Center" Margin="0" NormalBackColor="{StaticResource AppBackBrush}" VerticalAlignment="Center" Height="16"/>
-                <local:IconButton ToolTip="从文件导入器件信息" Grid.Column="2" ButtonIcon="FileImport" IconColor="{StaticResource SpecialColor}" Width="16" Height="16" HorizontalAlignment="Center" Margin="0" NormalBackColor="{StaticResource AppBackBrush}" VerticalAlignment="Center"></local:IconButton>
+                <local:IconButton x:Name="ExportAllButton" Grid.Column="1" IconClick="ExportAllButton_Click" ToolTip="导出所有器件信息" ButtonIcon="FileXml" IconColor="{DynamicResource SpecialColor3}" Width="16" Height="16" HorizontalAlignment="Center" Margin="0" NormalBackColor="{StaticResource AppBackBrush}" VerticalAlignment="Center"></local:IconButton>
+
+                <local:IconButton ToolTip="从文件导入器件信息" Grid.Column="2" IconClick="ImportAllButton_Click" ButtonIcon="FileXml" IconColor="{StaticResource SpecialColor}" Width="16" Height="16" HorizontalAlignment="Center" Margin="0" NormalBackColor="{StaticResource AppBackBrush}" VerticalAlignment="Center"></local:IconButton>
             </Grid>
 
 

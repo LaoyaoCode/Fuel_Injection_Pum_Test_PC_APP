@@ -72,6 +72,7 @@
             <Border  Background="{StaticResource AppBackBrush}" CornerRadius="5"  MouseLeftButtonDown="DargWindowMove"/>
             <Image  HorizontalAlignment="Left" Margin="10,5,3,5" MouseLeftButtonDown="DargWindowMove" Source="Images/details_icon.png" VerticalAlignment="Center"/>
 
+            <MControls:ImageButton x:Name="ExportToXml" ClickEvent="ETXButton_Click" ToolTip="导出记录为Xml文件" ImageSource="/Fip;component/Images/xml.png" HorizontalAlignment="Right" NormalOp="0.5" Margin="0,5,45,5"/>
             <MControls:IconButton x:Name="CloseWindowsButton" IconClick="CloseButton_Click" ButtonIcon="Close" NormalBackColor="{DynamicResource AppBackBrush}" HorizontalAlignment="Right" Width="15" Foreground="{x:Null}" IconColor="Red" ToolTip="关闭对话框" Margin="0,0,10,0" Height="15"/>
         </Grid>
 

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Fip.Code.DB;
 using Fip.MControls;
+using DialogBox = System.Windows.Forms;
 
 namespace Fip
 {
@@ -56,6 +57,31 @@ namespace Fip
                 AdjWork_Part.SetMessage(model.AdjWork);
                 HighBreak_Part.SetMessage(model.HighBreak);
             }
+        }
+
+        private void ETXButton_Click()
+        {
+            DialogBox.SaveFileDialog dialog = new DialogBox.SaveFileDialog();
+            string filePath;
+
+            dialog.Title = "选择导出文件保存路径";
+            dialog.Filter = "xml File(*.xml)|*.xml";
+            dialog.DefaultExt = "xml";
+            //如果用户没有添加则自动添加扩展
+            dialog.AddExtension = true;
+
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                //文件路径
+                filePath = dialog.FileName;
+                StandardDeviceDesModel model = DBControler.UnityIns.GetSSDesTotalRecord(_ID);
+                List<StandardDeviceDesModel> list = new List<StandardDeviceDesModel>();
+                list.Add(model);
+
+                SDDAndXml.SaveToXml(filePath, list);
+                BottomPart.Log("导出成功", LogMessage.LevelEnum.Important);
+            }
+
         }
 
         /// <summary>
