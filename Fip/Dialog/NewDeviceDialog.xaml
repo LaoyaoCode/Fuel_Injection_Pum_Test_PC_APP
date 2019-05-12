@@ -141,18 +141,18 @@
                 </Grid.ColumnDefinitions>
 
                 <!--启动工况-->
-                <Tools:CircleButton_NDD Grid.Column="0" ButtonTag="0" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
+                <Tools:CircleButton_NDD ToolTip="启动工况" Grid.Column="0" ButtonTag="0" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
                 <!--怠速工况-->
-                <Tools:CircleButton_NDD Grid.Column="1" ButtonTag="1" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
-                <Tools:CircleButton_NDD Grid.Column="2" ButtonTag="2" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
-                <Tools:CircleButton_NDD Grid.Column="3" ButtonTag="3" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
-                <Tools:CircleButton_NDD Grid.Column="4" ButtonTag="4" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
-                <Tools:CircleButton_NDD Grid.Column="5" ButtonTag="5" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
-                <Tools:CircleButton_NDD Grid.Column="6" ButtonTag="6" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
-                <Tools:CircleButton_NDD Grid.Column="7" ButtonTag="7" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
-                <Tools:CircleButton_NDD Grid.Column="8" ButtonTag="8" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
+                <Tools:CircleButton_NDD ToolTip="怠速工况" Grid.Column="1" ButtonTag="1" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
+                <Tools:CircleButton_NDD ToolTip="怠速断油" Grid.Column="2" ButtonTag="2" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
+                <Tools:CircleButton_NDD ToolTip="校正起作用" Grid.Column="3" ButtonTag="3" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
+                <Tools:CircleButton_NDD ToolTip="校正工况"  Grid.Column="4" ButtonTag="4" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
+                <Tools:CircleButton_NDD ToolTip="校正结束"  Grid.Column="5" ButtonTag="5" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
+                <Tools:CircleButton_NDD ToolTip="标定工况"  Grid.Column="6" ButtonTag="6" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
+                <Tools:CircleButton_NDD ToolTip="调速工况"  Grid.Column="7" ButtonTag="7" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
+                <Tools:CircleButton_NDD ToolTip="高速断油"  Grid.Column="8" ButtonTag="8" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
                 <!--一些独立值的设定-->
-                <Tools:CircleButton_NDD Grid.Column="9" ButtonTag="9" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
+                <Tools:CircleButton_NDD ToolTip="信息设定"  Grid.Column="9" ButtonTag="9" Style="{StaticResource M_CB_Style}"></Tools:CircleButton_NDD>
 
             </Grid>
         </Grid>

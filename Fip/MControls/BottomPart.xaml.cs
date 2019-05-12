@@ -119,13 +119,32 @@ namespace Fip.MControls
             ITrans.UnityIns.Add_LostConnectDel(DeviceLostConnect);
             ITrans.UnityIns.Add_GetMeeageDel(RecieveMessage);
 
-            ITrans.UnityIns.ConnectToDeviceAsync((result , message , type)=>
-            {
-                //成功连接了，然后等待获取信息
-
-            });
             SearchDeviceButton.IsEnabled = false;
             LoadingIcon_Appear();
+
+            ITrans.UnityIns.ConnectToDeviceAsync((result , message , type)=>
+            {
+                this.Dispatcher.Invoke(new Action(()=>
+                {
+                    //成功连接了，然后等待获取信息
+                    if (result)
+                    {
+                        Log("连接虚拟测试台成功", LogMessage.LevelEnum.Important);
+                    }
+                    else
+                    {
+                        Log("连接虚拟测试台失败，请检查其是否开启", LogMessage.LevelEnum.Error);
+                        //加载图标消失
+                        LoadingIcon_Disappear();
+                        SearchDeviceButton.Visibility = Visibility.Visible;
+                        ConnectedIcon.Visibility = Visibility.Hidden;
+                        SearchDeviceButton.IsEnabled = true;
+                    }
+
+                }));
+                
+            });
+            
         }
 
         /// <summary>

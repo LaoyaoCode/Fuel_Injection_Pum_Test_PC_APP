@@ -50,11 +50,6 @@ namespace Fip.Code.Trans
         private event LostConnectDel LostConnectEvent;
 
         /// <summary>
-        /// 最大重发次数
-        /// </summary>
-        //private static readonly int MAX_RESEND_TIME = 5;
-
-        /// <summary>
         /// 获取的数据列表
         /// </summary>
         private List<byte> RecieveDatas = new List<byte>();

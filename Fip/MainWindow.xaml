@@ -60,7 +60,7 @@
             <!--背景矩形-->
             <Border CornerRadius="5" Background="{StaticResource AppBackBrush}" MouseLeftButtonDown="DargWindowMove"></Border>
             <Image  HorizontalAlignment="Left" Margin="10,5,3,5" MouseLeftButtonDown="DargWindowMove" Source="icon.ico" VerticalAlignment="Center"/>
-            <!--<TextBlock Text="Fuel Injection Pump" Foreground="{DynamicResource SpecialColor}" FontSize="{DynamicResource BigTextSize}" HorizontalAlignment="Center" VerticalAlignment="Center" MouseLeftButtonDown="DargWindowMove"/>-->
+            <TextBlock Text="0121511371111      徐辉煌" Foreground="{DynamicResource SpecialColor2}" HorizontalAlignment="Center" VerticalAlignment="Center" MouseLeftButtonDown="DargWindowMove"/>
 
             <MControls:IconButton x:Name="CloseWindowsButton" IconClick="CloseButton_Click" ButtonIcon="Close" NormalBackColor="{StaticResource AppBackBrush}" HorizontalAlignment="Right" Width="15" Foreground="{x:Null}" IconColor="Red" ToolTip="关闭程序" Margin="0,0,10,0" Height="15"/>
             <MControls:IconButton x:Name="MinWindowsButton" IconClick="MinButton_Click" ButtonIcon="Minus" NormalBackColor="{StaticResource AppBackBrush}" HorizontalAlignment="Right" Width="15" Foreground="{x:Null}" IconColor="Black" Margin="0,0,60,0" ToolTip="最小化" Height="15"/>
